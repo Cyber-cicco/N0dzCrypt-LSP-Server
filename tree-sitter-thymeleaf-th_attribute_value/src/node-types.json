@@ -1,10 +1,5 @@
 [
   {
-    "type": "add",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "binary_expression",
     "named": true,
     "fields": {
@@ -101,56 +96,6 @@
     }
   },
   {
-    "type": "divide",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "equal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "equal_2",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "greater_or_equal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "greater_than",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "lesser_or_equal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "lesser_than",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "modulo",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "multiply",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "not_equal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -175,11 +120,6 @@
   },
   {
     "type": "string_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "substract",
     "named": true,
     "fields": {}
   },
@@ -248,27 +188,7 @@
     "named": false
   },
   {
-    "type": "%",
-    "named": false
-  },
-  {
     "type": "'",
-    "named": false
-  },
-  {
-    "type": "*",
-    "named": false
-  },
-  {
-    "type": "+",
-    "named": false
-  },
-  {
-    "type": "-",
-    "named": false
-  },
-  {
-    "type": "/",
     "named": false
   },
   {
@@ -276,35 +196,55 @@
     "named": false
   },
   {
-    "type": "<",
-    "named": false
-  },
-  {
-    "type": "<=",
-    "named": false
-  },
-  {
-    "type": "==",
-    "named": false
-  },
-  {
-    "type": ">",
-    "named": false
-  },
-  {
-    "type": ">=",
-    "named": false
-  },
-  {
     "type": "?",
     "named": false
   },
   {
-    "type": "eq",
-    "named": false
+    "type": "add",
+    "named": true
   },
   {
-    "type": "ne",
-    "named": false
+    "type": "divide",
+    "named": true
+  },
+  {
+    "type": "equal",
+    "named": true
+  },
+  {
+    "type": "equal_2",
+    "named": true
+  },
+  {
+    "type": "greater_or_equal",
+    "named": true
+  },
+  {
+    "type": "greater_than",
+    "named": true
+  },
+  {
+    "type": "lesser_or_equal",
+    "named": true
+  },
+  {
+    "type": "lesser_than",
+    "named": true
+  },
+  {
+    "type": "modulo",
+    "named": true
+  },
+  {
+    "type": "multiply",
+    "named": true
+  },
+  {
+    "type": "not_equal",
+    "named": true
+  },
+  {
+    "type": "substract",
+    "named": true
   }
 ]

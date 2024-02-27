@@ -115,20 +115,6 @@ module.exports = grammar({
             $._interpreted_string_literal,
         ),
 
-        operator: $ => choice(
-            '>',
-            '<',
-            '>=',
-            '<=',
-            '==',
-            'eq',
-            'ne',
-            '+',
-            '-',
-            '*',
-            '/',        
-            '%',
-        ),
         _interpreted_string_literal: $ => seq(
             "'",
             repeat(choice(
