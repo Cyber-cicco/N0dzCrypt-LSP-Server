@@ -50,6 +50,8 @@ module.exports = grammar({
         equal: $ => '==',
         equal_2: $ => 'eq',
         not_equal: $ => 'ne',
+        and: $ => 'and',
+        or: $ => 'or',
         add: $ => '+',
         substract: $ => '-',
         multiply: $ => '*',
@@ -64,7 +66,8 @@ module.exports = grammar({
             //$.url_expression,
             //$.fragment_expression,
             $.binary_expression,
-            $.ternary_expression
+            $.ternary_expression,
+            $.parenthesized_expression,
         ),
 
         //ognl_expression : $ => {
@@ -89,6 +92,12 @@ module.exports = grammar({
             field('alternative', $._expression)
         )),
 
+        parenthesized_expression: $ => seq(
+            '(',
+            $._expression,
+            ')',
+        ),
+
         binary_expression: $ => choice(
             ...[
                 [$.greater_than, PREC.REL],
@@ -98,6 +107,8 @@ module.exports = grammar({
                 [$.equal, PREC.EQUALITY],
                 [$.equal_2, PREC.EQUALITY],
                 [$.not_equal, PREC.EQUALITY],
+                [$.and, PREC.AND],
+                [$.or, PREC.OR],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
                 [$.multiply, PREC.MULT],

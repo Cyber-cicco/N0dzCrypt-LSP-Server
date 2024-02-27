@@ -1,2 +1,2 @@
-(true) ? 'pipi\'\\' + 'caca' * 'pipi caca' : 'caca'
+('caca') ? ('pipi\'\\' + 'caca') * 'pipi caca' : 'caca'
 
