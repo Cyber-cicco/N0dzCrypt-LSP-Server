@@ -43,6 +43,19 @@ module.exports = grammar({
             TERMINATOR,
         ),
 
+        greater_than: $ => '>',
+        lesser_than: $ => '<',
+        greater_or_equal: $ => '>=',
+        lesser_or_equal: $ => '<=',
+        equal: $ => '==',
+        equal_2: $ => 'eq',
+        not_equal: $ => 'ne',
+        add: $ => '+',
+        substract: $ => '-',
+        multiply: $ => '*',
+        divide: $ => '/',
+        modulo: $ => '%',
+
         _expression: $ => choice(
             $.string_literal,
             //$.ognl_expression,
@@ -50,7 +63,8 @@ module.exports = grammar({
             //$.message_expression,
             //$.url_expression,
             //$.fragment_expression,
-            $.binary_expression
+            $.binary_expression,
+            $.ternary_expression
         ),
 
         //ognl_expression : $ => {
@@ -67,25 +81,32 @@ module.exports = grammar({
 
         //fragment_expression : $ => {
         //},
+        ternary_expression: $ => prec.right(PREC.TERNARY, seq(
+            field('condition', $._expression),
+            '?',
+            field('consequence', $._expression),
+            ':',
+            field('alternative', $._expression)
+        )),
 
         binary_expression: $ => choice(
             ...[
-                ['>', PREC.REL],
-                ['<', PREC.REL],
-                ['>=', PREC.REL],
-                ['<=', PREC.REL],
-                ['==', PREC.EQUALITY],
-                ['eq', PREC.EQUALITY],
-                ['ne', PREC.EQUALITY],
-                ['+', PREC.ADD],
-                ['-', PREC.ADD],
-                ['*', PREC.MULT],
-                ['/', PREC.MULT],
-                ['%', PREC.MULT],
+                [$.greater_than, PREC.REL],
+                [$.lesser_than, PREC.REL],
+                [$.greater_or_equal, PREC.REL],
+                [$.lesser_or_equal, PREC.REL],
+                [$.equal, PREC.EQUALITY],
+                [$.equal_2, PREC.EQUALITY],
+                [$.not_equal, PREC.EQUALITY],
+                [$.add, PREC.ADD],
+                [$.substract, PREC.ADD],
+                [$.multiply, PREC.MULT],
+                [$.divide, PREC.MULT],
+                [$.modulo, PREC.MULT],
             ].map(([operator, precedence]) =>
                 prec.left(precedence, seq(
                     field('left', $._expression),
-                    field('operator', $.operator),
+                    field('operator', operator),
                     field('right', $._expression)
                 ))
             )),

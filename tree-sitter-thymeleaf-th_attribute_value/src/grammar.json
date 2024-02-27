@@ -26,6 +26,54 @@
         }
       ]
     },
+    "greater_than": {
+      "type": "STRING",
+      "value": ">"
+    },
+    "lesser_than": {
+      "type": "STRING",
+      "value": "<"
+    },
+    "greater_or_equal": {
+      "type": "STRING",
+      "value": ">="
+    },
+    "lesser_or_equal": {
+      "type": "STRING",
+      "value": "<="
+    },
+    "equal": {
+      "type": "STRING",
+      "value": "=="
+    },
+    "equal_2": {
+      "type": "STRING",
+      "value": "eq"
+    },
+    "not_equal": {
+      "type": "STRING",
+      "value": "ne"
+    },
+    "add": {
+      "type": "STRING",
+      "value": "+"
+    },
+    "substract": {
+      "type": "STRING",
+      "value": "-"
+    },
+    "multiply": {
+      "type": "STRING",
+      "value": "*"
+    },
+    "divide": {
+      "type": "STRING",
+      "value": "/"
+    },
+    "modulo": {
+      "type": "STRING",
+      "value": "%"
+    },
     "_expression": {
       "type": "CHOICE",
       "members": [
@@ -36,8 +84,53 @@
         {
           "type": "SYMBOL",
           "name": "binary_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ternary_expression"
         }
       ]
+    },
+    "ternary_expression": {
+      "type": "PREC_RIGHT",
+      "value": 3,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "condition",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "?"
+          },
+          {
+            "type": "FIELD",
+            "name": "consequence",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": ":"
+          },
+          {
+            "type": "FIELD",
+            "name": "alternative",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          }
+        ]
+      }
     },
     "binary_expression": {
       "type": "CHOICE",
@@ -61,7 +154,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "greater_than"
                 }
               },
               {
@@ -94,7 +187,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "lesser_than"
                 }
               },
               {
@@ -127,7 +220,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "greater_or_equal"
                 }
               },
               {
@@ -160,7 +253,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "lesser_or_equal"
                 }
               },
               {
@@ -193,7 +286,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "equal"
                 }
               },
               {
@@ -226,7 +319,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "equal_2"
                 }
               },
               {
@@ -259,7 +352,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "not_equal"
                 }
               },
               {
@@ -292,7 +385,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "add"
                 }
               },
               {
@@ -325,7 +418,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "substract"
                 }
               },
               {
@@ -358,7 +451,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "multiply"
                 }
               },
               {
@@ -391,7 +484,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "divide"
                 }
               },
               {
@@ -424,7 +517,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "operator"
+                  "name": "modulo"
                 }
               },
               {

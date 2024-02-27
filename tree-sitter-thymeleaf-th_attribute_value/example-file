@@ -1,1 +1,1 @@
-'pipi\'\\' + 'caca' == 'pipi caca'
+'pipi\'\\' + 'caca' * 'pipi caca'
