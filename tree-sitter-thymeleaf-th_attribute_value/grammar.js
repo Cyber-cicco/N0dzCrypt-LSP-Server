@@ -1,10 +1,29 @@
-const 
-    TERMINATOR = choice('\0'),
-    DECIMAL_DIGIT = /[0-9]/,
-    BINARY_OPERATORS = ['+', '-', '*', '/', '%'],
-    STRING_CONCAT_OPERATOR = ['+'],
-    UNARY_OPERATORS = ['-'],
-    COMPARATIVE_OPERATORS = ['==', '!=', '<', '<=', '>', '>='];
+
+const TERMINATOR = choice('\0');
+const DECIMAL_DIGIT = /[0-9]/;
+const BINARY_OPERATORS = ['+', '-', '*', '/', '%'];
+const STRING_CONCAT_OPERATOR = ['+'];
+const UNARY_OPERATORS = ['-'];
+const COMPARATIVE_OPERATORS = ['==', '!=', '<', '<=', '>', '>='];
+const PREC = {
+    COMMENT: 0,      // //  /*  */
+    ASSIGN: 1,       // =  += -=  *=  /=  %=  &=  ^=  |=  <<=  >>=  >>>=
+    DECL: 2,
+    ELEMENT_VAL: 2,
+    TERNARY: 3,      // ?:
+    OR: 4,           // ||
+    AND: 5,          // &&
+    BIT_OR: 6,       // |
+    BIT_XOR: 7,      // ^
+    BIT_AND: 8,      // &
+    EQUALITY: 9,     // ==  !=
+    GENERIC: 10,
+    REL: 10,         // <  <=  >  >=  instanceof
+    SHIFT: 11,       // <<  >>  >>>
+    ADD: 12,         // +  -
+    MULT: 13,        // *  /  %
+    UNARY_EXPRESSION : 14
+}
 
 module.exports = grammar({
     name: 'thymeleaf_attribute',
@@ -26,45 +45,83 @@ module.exports = grammar({
 
         _expression: $ => choice(
             $.string_literal,
-            $.ognl_expression,
-            $.selection_variable_expression,
-            $.message_expression,
-            $.url_expression,
-            $.fragment_expression
+            //$.ognl_expression,
+            //$.selection_variable_expression,
+            //$.message_expression,
+            //$.url_expression,
+            //$.fragment_expression,
+            $.binary_expression
         ),
 
-        ognl_expression : $ => {
-        },
+        //ognl_expression : $ => {
+        //},
 
-        selection_variable_expression : $ => {
-        },
-        
-        message_expression : $ => {
-        },
+        //selection_variable_expression : $ => {
+        //},
+        //
+        //message_expression : $ => {
+        //},
 
-        url_expression : $ => {
-        },
+        //url_expression : $ => {
+        //},
 
-        fragment_expression : $ => {
-        },
+        //fragment_expression : $ => {
+        //},
+
+        binary_expression: $ => choice(
+            ...[
+                ['>', PREC.REL],
+                ['<', PREC.REL],
+                ['>=', PREC.REL],
+                ['<=', PREC.REL],
+                ['==', PREC.EQUALITY],
+                ['eq', PREC.EQUALITY],
+                ['ne', PREC.EQUALITY],
+                ['+', PREC.ADD],
+                ['-', PREC.ADD],
+                ['*', PREC.MULT],
+                ['/', PREC.MULT],
+                ['%', PREC.MULT],
+            ].map(([operator, precedence]) =>
+                prec.left(precedence, seq(
+                    field('left', $._expression),
+                    field('operator', $.operator),
+                    field('right', $._expression)
+                ))
+            )),
 
         string_literal: $ => choice(
             $._interpreted_string_literal,
         ),
 
+        operator: $ => choice(
+            '>',
+            '<',
+            '>=',
+            '<=',
+            '==',
+            'eq',
+            'ne',
+            '+',
+            '-',
+            '*',
+            '/',        
+            '%',
+        ),
         _interpreted_string_literal: $ => seq(
             "'",
             repeat(choice(
                 $._interpreted_string_literal_basic_content,
-                $.escape_sequence,
+                $._escape_sequence,
             )),
             "'",
         ),
 
         _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\n\\]+/)),
 
-        escape_sequence: _ => token.immediate(seq(
+        _escape_sequence: _ => token.immediate(seq(
             '\\',
+            /./
         )),
     }
 });
