@@ -35,6 +35,33 @@ module.exports = grammar({
     ],
 
     rules: {
+
+        //Literals
+        true_literal: _ => 'true',
+        false_literal: _ => 'false',
+        null_literal: _ => 'null',
+        number_literal: _ => /[0-9]+/,
+
+        string_literal: $ => choice(
+            $._interpreted_string_literal,
+        ),
+
+        _interpreted_string_literal: $ => seq(
+            "'",
+            repeat(choice(
+                $._interpreted_string_literal_basic_content,
+                $._escape_sequence,
+            )),
+            "'",
+        ),
+
+        _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\n\\]+/)),
+
+        _escape_sequence: _ => token.immediate(seq(
+            '\\',
+            /./
+        )),
+
         // TODO: add the actual grammar rules
         source_file: $ => repeat($._node),
 
@@ -44,12 +71,17 @@ module.exports = grammar({
         ),
 
         greater_than: $ => '>',
+        greater_than_2: $ => 'gt',
         lesser_than: $ => '<',
+        lesser_than_2: $ => 'lt',
         greater_or_equal: $ => '>=',
+        greater_or_equal_2: $ => 'ge',
         lesser_or_equal: $ => '<=',
+        lesser_or_equal_2: $ => 'le',
         equal: $ => '==',
+        not_equal: $ => '!=',
         equal_2: $ => 'eq',
-        not_equal: $ => 'ne',
+        not_equal_2: $ => 'ne',
         and: $ => 'and',
         or: $ => 'or',
         add: $ => '+',
@@ -60,6 +92,10 @@ module.exports = grammar({
 
         _expression: $ => choice(
             $.string_literal,
+            $.number_literal,
+            $.null_literal,
+            $.false_literal,
+            $.true_literal,
             //$.ognl_expression,
             //$.selection_variable_expression,
             //$.message_expression,
@@ -104,9 +140,14 @@ module.exports = grammar({
                 [$.lesser_than, PREC.REL],
                 [$.greater_or_equal, PREC.REL],
                 [$.lesser_or_equal, PREC.REL],
+                [$.greater_than_2, PREC.REL],
+                [$.lesser_than_2, PREC.REL],
+                [$.greater_or_equal_2, PREC.REL],
+                [$.lesser_or_equal_2, PREC.REL],
                 [$.equal, PREC.EQUALITY],
                 [$.equal_2, PREC.EQUALITY],
                 [$.not_equal, PREC.EQUALITY],
+                [$.not_equal_2, PREC.EQUALITY],
                 [$.and, PREC.AND],
                 [$.or, PREC.OR],
                 [$.add, PREC.ADD],
@@ -121,26 +162,6 @@ module.exports = grammar({
                     field('right', $._expression)
                 ))
             )),
-
-        string_literal: $ => choice(
-            $._interpreted_string_literal,
-        ),
-
-        _interpreted_string_literal: $ => seq(
-            "'",
-            repeat(choice(
-                $._interpreted_string_literal_basic_content,
-                $._escape_sequence,
-            )),
-            "'",
-        ),
-
-        _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\n\\]+/)),
-
-        _escape_sequence: _ => token.immediate(seq(
-            '\\',
-            /./
-        )),
     }
 });
 
