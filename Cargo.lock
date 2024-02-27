@@ -301,13 +301,15 @@ name = "thymeleaf-lsp-server"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "cc",
+ "log",
  "lsp-server",
  "lsp-types",
  "maplit",
  "phf",
  "serde",
  "serde_json",
- "tree-sitter 0.21.0",
+ "tree-sitter",
  "tree-sitter-html",
  "tree-sitter-java",
  "walkdir",
@@ -339,23 +341,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "tree-sitter"
-version = "0.21.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "705bf7c0958d0171dd7d3a6542f2f4f21d87ed5f1dc8db52919d3a6bed9a359a"
-dependencies = [
- "cc",
- "regex",
-]
-
-[[package]]
 name = "tree-sitter-html"
 version = "0.20.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "017822b6bd42843c4bd67fabb834f61ce23254e866282dd93871350fd6b7fa1d"
 dependencies = [
  "cc",
- "tree-sitter 0.20.10",
+ "tree-sitter",
 ]
 
 [[package]]
@@ -365,7 +357,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2adc5696bf5abf761081d7457d2bb82d0e3b28964f4214f63fd7e720ef462653"
 dependencies = [
  "cc",
- "tree-sitter 0.20.10",
+ "tree-sitter",
 ]
 
 [[package]]

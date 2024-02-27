@@ -2,5 +2,5 @@ mod tokeniser;
 mod parser;
 
 fn main() {
-    tokeniser::tokenise()
+    parser::parse_tokens()
 }

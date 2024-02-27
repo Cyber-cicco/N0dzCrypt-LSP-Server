@@ -35,6 +35,7 @@ enum TokenType {
 
 const S : fn(x : &str) -> String = |x : &str| String::from(x);
 
+//Litterals
 const CTX : &str = "ctx";
 const VARS : &str = "vars";
 const LOCALE : &str = "locale";
@@ -54,6 +55,8 @@ const SETS : &str = "sets";
 const MAPS : &str = "maps";
 const AGGREGATES : &str = "aggregates";
 const IDS : &str = "ids";
+const TRUE : &str = "true";
+const FALSE : &str = "false";
 
 pub fn tokenise() {
     println!("Hello, world!");
