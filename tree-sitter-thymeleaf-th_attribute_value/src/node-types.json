@@ -207,6 +207,49 @@
     }
   },
   {
+    "type": "source_file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "string_literal",
     "named": true,
     "fields": {}
@@ -332,11 +375,6 @@
     }
   },
   {
-    "type": "true_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "\u0000",
     "named": false
   },
@@ -449,7 +487,7 @@
     "named": true
   },
   {
-    "type": "true",
-    "named": false
+    "type": "true_literal",
+    "named": true
   }
 ]

@@ -36,7 +36,18 @@ module.exports = grammar({
 
     rules: {
 
+        // TODO: add the actual grammar rules
+        source_file: $ => repeat($._node),
+
         //Literals
+        _literal : $ => choice(
+            $.number_literal,
+            $.string_literal,
+            $.true_literal,
+            $.false_literal,
+            $.null_literal,
+        ),
+
         true_literal: _ => 'true',
         false_literal: _ => 'false',
         null_literal: _ => 'null',
@@ -61,9 +72,6 @@ module.exports = grammar({
             '\\',
             /./
         )),
-
-        // TODO: add the actual grammar rules
-        source_file: $ => repeat($._node),
 
         _node: $ => choice(
             $._expression,
@@ -91,19 +99,15 @@ module.exports = grammar({
         modulo: $ => '%',
 
         _expression: $ => choice(
-            $.string_literal,
-            $.number_literal,
-            $.null_literal,
-            $.false_literal,
-            $.true_literal,
+            $.binary_expression,
+            $.ternary_expression,
+            $.parenthesized_expression,
+            $._literal,
             //$.ognl_expression,
             //$.selection_variable_expression,
             //$.message_expression,
             //$.url_expression,
             //$.fragment_expression,
-            $.binary_expression,
-            $.ternary_expression,
-            $.parenthesized_expression,
         ),
 
         //ognl_expression : $ => {
