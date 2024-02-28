@@ -344,10 +344,6 @@ module.exports = grammar({
             /[^}]+/,
         ),
 
-        ognl_std_expression : $ => choice(
-            //TODO : add rules for ognl
-            /[^}]+/,
-        ),
 
         //selection_variable_th_std_expression : $ => {
         //},
@@ -414,6 +410,13 @@ module.exports = grammar({
                     field('right', $._th_std_expression)
                 ))
             )),
+
+        //OGNL 
+        ognl_std_expression : $ => choice(
+            //TODO : add rules for ognl
+            /[^}]+/,
+        ),
+
     }
 });
 
