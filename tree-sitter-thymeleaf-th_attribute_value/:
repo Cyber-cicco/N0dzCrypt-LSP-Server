@@ -344,13 +344,13 @@ module.exports = grammar({
 
         varselect_th_std_expression : $ => seq(
             '*{',
-            $._ognl_std_expression,
+            $.ognl_std_expression,
             '}',
         ),
 
         ognl_th_std_expression : $ => seq(
             '${',
-            $._ognl_std_expression,
+            $.ognl_std_expression,
             '}',
         ),
 
@@ -432,12 +432,12 @@ module.exports = grammar({
             )),
 
         //OGNL 
-        _ognl_std_expression : $ => choice(
+        ognl_std_expression : $ => choice(
             //TODO : add rules for ognl
-            $._ognl_literal,
+            /[^}]+/,
         ),
 
-        _ognl_literal : $ => choice(
+        ognl_literal : $ => choice(
             $.number_literal,
             $.string_literal,
             $.true_literal,
@@ -448,22 +448,21 @@ module.exports = grammar({
         ),
 
         ognl_object_literal : $ => /[A-Za-z_]+/,
-
         ognl_method_literal : $ => seq(
             $.ognl_method_name,
             $.ognl_method_args,
         ),
 
         ognl_method_name : $ => seq(
-            /[A-Za-z_]+/,
-            repeat(/[0-9A-Za-z_]/),
+            /[A-Za-z_]/,
+            optional(/[0-9A-Za-z_]+/),
         ),
 
         ognl_method_args : $ => seq(
-            '(',
-            commaSep($._ognl_literal),
-            ')',
-        ), 
+            "(",
+            commaSep($.ognl_literal),
+            ")",
+        ) 
     }
 });
 

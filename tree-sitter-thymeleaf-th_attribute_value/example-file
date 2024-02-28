@@ -2,6 +2,6 @@
         class="bg-white text-primary"
         th:text="(3 > 4) ? -2.2 * ${'Hello world !'} + null : ((-3) + 3)"
         th:truc="| ceci n'est pas une 
-        ${pipe} jean, c'est un lien : @{ouiiiiiiiiii}|"
+        ${pipe(caca, prout())} jean, c'est un lien : @{ouiiiiiiiiii}|"
         >Sommaire</div>
 

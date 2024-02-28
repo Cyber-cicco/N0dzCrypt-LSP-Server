@@ -459,7 +459,70 @@
     "fields": {}
   },
   {
-    "type": "ognl_std_expression",
+    "type": "ognl_method_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_object_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ognl_method_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "ognl_method_args",
+          "named": true
+        },
+        {
+          "type": "ognl_method_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ognl_method_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ognl_object_literal",
     "named": true,
     "fields": {}
   },
@@ -469,10 +532,34 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "ognl_std_expression",
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_object_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
           "named": true
         }
       ]
@@ -1142,10 +1229,34 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "ognl_std_expression",
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_object_literal",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
           "named": true
         }
       ]
@@ -1197,6 +1308,10 @@
   },
   {
     "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
     "named": false
   },
   {

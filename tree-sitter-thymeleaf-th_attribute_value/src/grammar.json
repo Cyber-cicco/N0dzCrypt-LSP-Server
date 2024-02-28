@@ -1107,7 +1107,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_std_expression"
+          "name": "_ognl_std_expression"
         },
         {
           "type": "STRING",
@@ -1124,7 +1124,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_std_expression"
+          "name": "_ognl_std_expression"
         },
         {
           "type": "STRING",
@@ -1920,12 +1920,124 @@
         }
       ]
     },
-    "ognl_std_expression": {
+    "_ognl_std_expression": {
       "type": "CHOICE",
       "members": [
         {
+          "type": "SYMBOL",
+          "name": "_ognl_literal"
+        }
+      ]
+    },
+    "_ognl_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "true_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "false_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "null_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_object_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_literal"
+        }
+      ]
+    },
+    "ognl_object_literal": {
+      "type": "PATTERN",
+      "value": "[A-Za-z_]+"
+    },
+    "ognl_method_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_args"
+        }
+      ]
+    },
+    "ognl_method_name": {
+      "type": "SEQ",
+      "members": [
+        {
           "type": "PATTERN",
-          "value": "[^}]+"
+          "value": "[A-Za-z_]+"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[0-9A-Za-z_]"
+          }
+        }
+      ]
+    },
+    "ognl_method_args": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_ognl_literal"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_ognl_literal"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     }
