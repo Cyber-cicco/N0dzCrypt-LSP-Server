@@ -238,10 +238,6 @@ module.exports = grammar({
         false_literal: _ => 'false',
         null_literal: _ => 'null',
         number_literal: _ => seq(
-            optional(choice(
-                token.immediate('-'),
-                token.immediate('+'),
-            )),
             /[0-9]+/,
             optional(seq(
                 '.',
@@ -249,10 +245,32 @@ module.exports = grammar({
             ))
         ),
         
-        token_literal: _ => /[0-9a-zA-Z_\-\.]+/,
+        token_literal: _ => repeat1(
+            seq(
+                optional(/[\-\+]/),
+                /[a-zA-Z\-_\.]+/,
+            ),
+        ),
 
         string_literal: $ => choice(
             $._interpreted_string_literal,
+            $.interpolated_string_literal,
+        ),
+
+        interpolated_string_literal: $ => seq(
+            "|",
+            repeat(choice(
+                $.interpolated_string_literal_basic_content,
+                $.ognl_th_std_expression,
+                $.varselect_th_std_expression,
+                $.message_th_std_expression,
+                $.url_th_std_expression,
+                '#',
+                '~',
+                '$',
+                '*',
+            )),
+            "|",
         ),
 
         _interpreted_string_literal: $ => seq(
@@ -264,7 +282,9 @@ module.exports = grammar({
             "'",
         ),
 
-        _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\n\\]+/)),
+        _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\\]+/)),
+
+        interpolated_string_literal_basic_content: _ => token.immediate(prec(1, /[^@|#~$*]+/)),
 
         _escape_sequence: _ => token.immediate(seq(
             '\\',
