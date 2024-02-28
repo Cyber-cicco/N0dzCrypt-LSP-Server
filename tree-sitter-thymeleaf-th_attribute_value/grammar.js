@@ -30,6 +30,8 @@ module.exports = grammar({
     extras: $ => [
         $.comment,
         /\s+/,
+        /\n/,
+        /\r/,
     ],
 
     externals: $ => [
@@ -182,12 +184,14 @@ module.exports = grammar({
             $.true_literal,
             $.false_literal,
             $.null_literal,
+            $.token_literal,
         ),
 
         true_literal: _ => 'true',
         false_literal: _ => 'false',
         null_literal: _ => 'null',
-        number_literal: _ => /[0-9]+/,
+        number_literal: _ => /[0-9\.]+/,
+        token_literal: _ => /[0-9a-zA-Z_\-\.]+/,
 
         string_literal: $ => choice(
             $._interpreted_string_literal,

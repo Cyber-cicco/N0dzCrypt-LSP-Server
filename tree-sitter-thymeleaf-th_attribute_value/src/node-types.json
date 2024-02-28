@@ -59,6 +59,10 @@
             "named": true
           },
           {
+            "type": "token_literal",
+            "named": true
+          },
+          {
             "type": "true_literal",
             "named": true
           }
@@ -176,6 +180,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "token_literal",
             "named": true
           },
           {
@@ -358,6 +366,10 @@
           "named": true
         },
         {
+          "type": "token_literal",
+          "named": true
+        },
+        {
           "type": "true_literal",
           "named": true
         }
@@ -513,6 +525,10 @@
             "named": true
           },
           {
+            "type": "token_literal",
+            "named": true
+          },
+          {
             "type": "true_literal",
             "named": true
           }
@@ -551,6 +567,10 @@
             "named": true
           },
           {
+            "type": "token_literal",
+            "named": true
+          },
+          {
             "type": "true_literal",
             "named": true
           }
@@ -586,6 +606,10 @@
           },
           {
             "type": "ternary_expression",
+            "named": true
+          },
+          {
+            "type": "token_literal",
             "named": true
           },
           {
@@ -654,6 +678,10 @@
         },
         {
           "type": "ternary_expression",
+          "named": true
+        },
+        {
+          "type": "token_literal",
           "named": true
         },
         {
@@ -830,6 +858,10 @@
   {
     "type": "th:",
     "named": false
+  },
+  {
+    "type": "token_literal",
+    "named": true
   },
   {
     "type": "true_literal",

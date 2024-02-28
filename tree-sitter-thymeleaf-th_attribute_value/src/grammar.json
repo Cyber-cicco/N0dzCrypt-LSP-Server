@@ -539,6 +539,10 @@
         {
           "type": "SYMBOL",
           "name": "null_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "token_literal"
         }
       ]
     },
@@ -556,7 +560,11 @@
     },
     "number_literal": {
       "type": "PATTERN",
-      "value": "[0-9]+"
+      "value": "[0-9\\.]+"
+    },
+    "token_literal": {
+      "type": "PATTERN",
+      "value": "[0-9a-zA-Z_\\-\\.]+"
     },
     "string_literal": {
       "type": "CHOICE",
@@ -1419,6 +1427,14 @@
     {
       "type": "PATTERN",
       "value": "\\s+"
+    },
+    {
+      "type": "PATTERN",
+      "value": "\\n"
+    },
+    {
+      "type": "PATTERN",
+      "value": "\\r"
     }
   ],
   "conflicts": [],

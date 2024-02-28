@@ -1,5 +1,5 @@
     <div
         class="bg-white text-primary"
-        th:text="'Hello world !'"
+        th:text="2.2c * 'Hello world !' + null"
         >Sommaire</div>
 
