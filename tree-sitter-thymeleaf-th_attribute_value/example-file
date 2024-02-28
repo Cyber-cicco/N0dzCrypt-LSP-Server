@@ -1,2 +1,5 @@
-(true) ? ('pipi\'\\' + 'caca') * 'pipi caca' : 'caca'
+    <div
+        class="bg-white text-primary"
+        th:text="'Hello world !'"
+        >Sommaire</div>
 

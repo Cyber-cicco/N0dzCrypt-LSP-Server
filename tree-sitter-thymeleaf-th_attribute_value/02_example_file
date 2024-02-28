@@ -1,0 +1,59 @@
+<aside class="flex flex-col h-full overflow-hidden shadow-dark w-1/5 bg-primary text-white shadow-md rounded-md">
+    <div class="p-5 font-poppins">Chapitres : </div>
+    <div
+        class="p-2 w-full bg-lightPrimary hover:brightness-150 hover:cursor-pointer"
+        th:hx-get="'/cours/sommaire/api?id=' + ${cours.getId()} + '&smodule=' + ${idSModule} + '&module=' + ${idModuleOrigine}"
+        th:hx-push-url="'/cours/sommaire?id=' + ${cours.getId()} + '&smodule=' + ${idSModule} + '&module=' + ${idModuleOrigine}"
+        hx-target="#chapitre-cours"
+        hx-swap="outerHTML"
+        hx-select="#chapitre-cours"
+        >Sommaire</div>
+    <div
+        th:each="c, iterStat : ${cours.getChapitres()}"
+        class="p-2 w-full bg-lightPrimary hover:brightness-150 hover:cursor-pointer"
+        th:text="${c.getLibelle()}"
+        th:hx-get="'/cours/chapitre/api?id='
+        + ${c.getOrdre()}
+        + '&cours=' + ${cours.getId()}"
+        th:hx-push-url="'/cours/chapitre?id='
+        + ${c.getOrdre()}
+        + '&cours=' + ${cours.getId()}"
+        hx-target="#chapitre-cours"
+        hx-swap="outerHTML transition:true"
+        hx-select="#chapitre-cours"
+        ></div>
+    <div class="grow"></div>
+    <div class="flex bg-white text-primary flex-col">
+        <div class="flex gap-2 p-1 items-center">
+            <div
+                class="rounded-full hover:cursor-pointer hover:bg-lightAccent p-1"
+                th:hx-patch="'/cours/bookmark?id=' + ${cours.getId()}"
+                th:hx-target="'#bookmarked-' + ${cours.getId()}"
+                hx-swap="outerHTML"
+                >
+                <img
+                class="min-w-[30px] min-h-[30px]"
+                th:id="'bookmarked-' + ${cours.getId()}"
+                th:width="${width}"
+                src="/img/icons/bookmark.svg"
+                th:style="${flags.getBoomarked()} ? 'filter: invert(73%) sepia(83%) saturate(1960%) hue-rotate(3deg) brightness(99%) contrast(108%);' : _"
+                >
+            </div><span>Ajouter à mes favoris</span>
+        </div>
+        <div class="flex gap-2 p-1 items-center">
+            <div
+                class="rounded-full hover:cursor-pointer hover:bg-lightAccent p-1"
+                th:hx-patch="'/cours/finished?id=' + ${cours.getId()}"
+                th:hx-target="'#finished-' + ${cours.getId()}"
+                hx-swap="outerHTML"
+                >
+                <img
+                class="min-w-[30px] min-h-[30px]"
+                th:id="'finished-' + ${cours.getId()}"
+                th:width="${width}"
+                src="/img/icons/check.svg"
+                th:style="${flags.getFinished()} ? 'filter: invert(42%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);' : _"
+                >
+            </div><span>Marquer ce cours comme terminé</span>
+        </div>
+</aside>
