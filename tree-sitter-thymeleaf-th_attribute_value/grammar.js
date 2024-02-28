@@ -447,11 +447,41 @@ module.exports = grammar({
             $.ognl_method_literal,
         ),
 
-        ognl_object_literal : $ => /[A-Za-z_]+/,
+        _ognl_post_accessor : $ => choice(
+            $.ognl_property_access,
+            $.ognl_method_access,
+        ),
+
+        index : _ => /[0-9]+/,
+
+        ognl_object_literal : $ => seq(
+            /[A-Za-z_]+/,
+            repeat(/[0-9A-Za-z_]/),
+            optional($._ognl_post_accessor),
+        ),
+
+        ognl_property_access : $ => choice(
+            seq(
+                '.',
+                field('name',$.ognl_object_literal),
+            ),
+            seq(
+                '[',
+                field('name',$._ognl_literal),
+                ']',
+                optional($._ognl_post_accessor)
+            )
+        ),
+
+        ognl_method_access : $ => seq(
+            '.',
+            $.ognl_method_literal,
+        ),
 
         ognl_method_literal : $ => seq(
-            $.ognl_method_name,
-            $.ognl_method_args,
+            field('name', $.ognl_method_name),
+            field('args', $.ognl_method_args),
+            optional($._ognl_post_accessor),
         ),
 
         ognl_method_name : $ => seq(

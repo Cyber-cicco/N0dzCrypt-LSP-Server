@@ -1962,20 +1962,149 @@
         }
       ]
     },
-    "ognl_object_literal": {
+    "_ognl_post_accessor": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "ognl_property_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_access"
+        }
+      ]
+    },
+    "index": {
       "type": "PATTERN",
-      "value": "[A-Za-z_]+"
+      "value": "[0-9]+"
+    },
+    "ognl_object_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[A-Za-z_]+"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "PATTERN",
+            "value": "[0-9A-Za-z_]"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_ognl_post_accessor"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "ognl_property_access": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "."
+            },
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "ognl_object_literal"
+              }
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "["
+            },
+            {
+              "type": "FIELD",
+              "name": "name",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_ognl_literal"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "]"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_ognl_post_accessor"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "ognl_method_access": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_literal"
+        }
+      ]
     },
     "ognl_method_literal": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "ognl_method_name"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ognl_method_name"
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "ognl_method_args"
+          "type": "FIELD",
+          "name": "args",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ognl_method_args"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_ognl_post_accessor"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },

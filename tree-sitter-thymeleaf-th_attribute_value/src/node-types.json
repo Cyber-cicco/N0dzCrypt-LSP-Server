@@ -467,6 +467,21 @@
     "fields": {}
   },
   {
+    "type": "ognl_method_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ognl_method_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "ognl_method_args",
     "named": true,
     "fields": {},
@@ -508,17 +523,38 @@
   {
     "type": "ognl_method_literal",
     "named": true,
-    "fields": {},
+    "fields": {
+      "args": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ognl_method_args",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ognl_method_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
-          "type": "ognl_method_args",
+          "type": "ognl_method_access",
           "named": true
         },
         {
-          "type": "ognl_method_name",
+          "type": "ognl_property_access",
           "named": true
         }
       ]
@@ -532,7 +568,75 @@
   {
     "type": "ognl_object_literal",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "ognl_method_access",
+          "named": true
+        },
+        {
+          "type": "ognl_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ognl_property_access",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_method_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_object_literal",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "ognl_method_access",
+          "named": true
+        },
+        {
+          "type": "ognl_property_access",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "ognl_th_std_expression",
@@ -1378,6 +1482,14 @@
   },
   {
     "type": "@{",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
     "named": false
   },
   {
