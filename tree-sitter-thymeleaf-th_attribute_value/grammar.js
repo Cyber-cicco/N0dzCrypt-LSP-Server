@@ -107,8 +107,8 @@ module.exports = grammar({
             seq(
                 'th:',
                 choice(
-                    seq($._th_generic, '=', '"', $.th_attribute_value, '"'),
-                    seq($._th_ognl_only, '=', '"', $.ognl_th_std_expression,'"')
+                    seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
+                    seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"')
                 ),
             ),
         ),
@@ -160,17 +160,6 @@ module.exports = grammar({
         ),
 
         attribute_name: _ => /[^(th:)<>"'/=\s]+/,
-
-        th_attribute_name: _ => seq(
-            'th:',
-            choice(
-                'each',
-                'text',
-                'utext',
-                'inline',
-                /[^<>"'/=\s]+/
-            ),
-        ),
 
         _th_generic: $ => choice(
             $.th_insert,
@@ -309,16 +298,50 @@ module.exports = grammar({
             $.parenthesized_th_std_expression,
             $._literal,
             $.ognl_th_std_expression,
-            //$.selection_variable_th_std_expression,
-            //$.message_th_std_expression,
-            //$.url_th_std_expression,
-            //$.fragment_th_std_expression,
+            $.varselect_th_std_expression,
+            $.message_th_std_expression,
+            $.url_th_std_expression,
+            $.fragment_th_std_expression,
+        ),
+
+        fragment_th_std_expression : $ => seq(
+            '~{',
+            $.url_std_expression,
+            '}',
+        ),
+
+        url_th_std_expression : $ => seq(
+            '@{',
+            $.url_std_expression,
+            '}',
+        ),
+
+        message_th_std_expression : $ => seq(
+            '#{',
+            $.message_std_expression,
+            '}',
+        ),
+
+        varselect_th_std_expression : $ => seq(
+            '*{',
+            $.ognl_std_expression,
+            '}',
         ),
 
         ognl_th_std_expression : $ => seq(
             '${',
             $.ognl_std_expression,
             '}',
+        ),
+
+        url_std_expression : $ => choice(
+            //TODO : add rules for ognl
+            /[^}]+/,
+        ),
+
+        message_std_expression : $ => choice(
+            //TODO : add rules for ognl
+            /[^}]+/,
         ),
 
         ognl_std_expression : $ => choice(

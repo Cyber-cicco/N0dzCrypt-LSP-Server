@@ -20,9 +20,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 79
 #define EXTERNAL_TOKEN_COUNT 9
-#define FIELD_COUNT 7
+#define FIELD_COUNT 9
 #define MAX_ALIAS_SEQUENCE_LENGTH 6
-#define PRODUCTION_ID_COUNT 4
+#define PRODUCTION_ID_COUNT 5
 
 enum ts_symbol_identifiers {
   anon_sym_LT_BANG = 1,
@@ -856,17 +856,21 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 
 enum ts_field_identifiers {
   field_alternative = 1,
-  field_condition = 2,
-  field_consequence = 3,
-  field_left = 4,
-  field_operand = 5,
-  field_operator = 6,
-  field_right = 7,
+  field_attribute_name = 2,
+  field_attribute_value = 3,
+  field_condition = 4,
+  field_consequence = 5,
+  field_left = 6,
+  field_operand = 7,
+  field_operator = 8,
+  field_right = 9,
 };
 
 static const char * const ts_field_names[] = {
   [0] = NULL,
   [field_alternative] = "alternative",
+  [field_attribute_name] = "attribute_name",
+  [field_attribute_value] = "attribute_value",
   [field_condition] = "condition",
   [field_consequence] = "consequence",
   [field_left] = "left",
@@ -877,8 +881,9 @@ static const char * const ts_field_names[] = {
 
 static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [1] = {.index = 0, .length = 2},
-  [2] = {.index = 2, .length = 3},
-  [3] = {.index = 5, .length = 3},
+  [2] = {.index = 2, .length = 2},
+  [3] = {.index = 4, .length = 3},
+  [4] = {.index = 7, .length = 3},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -886,10 +891,13 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_operand, 1},
     {field_operator, 0},
   [2] =
+    {field_attribute_name, 1},
+    {field_attribute_value, 4},
+  [4] =
     {field_left, 0},
     {field_operator, 1},
     {field_right, 2},
-  [5] =
+  [7] =
     {field_alternative, 4},
     {field_condition, 0},
     {field_consequence, 2},
@@ -5755,8 +5763,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [9] = {.entry = {.count = 1, .reusable = false}}, SHIFT(99),
   [11] = {.entry = {.count = 1, .reusable = true}}, SHIFT(148),
   [13] = {.entry = {.count = 1, .reusable = true}}, SHIFT(39),
-  [15] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_binary_th_std_expression, 3, .production_id = 2),
-  [17] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_binary_th_std_expression, 3, .production_id = 2),
+  [15] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_binary_th_std_expression, 3, .production_id = 3),
+  [17] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_binary_th_std_expression, 3, .production_id = 3),
   [19] = {.entry = {.count = 1, .reusable = true}}, SHIFT(44),
   [21] = {.entry = {.count = 1, .reusable = true}}, SHIFT(43),
   [23] = {.entry = {.count = 1, .reusable = true}}, SHIFT(18),
@@ -5767,7 +5775,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [33] = {.entry = {.count = 1, .reusable = true}}, SHIFT(24),
   [35] = {.entry = {.count = 1, .reusable = true}}, SHIFT(26),
   [37] = {.entry = {.count = 1, .reusable = true}}, SHIFT(17),
-  [39] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_ternary_th_std_expression, 5, .production_id = 3),
+  [39] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_ternary_th_std_expression, 5, .production_id = 4),
   [41] = {.entry = {.count = 1, .reusable = true}}, SHIFT(30),
   [43] = {.entry = {.count = 1, .reusable = true}}, SHIFT(33),
   [45] = {.entry = {.count = 1, .reusable = true}}, SHIFT(25),
@@ -5899,7 +5907,7 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [309] = {.entry = {.count = 1, .reusable = true}}, SHIFT(107),
   [311] = {.entry = {.count = 1, .reusable = true}}, SHIFT(91),
   [313] = {.entry = {.count = 1, .reusable = true}}, SHIFT(119),
-  [315] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_th_attribute, 6),
+  [315] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_th_attribute, 6, .production_id = 2),
   [317] = {.entry = {.count = 1, .reusable = false}}, SHIFT(31),
   [319] = {.entry = {.count = 1, .reusable = true}}, SHIFT(93),
   [321] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_quoted_attribute_value, 3),

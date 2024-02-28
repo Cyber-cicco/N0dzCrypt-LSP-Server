@@ -706,64 +706,71 @@
   {
     "type": "th_attribute",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "ognl_th_std_expression",
-          "named": true
-        },
-        {
-          "type": "th_attribute_value",
-          "named": true
-        },
-        {
-          "type": "th_case",
-          "named": true
-        },
-        {
-          "type": "th_fragment",
-          "named": true
-        },
-        {
-          "type": "th_generic",
-          "named": true
-        },
-        {
-          "type": "th_if",
-          "named": true
-        },
-        {
-          "type": "th_insert",
-          "named": true
-        },
-        {
-          "type": "th_object",
-          "named": true
-        },
-        {
-          "type": "th_remove",
-          "named": true
-        },
-        {
-          "type": "th_replace",
-          "named": true
-        },
-        {
-          "type": "th_switch",
-          "named": true
-        },
-        {
-          "type": "th_unless",
-          "named": true
-        },
-        {
-          "type": "th_with",
-          "named": true
-        }
-      ]
+    "fields": {
+      "attribute_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "th_case",
+            "named": true
+          },
+          {
+            "type": "th_fragment",
+            "named": true
+          },
+          {
+            "type": "th_generic",
+            "named": true
+          },
+          {
+            "type": "th_if",
+            "named": true
+          },
+          {
+            "type": "th_insert",
+            "named": true
+          },
+          {
+            "type": "th_object",
+            "named": true
+          },
+          {
+            "type": "th_remove",
+            "named": true
+          },
+          {
+            "type": "th_replace",
+            "named": true
+          },
+          {
+            "type": "th_switch",
+            "named": true
+          },
+          {
+            "type": "th_unless",
+            "named": true
+          },
+          {
+            "type": "th_with",
+            "named": true
+          }
+        ]
+      },
+      "attribute_value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "th_attribute_value",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
