@@ -228,6 +228,7 @@ module.exports = grammar({
         _literal : $ => choice(
             $.number_literal,
             $.string_literal,
+            $.interpolated_string_literal,
             $.true_literal,
             $.false_literal,
             $.null_literal,
@@ -254,7 +255,6 @@ module.exports = grammar({
 
         string_literal: $ => choice(
             $._interpreted_string_literal,
-            $.interpolated_string_literal,
         ),
 
         interpolated_string_literal: $ => seq(

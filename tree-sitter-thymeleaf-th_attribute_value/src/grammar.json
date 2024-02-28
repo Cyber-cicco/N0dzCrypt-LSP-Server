@@ -707,6 +707,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "interpolated_string_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "true_literal"
         },
         {
@@ -795,10 +799,6 @@
         {
           "type": "SYMBOL",
           "name": "_interpreted_string_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "interpolated_string_literal"
         }
       ]
     },
