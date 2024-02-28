@@ -103,17 +103,17 @@ module.exports = grammar({
              $.attribute, 
         ),
 
-        th_attribute: $ => seq(
-            $.th_attribute_name,
-            optional(seq(
-                '=',
-                '"',
-                $.th_attribute_value,
-                '"',
-            )),
+        th_attribute: $ => choice(
+            seq(
+                'th:',
+                choice(
+                    seq($._th_generic, '=', '"', $.th_attribute_value, '"'),
+                    seq($._th_ognl_only, '=', '"', $.ognl_th_std_expression,'"')
+                ),
+            ),
         ),
 
-        th_attribute_value: $ => choice( $._expression),
+        th_attribute_value: $ => choice( $._th_std_expression),
 
         script_start_tag: $ => seq(
             '<',
@@ -161,7 +161,65 @@ module.exports = grammar({
 
         attribute_name: _ => /[^(th:)<>"'/=\s]+/,
 
-        th_attribute_name: _ => seq('th:', /[^<>"'/=\s]+/),
+        th_attribute_name: _ => seq(
+            'th:',
+            choice(
+                'each',
+                'text',
+                'utext',
+                'inline',
+                /[^<>"'/=\s]+/
+            ),
+        ),
+
+        _th_generic: $ => choice(
+            $.th_insert,
+            $.th_replace,
+            $.th_if,
+            $.th_switch,
+            $.th_case,
+            $.th_unless,
+            $.th_remove,
+            $.th_generic,
+            $.th_fragment,
+        ),
+
+        _th_ognl_only: $ => choice(
+            $.th_object,
+            $.th_with,
+        ),
+
+        _th_assignation_sequence : $ => choice(
+            $.th_attr,
+            $.th_attrappend,
+            $.th_attrprepend,
+        ),
+
+        th_insert: $ => 'insert',
+        th_replace: $ => 'replace',
+        th_each: $ => 'each',
+        th_if: $ => 'if',
+        th_unless: $ => 'unless',
+        th_switch: $ => 'switch',
+        th_case: $ => 'case',
+
+        //${} only
+        th_object: $ => 'object',
+        th_with: $ => 'with',
+
+        //assingation sequence tags
+        th_attr: $ => 'attr',
+        th_attrappend: $ => 'attrappend',
+        th_attrprepend: $ => 'attrprepend',
+
+        th_text: $ => 'text',
+        th_utext: $ => 'utext',
+        th_fragment: $ => 'fragment',
+        th_remove: $ => 'remove',
+
+        //specific
+        th_inline : $ => 'inline',
+        th_generic : $ => /[^<>"'/=\s]+/,
 
         attribute_value: _ => /[^<>"'=\s]+/,
 
@@ -233,47 +291,55 @@ module.exports = grammar({
         divide: $ => '/',
         modulo: $ => '%',
 
-        _expression: $ => choice(
-            $.binary_expression,
-            $.ternary_expression,
-            $.parenthesized_expression,
+        _th_std_expression: $ => choice(
+            $.binary_th_std_expression,
+            $.ternary_th_std_expression,
+            $.parenthesized_th_std_expression,
             $._literal,
-            //$.ognl_expression,
-            //$.selection_variable_expression,
-            //$.message_expression,
-            //$.url_expression,
-            //$.fragment_expression,
+            $.ognl_th_std_expression,
+            //$.selection_variable_th_std_expression,
+            //$.message_th_std_expression,
+            //$.url_th_std_expression,
+            //$.fragment_th_std_expression,
         ),
 
-        //ognl_expression : $ => {
-        //},
+        ognl_th_std_expression : $ => seq(
+            '${',
+            $.ognl_std_expression,
+            '}',
+        ),
 
-        //selection_variable_expression : $ => {
+        ognl_std_expression : $ => choice(
+            //TODO : add rules for ognl
+            /[^}]+/,
+        ),
+
+        //selection_variable_th_std_expression : $ => {
         //},
         //
-        //message_expression : $ => {
+        //message_th_std_expression : $ => {
         //},
 
-        //url_expression : $ => {
+        //url_th_std_expression : $ => {
         //},
 
-        //fragment_expression : $ => {
+        //fragment_th_std_expression : $ => {
         //},
-        ternary_expression: $ => prec.right(PREC.TERNARY, seq(
-            field('condition', $._expression),
+        ternary_th_std_expression: $ => prec.right(PREC.TERNARY, seq(
+            field('condition', $._th_std_expression),
             '?',
-            field('consequence', $._expression),
+            field('consequence', $._th_std_expression),
             ':',
-            field('alternative', $._expression)
+            field('alternative', $._th_std_expression)
         )),
 
-        parenthesized_expression: $ => seq(
+        parenthesized_th_std_expression: $ => seq(
             '(',
-            $._expression,
+            $._th_std_expression,
             ')',
         ),
 
-        binary_expression: $ => choice(
+        binary_th_std_expression: $ => choice(
             ...[
                 [$.greater_than, PREC.REL],
                 [$.lesser_than, PREC.REL],
@@ -296,9 +362,9 @@ module.exports = grammar({
                 [$.modulo, PREC.MULT],
             ].map(([operator, precedence]) =>
                 prec.left(precedence, seq(
-                    field('left', $._expression),
+                    field('left', $._th_std_expression),
                     field('operator', operator),
-                    field('right', $._expression)
+                    field('right', $._th_std_expression)
                 ))
             )),
     }

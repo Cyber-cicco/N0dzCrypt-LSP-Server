@@ -23,7 +23,7 @@
     }
   },
   {
-    "type": "binary_expression",
+    "type": "binary_th_std_expression",
     "named": true,
     "fields": {
       "left": {
@@ -31,7 +31,7 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "binary_th_std_expression",
             "named": true
           },
           {
@@ -47,7 +47,11 @@
             "named": true
           },
           {
-            "type": "parenthesized_expression",
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -55,7 +59,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
+            "type": "ternary_th_std_expression",
             "named": true
           },
           {
@@ -155,7 +159,7 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "binary_th_std_expression",
             "named": true
           },
           {
@@ -171,7 +175,11 @@
             "named": true
           },
           {
-            "type": "parenthesized_expression",
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -179,7 +187,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
+            "type": "ternary_th_std_expression",
             "named": true
           },
           {
@@ -330,7 +338,12 @@
     "fields": {}
   },
   {
-    "type": "parenthesized_expression",
+    "type": "ognl_std_expression",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ognl_th_std_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -338,7 +351,22 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
+          "type": "ognl_std_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parenthesized_th_std_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_th_std_expression",
           "named": true
         },
         {
@@ -354,7 +382,11 @@
           "named": true
         },
         {
-          "type": "parenthesized_expression",
+          "type": "ognl_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
@@ -362,7 +394,7 @@
           "named": true
         },
         {
-          "type": "ternary_expression",
+          "type": "ternary_th_std_expression",
           "named": true
         },
         {
@@ -489,7 +521,7 @@
     }
   },
   {
-    "type": "ternary_expression",
+    "type": "ternary_th_std_expression",
     "named": true,
     "fields": {
       "alternative": {
@@ -497,7 +529,7 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "binary_th_std_expression",
             "named": true
           },
           {
@@ -513,7 +545,11 @@
             "named": true
           },
           {
-            "type": "parenthesized_expression",
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -521,7 +557,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
+            "type": "ternary_th_std_expression",
             "named": true
           },
           {
@@ -539,7 +575,7 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "binary_th_std_expression",
             "named": true
           },
           {
@@ -555,7 +591,11 @@
             "named": true
           },
           {
-            "type": "parenthesized_expression",
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -563,7 +603,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
+            "type": "ternary_th_std_expression",
             "named": true
           },
           {
@@ -581,7 +621,7 @@
         "required": true,
         "types": [
           {
-            "type": "binary_expression",
+            "type": "binary_th_std_expression",
             "named": true
           },
           {
@@ -597,7 +637,11 @@
             "named": true
           },
           {
-            "type": "parenthesized_expression",
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -605,7 +649,7 @@
             "named": true
           },
           {
-            "type": "ternary_expression",
+            "type": "ternary_th_std_expression",
             "named": true
           },
           {
@@ -629,20 +673,59 @@
       "required": true,
       "types": [
         {
-          "type": "th_attribute_name",
+          "type": "ognl_th_std_expression",
           "named": true
         },
         {
           "type": "th_attribute_value",
           "named": true
+        },
+        {
+          "type": "th_case",
+          "named": true
+        },
+        {
+          "type": "th_fragment",
+          "named": true
+        },
+        {
+          "type": "th_generic",
+          "named": true
+        },
+        {
+          "type": "th_if",
+          "named": true
+        },
+        {
+          "type": "th_insert",
+          "named": true
+        },
+        {
+          "type": "th_object",
+          "named": true
+        },
+        {
+          "type": "th_remove",
+          "named": true
+        },
+        {
+          "type": "th_replace",
+          "named": true
+        },
+        {
+          "type": "th_switch",
+          "named": true
+        },
+        {
+          "type": "th_unless",
+          "named": true
+        },
+        {
+          "type": "th_with",
+          "named": true
         }
       ]
     }
-  },
-  {
-    "type": "th_attribute_name",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "th_attribute_value",
@@ -653,7 +736,7 @@
       "required": true,
       "types": [
         {
-          "type": "binary_expression",
+          "type": "binary_th_std_expression",
           "named": true
         },
         {
@@ -669,7 +752,11 @@
           "named": true
         },
         {
-          "type": "parenthesized_expression",
+          "type": "ognl_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
@@ -677,7 +764,7 @@
           "named": true
         },
         {
-          "type": "ternary_expression",
+          "type": "ternary_th_std_expression",
           "named": true
         },
         {
@@ -692,7 +779,16 @@
     }
   },
   {
+    "type": "th_generic",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "${",
     "named": false
   },
   {
@@ -768,6 +864,10 @@
     "named": false
   },
   {
+    "type": "each",
+    "named": false
+  },
+  {
     "type": "entity",
     "named": true
   },
@@ -798,6 +898,10 @@
   {
     "type": "greater_than_2",
     "named": true
+  },
+  {
+    "type": "inline",
+    "named": false
   },
   {
     "type": "lesser_or_equal",
@@ -853,11 +957,67 @@
   },
   {
     "type": "text",
+    "named": false
+  },
+  {
+    "type": "text",
     "named": true
   },
   {
     "type": "th:",
     "named": false
+  },
+  {
+    "type": "th_attr",
+    "named": true
+  },
+  {
+    "type": "th_attrappend",
+    "named": true
+  },
+  {
+    "type": "th_attrprepend",
+    "named": true
+  },
+  {
+    "type": "th_case",
+    "named": true
+  },
+  {
+    "type": "th_fragment",
+    "named": true
+  },
+  {
+    "type": "th_if",
+    "named": true
+  },
+  {
+    "type": "th_insert",
+    "named": true
+  },
+  {
+    "type": "th_object",
+    "named": true
+  },
+  {
+    "type": "th_remove",
+    "named": true
+  },
+  {
+    "type": "th_replace",
+    "named": true
+  },
+  {
+    "type": "th_switch",
+    "named": true
+  },
+  {
+    "type": "th_unless",
+    "named": true
+  },
+  {
+    "type": "th_with",
+    "named": true
   },
   {
     "type": "token_literal",
@@ -866,5 +1026,13 @@
   {
     "type": "true_literal",
     "named": true
+  },
+  {
+    "type": "utext",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
   }
 ]
