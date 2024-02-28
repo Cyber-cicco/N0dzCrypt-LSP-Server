@@ -1,6 +1,6 @@
     <div
         class="bg-white text-primary"
-        th:text="2.2 * ${'Hello world !'} + null"
+        th:text="- 2.2 * ${'Hello world !'} + null"
         th:object="${'Hello world !'}"
         >Sommaire</div>
 

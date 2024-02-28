@@ -21,7 +21,7 @@ const PREC = {
     SHIFT: 11,       // <<  >>  >>>
     ADD: 12,         // +  -
     MULT: 13,        // *  /  %
-    UNARY_EXPRESSION : 14
+    UNARY: 14
 }
 
 module.exports = grammar({
@@ -248,7 +248,18 @@ module.exports = grammar({
         true_literal: _ => 'true',
         false_literal: _ => 'false',
         null_literal: _ => 'null',
-        number_literal: _ => /[0-9\.]+/,
+        number_literal: _ => seq(
+            optional(choice(
+                token.immediate('-'),
+                token.immediate('+'),
+            )),
+            /[0-9]+/,
+            optional(seq(
+                '.',
+                /[0-9]+/,
+            ))
+        ),
+        
         token_literal: _ => /[0-9a-zA-Z_\-\.]+/,
 
         string_literal: $ => choice(
@@ -292,6 +303,7 @@ module.exports = grammar({
         modulo: $ => '%',
 
         _th_std_expression: $ => choice(
+            $.unary_th_std_expression,
             $.binary_th_std_expression,
             $.ternary_th_std_expression,
             $.parenthesized_th_std_expression,
@@ -332,6 +344,18 @@ module.exports = grammar({
             ':',
             field('alternative', $._th_std_expression)
         )),
+
+        unary_th_std_expression : $ => choice(...[
+            ['+', PREC.UNARY],
+            ['-', PREC.UNARY],
+            ['!', PREC.UNARY],
+        ].map(([operator, precedence]) =>
+            prec.left(precedence, seq(
+                field('operator', operator),
+                field('operand', $._th_std_expression)
+            ))
+        )),
+
 
         parenthesized_th_std_expression: $ => seq(
             '(',
