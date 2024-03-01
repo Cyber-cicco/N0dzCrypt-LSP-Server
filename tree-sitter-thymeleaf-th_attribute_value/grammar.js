@@ -445,11 +445,48 @@ module.exports = grammar({
             $.null_literal,
             $.ognl_object_literal,
             $.ognl_method_literal,
+            $.ognl_instanceof,
+            $.ognl_new,
+            $.ognl_java_class,
         ),
+
+        ognl_new : $ => 'new',
+
+        ognl_instanceof : $ => 'instanceof',
 
         _ognl_post_accessor : $ => choice(
             $.ognl_property_access,
             $.ognl_method_access,
+        ),
+
+        ognl_java_class : $ => seq(
+            '@',
+            repeat(seq(
+                /[a-zA-Z_]+/,
+                '.'
+            )),
+            /[a-zA-Z_]+/,
+            optional($._ognl_post_java_class)
+        ),
+
+        _ognl_post_java_class : $ => choice(
+            $.ognl_java_method,
+            $.ognl_java_field,
+        ),
+
+        ognl_java_method : $ => seq(
+            seq(
+                '@',
+                /[a-zA-Z_]+/,
+                $.ognl_method_args,
+            ),
+        ),
+
+        ognl_java_field : $ => seq(
+            seq(
+                '@',
+                /[a-zA-Z_]+/,
+            ),
         ),
 
         index : _ => /[0-9]+/,

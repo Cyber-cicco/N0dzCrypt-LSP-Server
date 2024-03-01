@@ -1959,8 +1959,28 @@
         {
           "type": "SYMBOL",
           "name": "ognl_method_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_instanceof"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_new"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_java_class"
         }
       ]
+    },
+    "ognl_new": {
+      "type": "STRING",
+      "value": "new"
+    },
+    "ognl_instanceof": {
+      "type": "STRING",
+      "value": "instanceof"
     },
     "_ognl_post_accessor": {
       "type": "CHOICE",
@@ -1972,6 +1992,100 @@
         {
           "type": "SYMBOL",
           "name": "ognl_method_access"
+        }
+      ]
+    },
+    "ognl_java_class": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[a-zA-Z_]+"
+              },
+              {
+                "type": "STRING",
+                "value": "."
+              }
+            ]
+          }
+        },
+        {
+          "type": "PATTERN",
+          "value": "[a-zA-Z_]+"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_ognl_post_java_class"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_ognl_post_java_class": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "ognl_java_method"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_java_field"
+        }
+      ]
+    },
+    "ognl_java_method": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "@"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[a-zA-Z_]+"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "ognl_method_args"
+            }
+          ]
+        }
+      ]
+    },
+    "ognl_java_field": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "@"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[a-zA-Z_]+"
+            }
+          ]
         }
       ]
     },

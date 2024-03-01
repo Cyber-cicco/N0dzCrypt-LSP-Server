@@ -467,6 +467,45 @@
     "fields": {}
   },
   {
+    "type": "ognl_java_class",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "ognl_java_field",
+          "named": true
+        },
+        {
+          "type": "ognl_java_method",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ognl_java_field",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "ognl_java_method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ognl_method_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "ognl_method_access",
     "named": true,
     "fields": {},
@@ -502,7 +541,19 @@
           "named": true
         },
         {
+          "type": "ognl_instanceof",
+          "named": true
+        },
+        {
+          "type": "ognl_java_class",
+          "named": true
+        },
+        {
           "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_new",
           "named": true
         },
         {
@@ -605,7 +656,19 @@
             "named": true
           },
           {
+            "type": "ognl_instanceof",
+            "named": true
+          },
+          {
+            "type": "ognl_java_class",
+            "named": true
+          },
+          {
             "type": "ognl_method_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_new",
             "named": true
           },
           {
@@ -659,7 +722,19 @@
           "named": true
         },
         {
+          "type": "ognl_instanceof",
+          "named": true
+        },
+        {
+          "type": "ognl_java_class",
+          "named": true
+        },
+        {
           "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_new",
           "named": true
         },
         {
@@ -1370,7 +1445,19 @@
           "named": true
         },
         {
+          "type": "ognl_instanceof",
+          "named": true
+        },
+        {
+          "type": "ognl_java_class",
+          "named": true
+        },
+        {
           "type": "ognl_method_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_new",
           "named": true
         },
         {
@@ -1481,6 +1568,10 @@
     "named": false
   },
   {
+    "type": "@",
+    "named": false
+  },
+  {
     "type": "@{",
     "named": false
   },
@@ -1578,6 +1669,14 @@
   },
   {
     "type": "null_literal",
+    "named": true
+  },
+  {
+    "type": "ognl_instanceof",
+    "named": true
+  },
+  {
+    "type": "ognl_new",
     "named": true
   },
   {
