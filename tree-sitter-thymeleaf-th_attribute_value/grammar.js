@@ -23,6 +23,7 @@ const PREC = {
     MULT: 13,        // *  /  %
     CAST: 14,        // (Type)
     UNARY: 15,
+    INSTANCE_OF : 15,
     ARRAY: 16,       // [Index]
     OBJ_ACCESS: 16,  // .
     PARENS: 16,      // (Expression)
@@ -331,37 +332,70 @@ module.exports = grammar({
 
         fragment_th_std_expression : $ => seq(
             '~{',
-            $.url_std_expression,
+            optional($.url_std_expression),
             '}',
         ),
 
         url_th_std_expression : $ => seq(
             '@{',
-            $.url_std_expression,
+            optional($.url_std_expression),
             '}',
         ),
 
         message_th_std_expression : $ => seq(
             '#{',
-            $.message_std_expression,
+            optional($.message_std_expression),
             '}',
         ),
 
         varselect_th_std_expression : $ => seq(
             '*{',
-            $._ognl_std_expression,
+            optional($._ognl_std_expression),
             '}',
         ),
 
         ognl_th_std_expression : $ => seq(
             '${',
-            $._ognl_std_expression,
+            optional($._ognl_std_expression),
             '}',
         ),
 
-        url_std_expression : $ => choice(
-            //TODO : add rules for ognl
-            /[^}]+/,
+        url_std_expression : $ => seq(
+            optional('/'),
+            repeat(seq(
+                choice(
+                    $.standard_url_fragment,
+                    $.parameterized_url_fragment
+                ),
+                '/'
+            )),  
+            choice(
+                $.standard_url_fragment,
+                $.parameterized_url_fragment
+            ),
+            optional('/'),
+            optional(seq(
+                '(',
+                commaSep($.url_parameter_assignement),
+                ')',
+            ))
+               
+        ),
+
+        url_parameter_assignement : $ => seq(
+            field("param", $.url_parameter),
+            '=',
+            field("value", $._th_std_expression)
+        ),
+
+        standard_url_fragment : _ => /[0-9a-zA-Z_]+/,
+
+        url_parameter : _ => /[0-9a-zA-Z_]+/,
+
+        parameterized_url_fragment : $ => seq(
+            '{',
+            $.url_parameter,
+            '}'
         ),
 
         message_name : $ => seq(
@@ -522,6 +556,7 @@ module.exports = grammar({
                 [$.or, PREC.OR],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
+                [$.ognl_instanceof, PREC.INSTANCE_OF],
                 [$.multiply, PREC.MULT],
                 [$.divide, PREC.MULT],
                 [$.modulo, PREC.MULT],

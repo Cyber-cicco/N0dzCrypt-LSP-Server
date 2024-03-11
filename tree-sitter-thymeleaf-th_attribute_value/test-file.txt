@@ -1,2 +1,1 @@
-<div th:truc="${#test = #test.test()}"></div>
-<div th:truc="#{test.text(${caca})}"></div>
+<div th:truc="@{/{jean}/pierre(jean=1)}"></div>
