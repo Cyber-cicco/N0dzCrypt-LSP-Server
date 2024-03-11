@@ -21,7 +21,12 @@ const PREC = {
     SHIFT: 11,       // <<  >>  >>>
     ADD: 12,         // +  -
     MULT: 13,        // *  /  %
-    UNARY: 14
+    CAST: 14,        // (Type)
+    UNARY: 15,
+    ARRAY: 16,       // [Index]
+    OBJ_ACCESS: 16,  // .
+    PARENS: 16,      // (Expression)
+    CLASS_LITERAL: 17,  // .
 }
 
 module.exports = grammar({
@@ -435,7 +440,56 @@ module.exports = grammar({
         _ognl_std_expression : $ => choice(
             //TODO : add rules for ognl
             $._ognl_literal,
+            $.binary_ognl_expression
         ),
+
+        ognl_greater_or_equal: _ => 'gte',
+        ognl_lower_or_equal: _ => 'lte',
+        ognl_not_equal : _ => 'neq',
+        ognl_in : _ => 'in',
+        ognl_new : $ => 'new',
+        ognl_instanceof : $ => 'instanceof',
+        bit_shift_left: $ => '<<',
+        ognl_bit_shift_left: $ => 'shl',
+        bit_shift_right: $ => '>>',
+        ognl_bit_shift_right: $ => 'shr',
+        logical_shift_right: $ => '>>>',
+        bitwise_not: $ => '~',
+
+        binary_ognl_expression : $ => choice(
+            ...[
+                [$.greater_than, PREC.REL],
+                [$.lesser_than, PREC.REL],
+                [$.greater_or_equal, PREC.REL],
+                [$.lesser_or_equal, PREC.REL],
+                [$.greater_than_2, PREC.REL],
+                [$.lesser_than_2, PREC.REL],
+                [$.ognl_greater_or_equal, PREC.REL],
+                [$.ognl_lower_or_equal, PREC.REL],
+                [$.equal, PREC.EQUALITY],
+                [$.equal_2, PREC.EQUALITY],
+                [$.not_equal, PREC.EQUALITY],
+                [$.not_equal_2, PREC.EQUALITY],
+                [$.and, PREC.AND],
+                [$.or, PREC.OR],
+                [$.add, PREC.ADD],
+                [$.substract, PREC.ADD],
+                [$.multiply, PREC.MULT],
+                [$.divide, PREC.MULT],
+                [$.modulo, PREC.MULT],
+                [$.bit_shift_left, PREC.SHIFT],
+                [$.ognl_bit_shift_left, PREC.SHIFT],
+                [$.bit_shift_right, PREC.SHIFT],
+                [$.ognl_bit_shift_right, PREC.SHIFT],
+                [$.logical_shift_right, PREC.SHIFT],
+                [$.bitwise_not, PREC.UNARY],
+            ].map(([operator, precedence]) =>
+                prec.left(precedence, seq(
+                    field('left', $._ognl_std_expression),
+                    field('operator', operator),
+                    field('right', $._ognl_std_expression)
+                ))
+            )),
 
         _ognl_literal : $ => choice(
             $.number_literal,
@@ -450,9 +504,6 @@ module.exports = grammar({
             $.ognl_java_class,
         ),
 
-        ognl_new : $ => 'new',
-
-        ognl_instanceof : $ => 'instanceof',
 
         _ognl_post_accessor : $ => choice(
             $.ognl_property_access,
