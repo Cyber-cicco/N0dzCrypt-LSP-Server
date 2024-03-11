@@ -439,8 +439,33 @@ module.exports = grammar({
         //OGNL 
         _ognl_std_expression : $ => choice(
             //TODO : add rules for ognl
+            $._ognl_primary_expression,
+            $.binary_ognl_expression,
+            $.ognl_assignement_expression,
+        ),
+
+        _ognl_primary_expression : $ => choice(
             $._ognl_literal,
-            $.binary_ognl_expression
+        ),
+
+        _ognl_literal : $ => choice(
+            $.number_literal,
+            $.string_literal,
+            $.true_literal,
+            $.false_literal,
+            $.null_literal,
+            $.ognl_object_literal,
+            $.ognl_method_literal,
+            $.ognl_instanceof,
+            $.ognl_new,
+            $.ognl_java_class,
+            $.ognl_variable,
+        ),
+
+        ognl_assignement_expression : $ => seq(
+            field("var", $.ognl_variable), 
+            '=',
+            field("value", $._ognl_literal) 
         ),
 
         ognl_greater_or_equal: _ => 'gte',
@@ -491,17 +516,11 @@ module.exports = grammar({
                 ))
             )),
 
-        _ognl_literal : $ => choice(
-            $.number_literal,
-            $.string_literal,
-            $.true_literal,
-            $.false_literal,
-            $.null_literal,
-            $.ognl_object_literal,
-            $.ognl_method_literal,
-            $.ognl_instanceof,
-            $.ognl_new,
-            $.ognl_java_class,
+
+        ognl_variable : $ => seq(
+            '#',
+            /[a-zA-Z_]+/,
+            optional($._ognl_post_accessor),
         ),
 
 

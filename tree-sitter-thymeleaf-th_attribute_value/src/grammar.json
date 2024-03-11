@@ -1925,11 +1925,98 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_ognl_literal"
+          "name": "_ognl_primary_expression"
         },
         {
           "type": "SYMBOL",
           "name": "binary_ognl_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_assignement_expression"
+        }
+      ]
+    },
+    "_ognl_primary_expression": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_ognl_literal"
+        }
+      ]
+    },
+    "_ognl_literal": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "number_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "true_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "false_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "null_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_object_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_method_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_instanceof"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_new"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_java_class"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "ognl_variable"
+        }
+      ]
+    },
+    "ognl_assignement_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "var",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ognl_variable"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "FIELD",
+          "name": "value",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_ognl_literal"
+          }
         }
       ]
     },
@@ -2811,48 +2898,28 @@
         }
       ]
     },
-    "_ognl_literal": {
-      "type": "CHOICE",
+    "ognl_variable": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "number_literal"
+          "type": "STRING",
+          "value": "#"
         },
         {
-          "type": "SYMBOL",
-          "name": "string_literal"
+          "type": "PATTERN",
+          "value": "[a-zA-Z_]+"
         },
         {
-          "type": "SYMBOL",
-          "name": "true_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "false_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "null_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ognl_object_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ognl_method_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ognl_instanceof"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ognl_new"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "ognl_java_class"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_ognl_post_accessor"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
