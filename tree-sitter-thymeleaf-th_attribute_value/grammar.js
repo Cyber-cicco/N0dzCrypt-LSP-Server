@@ -364,9 +364,23 @@ module.exports = grammar({
             /[^}]+/,
         ),
 
-        message_std_expression : $ => choice(
-            //TODO : add rules for ognl
-            /[^}]+/,
+        message_name : $ => seq(
+            optional(seq(
+                /[0-9a-zA-Z_]+/,
+                '.'
+            )),
+            /[0-9a-zA-Z_]+/,
+        ), 
+
+        message_std_expression : $ => seq(
+            field("message", $.message_name),
+            field("args", 
+                optional(seq(
+                    '(',
+                        commaSep($._th_std_expression),
+                    ')',
+                ))
+            )
         ),
 
 
@@ -446,6 +460,7 @@ module.exports = grammar({
 
         _ognl_primary_expression : $ => choice(
             $._ognl_literal,
+            $.object_creation_expression,
         ),
 
         _ognl_literal : $ => choice(
@@ -460,6 +475,14 @@ module.exports = grammar({
             $.ognl_new,
             $.ognl_java_class,
             $.ognl_variable,
+        ),
+
+        object_creation_expression : $ => seq(
+            $.ognl_new,
+            /[a-zA-Z_]+/,
+            '(',
+            ')'
+            //TODO continuer sur OGNL quand j'en aurai moins marre de ce langage de merde
         ),
 
         ognl_assignement_expression : $ => seq(
