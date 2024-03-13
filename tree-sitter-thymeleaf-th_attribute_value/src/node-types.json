@@ -631,6 +631,100 @@
     }
   },
   {
+    "type": "fragment_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "fragment_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "interpolated_string_literal",
+          "named": true
+        },
+        {
+          "type": "message_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "token_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "url_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "varselect_th_std_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fragment_std_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fragment_call",
+          "named": true
+        },
+        {
+          "type": "standard_url_fragment",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "fragment_th_std_expression",
     "named": true,
     "fields": {},
@@ -639,7 +733,7 @@
       "required": false,
       "types": [
         {
-          "type": "url_std_expression",
+          "type": "fragment_std_expression",
           "named": true
         }
       ]
@@ -1819,6 +1913,10 @@
           {
             "type": "th_attribute_value",
             "named": true
+          },
+          {
+            "type": "th_fragment_declaration",
+            "named": true
           }
         ]
       }
@@ -1894,6 +1992,25 @@
         },
         {
           "type": "varselect_th_std_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "th_fragment_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fragment_arg",
+          "named": true
+        },
+        {
+          "type": "fragment_name",
           "named": true
         }
       ]
@@ -2267,6 +2384,10 @@
     "named": false
   },
   {
+    "type": "::",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -2352,6 +2473,14 @@
   },
   {
     "type": "false_literal",
+    "named": true
+  },
+  {
+    "type": "fragment_arg",
+    "named": true
+  },
+  {
+    "type": "fragment_name",
     "named": true
   },
   {

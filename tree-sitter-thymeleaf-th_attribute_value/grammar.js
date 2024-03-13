@@ -165,17 +165,37 @@ module.exports = grammar({
                     seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
                     seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
                     seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
+                    seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"')
                 ),
             ),
         ),
 
-        th_assignation_sequence: $ => choice(
+        th_fragment_declaration : $ => seq(
+            $.fragment_name,
+            seq(
+                '(',
+                commaSep($.fragment_arg),
+                ')'
+            )
+        ),
+
+        //WTF THYMELEAF
+        //This regex is wrong because you can actually put parenthesis in the name of the fragment
+        fragment_name : _ => /[^\.%\/\(\)]+/ ,
+
+        //exemple of a perfectly valid thymeleaf arg :
+        //1${!}c\acçççèèa__--1*
+        //(this is not satire)
+        fragment_arg : _ => /[^\.%,\(\)\/]+/,
+
+
+        th_assignation_sequence: $ => seq(
             commaSep1(seq(
                 $.attribute_name,
                 '=',
                 field("value", $._th_std_expression) 
             )),
-            optional(","),
+            optional(','),
         ),
 
         _th_generic: $ => choice(
@@ -187,7 +207,6 @@ module.exports = grammar({
             $.th_unless,
             $.th_remove,
             $.th_generic,
-            $.th_fragment,
         ),
 
         _th_ognl_only: $ => choice(
@@ -220,10 +239,10 @@ module.exports = grammar({
 
         th_text: $ => 'text',
         th_utext: $ => 'utext',
-        th_fragment: $ => 'fragment',
         th_remove: $ => 'remove',
 
         //specific
+        th_fragment: $ => 'fragment',
         th_inline : $ => 'inline',
         th_generic : $ => /[^<>"'/=\s]+/,
 
@@ -451,18 +470,6 @@ module.exports = grammar({
             )
         ),
 
-
-        //selection_variable_th_std_expression : $ => {
-        //},
-        //
-        //message_th_std_expression : $ => {
-        //},
-
-        //url_th_std_expression : $ => {
-        //},
-
-        //fragment_th_std_expression : $ => {
-        //},
         ternary_th_std_expression: $ => prec.right(PREC.TERNARY, seq(
             field('condition', $._th_std_expression),
             '?',

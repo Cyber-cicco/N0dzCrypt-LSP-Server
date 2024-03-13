@@ -1,1 +1,1 @@
-<div th:attr="class ='font-bold'," ></div>
+<div th:fragment="bonjour(boulgour, jeanacques)"></div>
