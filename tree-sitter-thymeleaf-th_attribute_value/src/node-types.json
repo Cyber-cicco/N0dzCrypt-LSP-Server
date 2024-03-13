@@ -1653,6 +1653,92 @@
     }
   },
   {
+    "type": "th_assignation_sequence",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "fragment_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "interpolated_string_literal",
+            "named": true
+          },
+          {
+            "type": "message_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "ternary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "token_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "url_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "varselect_th_std_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attribute_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "th_attribute",
     "named": true,
     "fields": {
@@ -1660,6 +1746,18 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "th_attr",
+            "named": true
+          },
+          {
+            "type": "th_attrappend",
+            "named": true
+          },
+          {
+            "type": "th_attrprepend",
+            "named": true
+          },
           {
             "type": "th_case",
             "named": true
@@ -1712,6 +1810,10 @@
         "types": [
           {
             "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "th_assignation_sequence",
             "named": true
           },
           {

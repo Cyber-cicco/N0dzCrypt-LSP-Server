@@ -109,15 +109,6 @@ module.exports = grammar({
              $.attribute, 
         ),
 
-        th_attribute: $ => choice(
-            seq(
-                'th:',
-                choice(
-                    seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
-                    seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"')
-                ),
-            ),
-        ),
 
         th_attribute_value: $ => choice( $._th_std_expression),
 
@@ -166,6 +157,26 @@ module.exports = grammar({
         ),
 
         attribute_name: _ => /[^(th:)<>"'/=\s]+/,
+
+        th_attribute: $ => choice(
+            seq(
+                'th:',
+                choice(
+                    seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
+                    seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
+                    seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
+                ),
+            ),
+        ),
+
+        th_assignation_sequence: $ => choice(
+            commaSep1(seq(
+                $.attribute_name,
+                '=',
+                field("value", $._th_std_expression) 
+            )),
+            optional(","),
+        ),
 
         _th_generic: $ => choice(
             $.th_insert,
@@ -332,7 +343,7 @@ module.exports = grammar({
 
         fragment_th_std_expression : $ => seq(
             '~{',
-            optional($.url_std_expression),
+            optional($.fragment_std_expression),
             '}',
         ),
 
@@ -380,6 +391,29 @@ module.exports = grammar({
                 ')',
             ))
                
+        ),
+
+        fragment_std_expression : $ => seq(
+            optional('/'),
+            repeat1(seq(
+                choice(
+                    $.standard_url_fragment,
+                ),
+                '/'
+            )),  
+            optional(seq(
+                '::',
+                $.fragment_call
+            ))
+        ),
+
+        fragment_call : $ => seq(
+            /[0-9a-zA-Z_]+/,
+            optional(seq(
+                '(',
+                commaSep($._th_std_expression),
+                ')',
+            ))
         ),
 
         url_parameter_assignement : $ => seq(

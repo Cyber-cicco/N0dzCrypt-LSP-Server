@@ -1,1 +1,1 @@
-<div th:truc="@{/{jean}/pierre(jean=1)}"></div>
+<div th:attr="class ='font-bold'," ></div>
