@@ -165,10 +165,21 @@ module.exports = grammar({
                     seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
                     seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
                     seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
-                    seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"')
+                    seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
+                    seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
                 ),
             ),
         ),
+
+        _th_inline_value : $ => choice(
+            $.inline_text,
+            $.inline_javascript,
+            $.inline_none
+        ),
+
+        inline_text : _ => 'text',
+        inline_javascript : _ => 'javascript',
+        inline_none : _ => 'none',
 
         th_fragment_declaration : $ => seq(
             $.fragment_name,
