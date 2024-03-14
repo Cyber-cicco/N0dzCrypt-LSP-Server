@@ -105,8 +105,8 @@ module.exports = grammar({
         ),
 
         _attributes: $ => choice(
-             $.th_attribute, 
-             $.attribute, 
+             prec(10, $.th_attribute), 
+             prec(0, $.attribute), 
         ),
 
 
@@ -145,6 +145,18 @@ module.exports = grammar({
             '>',
         ),
 
+        th_attribute: $ => seq(
+            'th:',
+            choice(
+                seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
+                seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
+                seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
+                seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
+                seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
+                seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
+            ),
+        ),
+
         attribute: $ => seq(
             $.attribute_name,
             optional(seq(
@@ -156,26 +168,28 @@ module.exports = grammar({
             )),
         ),
 
-        attribute_name: _ => /[^(th:)<>"'/=\s]+/,
+        attribute_name: _ => /[^<>:"'/=\s]+/,
 
-        th_attribute: $ => choice(
-            seq(
-                'th:',
-                choice(
-                    seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
-                    seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
-                    seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
-                    seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
-                    seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
-                ),
-            ),
-        ),
 
         _th_inline_value : $ => choice(
             $.inline_text,
             $.inline_javascript,
             $.inline_none
         ),
+
+        _th_remove_value : $ => choice(
+            $.remove_all,
+            $.remove_body,
+            $.remove_tag,
+            $.remove_abf,
+            $.remove_none,
+        ),
+
+        remove_all : _ => 'all',
+        remove_body : _ => 'body',
+        remove_tag : _ => 'tag',
+        remove_abf : _ => 'all-but-first',
+        remove_none : _ => 'none',
 
         inline_text : _ => 'text',
         inline_javascript : _ => 'javascript',
@@ -216,7 +230,6 @@ module.exports = grammar({
             $.th_switch,
             $.th_case,
             $.th_unless,
-            $.th_remove,
             $.th_generic,
         ),
 
@@ -485,8 +498,10 @@ module.exports = grammar({
             field('condition', $._th_std_expression),
             '?',
             field('consequence', $._th_std_expression),
-            ':',
-            field('alternative', $._th_std_expression)
+            optional(seq(
+                ':',
+                field('alternative', $._th_std_expression)
+            )),
         )),
 
         unary_th_std_expression : $ => choice(...[

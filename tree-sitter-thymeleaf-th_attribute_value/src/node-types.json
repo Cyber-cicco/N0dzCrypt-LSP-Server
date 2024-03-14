@@ -745,6 +745,16 @@
     "fields": {}
   },
   {
+    "type": "inline_none",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "inline_text",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "interpolated_string_literal",
     "named": true,
     "fields": {},
@@ -1424,6 +1434,11 @@
     }
   },
   {
+    "type": "remove_none",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "script_element",
     "named": true,
     "fields": {},
@@ -1536,7 +1551,7 @@
     "fields": {
       "alternative": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "binary_th_std_expression",
@@ -1869,6 +1884,10 @@
             "named": true
           },
           {
+            "type": "th_inline",
+            "named": true
+          },
+          {
             "type": "th_insert",
             "named": true
           },
@@ -1903,7 +1922,39 @@
         "required": true,
         "types": [
           {
+            "type": "inline_javascript",
+            "named": true
+          },
+          {
+            "type": "inline_none",
+            "named": true
+          },
+          {
+            "type": "inline_text",
+            "named": true
+          },
+          {
             "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "remove_abf",
+            "named": true
+          },
+          {
+            "type": "remove_all",
+            "named": true
+          },
+          {
+            "type": "remove_body",
+            "named": true
+          },
+          {
+            "type": "remove_none",
+            "named": true
+          },
+          {
+            "type": "remove_tag",
             "named": true
           },
           {
@@ -2496,6 +2547,10 @@
     "named": true
   },
   {
+    "type": "inline_javascript",
+    "named": true
+  },
+  {
     "type": "interpolated_string_literal_basic_content",
     "named": true
   },
@@ -2518,6 +2573,10 @@
   {
     "type": "modulo",
     "named": true
+  },
+  {
+    "type": "none",
+    "named": false
   },
   {
     "type": "not_equal",
@@ -2564,8 +2623,28 @@
     "named": true
   },
   {
+    "type": "remove_abf",
+    "named": true
+  },
+  {
+    "type": "remove_all",
+    "named": true
+  },
+  {
+    "type": "remove_body",
+    "named": true
+  },
+  {
+    "type": "remove_tag",
+    "named": true
+  },
+  {
     "type": "tag_name",
     "named": true
+  },
+  {
+    "type": "text",
+    "named": false
   },
   {
     "type": "text",
@@ -2601,6 +2680,10 @@
   },
   {
     "type": "th_if",
+    "named": true
+  },
+  {
+    "type": "th_inline",
     "named": true
   },
   {
