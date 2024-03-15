@@ -162,7 +162,7 @@ module.exports = grammar({
                 seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
                 seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
                 seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $.th_each_value),'"'),
-                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", $.fragment_std_expression,),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", $._fragment_std_expression,),'"'),
             ),
         ),
 
@@ -412,19 +412,19 @@ module.exports = grammar({
 
         fragment_th_std_expression : $ => seq(
             '~{',
-            optional($.fragment_std_expression),
+            optional($._fragment_std_expression),
             '}',
         ),
 
         url_th_std_expression : $ => seq(
             '@{',
-            optional($.url_std_expression),
+            optional($._url_std_expression),
             '}',
         ),
 
         message_th_std_expression : $ => seq(
             '#{',
-            optional($.message_std_expression),
+            optional($._message_std_expression),
             '}',
         ),
 
@@ -440,7 +440,7 @@ module.exports = grammar({
             '}',
         ),
 
-        url_std_expression : $ => seq(
+        _url_std_expression : $ => seq(
             optional('/'),
             repeat(seq(
                 choice(
@@ -462,7 +462,7 @@ module.exports = grammar({
                
         ),
 
-        fragment_std_expression : $ => prec(PREC.FRAGMENT_EXPRESSION, seq(
+        _fragment_std_expression : $ => prec(PREC.FRAGMENT_EXPRESSION, seq(
             choice(
                 $.standard_url,
                 $._th_std_expression
@@ -507,7 +507,7 @@ module.exports = grammar({
             /[0-9a-zA-Z_]+/,
         ), 
 
-        message_std_expression : $ => seq(
+        _message_std_expression : $ => seq(
             field("message", $.message_name),
             field("args", 
                 optional(seq(

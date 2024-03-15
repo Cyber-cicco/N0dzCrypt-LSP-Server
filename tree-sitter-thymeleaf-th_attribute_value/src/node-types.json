@@ -706,12 +706,12 @@
     }
   },
   {
-    "type": "fragment_std_expression",
+    "type": "fragment_th_std_expression",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "binary_th_std_expression",
@@ -789,21 +789,6 @@
     }
   },
   {
-    "type": "fragment_th_std_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "fragment_std_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "greater_than",
     "named": true,
     "fields": {}
@@ -860,7 +845,7 @@
     "fields": {}
   },
   {
-    "type": "message_std_expression",
+    "type": "message_th_std_expression",
     "named": true,
     "fields": {
       "args": {
@@ -947,7 +932,7 @@
       },
       "message": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "message_name",
@@ -955,21 +940,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "message_th_std_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "message_std_expression",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1981,11 +1951,27 @@
         ]
       },
       "attribute_value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
           {
-            "type": "fragment_std_expression",
+            "type": "::",
+            "named": false
+          },
+          {
+            "type": "binary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "fragment_call",
+            "named": true
+          },
+          {
+            "type": "fragment_th_std_expression",
             "named": true
           },
           {
@@ -2001,7 +1987,27 @@
             "named": true
           },
           {
+            "type": "interpolated_string_literal",
+            "named": true
+          },
+          {
+            "type": "message_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
             "type": "ognl_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
@@ -2025,6 +2031,18 @@
             "named": true
           },
           {
+            "type": "standard_url",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "ternary_th_std_expression",
+            "named": true
+          },
+          {
             "type": "th_assignation_sequence",
             "named": true
           },
@@ -2038,6 +2056,26 @@
           },
           {
             "type": "th_fragment_declaration",
+            "named": true
+          },
+          {
+            "type": "token_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "url_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "varselect_th_std_expression",
             "named": true
           }
         ]
@@ -2352,12 +2390,12 @@
     }
   },
   {
-    "type": "url_std_expression",
+    "type": "url_th_std_expression",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "parameterized_url_fragment",
@@ -2369,21 +2407,6 @@
         },
         {
           "type": "url_parameter_assignement",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "url_th_std_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "url_std_expression",
           "named": true
         }
       ]
@@ -2754,11 +2777,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "th:",

@@ -1,1 +1,8 @@
-<div th:insert="svg/simple-arrow :: svg('25', '25')"></div>
+                <a 
+                    tabindex="0"
+                    hx-trigger="keyup[keyCode==13], click"
+                    th:hx-get="@{/ase-details/partial(id=${iterStat.index})}"
+                    th:hx-push-url="@{/ase-details(id=${iterStat.index})}"
+                    hx-target="#router-outlet"
+                    class="flex hover:cursor-pointer hoverzoom rounded-md p-2 bg-white h-[550px] justify-between gap-2 shadow-lg flex-col items-center"
+                    >
