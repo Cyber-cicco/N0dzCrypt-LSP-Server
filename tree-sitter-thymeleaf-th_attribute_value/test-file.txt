@@ -1,39 +1,13 @@
-<table>
-  <thead>
-    <tr>
-      <th>NAME</th>
-      <th>PRICE</th>
-      <th>IN STOCK</th>
-      <th>COMMENTS</th>
-    </tr>
-  </thead>
-  <tbody th:remove="all-but-first">
-      <td th:text="${prod.name}">Onions</td>
-      <td th:text="${prod.price}">2.41</td>
-      <td th:text="${prod.inStock}? #{true}">yes</td>
-      <td>
-        <span th:text="${#lists.size(prod.comments)}">2</span> comment/s
-        <a href="comments.html" 
-           th:href="@{/product/comments(prodId=${prod.id})}" 
-           th:unless="${#lists.isEmpty(prod.comments)}">view</a>
-      </td>
-    </tr>
-    <tr class="odd">
-      <td>Blue Lettuce</td>
-      <td>9.55</td>
-      <td>no</td>
-      <td>
-        <span>0</span> comment/s
-      </td>
-    </tr>
-    <tr>
-      <td>Mild Cinnamon</td>
-      <td>1.99</td>
-      <td>yes</td>
-      <td>
-        <span>3</span> comment/s
-        <a href="comments.html">view</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<section class="flex flex-col gap-5 justify-center items-center bg-main text-white h-[400px]">
+    <h1 class="text-white text-5xl font-extrabold font-poppins">Trouvez votre <span class="text-accent"> alternant</span></h1>
+    <div class="flex flex-col gap-1 bg-primary p-5 rounded-lg">
+        Rechercher
+        <div class="flex">
+            <input class="rounded-l-md border-r-2 border-grey text-xl p-2 text-black" placeholder="Domaine, ex : java, .NET">
+            <input class="rounded-r-md text-xl p-2 text-black" placeholder="Lieu, ex : Nantes">
+            <div class="pl-5 flex items-center">
+                <div tabindex="0" class="rounded-full hover:bg-opacity-10 hover:bg-white hover:cursor-pointer border-2 border-white p-1 rotate-[270deg]" th:insert="svg/simple-arrow :: svg('25', '25')"></div>
+            </div>
+        </div>
+    </div>
+</section>

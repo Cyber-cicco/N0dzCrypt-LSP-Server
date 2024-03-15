@@ -1485,11 +1485,6 @@
     }
   },
   {
-    "type": "standard_url_fragment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "start_tag",
     "named": true,
     "fields": {},
@@ -1872,6 +1867,10 @@
             "named": true
           },
           {
+            "type": "th_each",
+            "named": true
+          },
+          {
             "type": "th_fragment",
             "named": true
           },
@@ -1918,9 +1917,25 @@
         ]
       },
       "attribute_value": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "[a-zA-Z]",
+            "named": false
+          },
+          {
+            "type": "fragment_std_expression",
+            "named": true
+          },
           {
             "type": "inline_javascript",
             "named": true
@@ -1931,6 +1946,10 @@
           },
           {
             "type": "inline_text",
+            "named": true
+          },
+          {
+            "type": "iterStat",
             "named": true
           },
           {
@@ -1968,6 +1987,16 @@
           {
             "type": "th_fragment_declaration",
             "named": true
+          }
+        ]
+      },
+      "element": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "[a-zA-Z]",
+            "named": false
           }
         ]
       }
@@ -2475,6 +2504,10 @@
     "named": false
   },
   {
+    "type": "[a-zA-Z]",
+    "named": false
+  },
+  {
     "type": "]",
     "named": false
   },
@@ -2552,6 +2585,10 @@
   },
   {
     "type": "interpolated_string_literal_basic_content",
+    "named": true
+  },
+  {
+    "type": "iterStat",
     "named": true
   },
   {
@@ -2639,16 +2676,20 @@
     "named": true
   },
   {
+    "type": "standard_url_fragment",
+    "named": true
+  },
+  {
     "type": "tag_name",
     "named": true
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "th:",
@@ -2668,6 +2709,10 @@
   },
   {
     "type": "th_case",
+    "named": true
+  },
+  {
+    "type": "th_each",
     "named": true
   },
   {

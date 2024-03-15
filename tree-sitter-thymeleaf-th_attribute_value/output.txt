@@ -1,239 +1,104 @@
 running: "c++" "--version"
 exit status: 0
 cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
-(document [0, 0] - [39, 0]
-  (element [0, 0] - [38, 8]
-    (start_tag [0, 0] - [0, 7]
-      (tag_name [0, 1] - [0, 6]))
-    (element [1, 2] - [8, 10]
-      (start_tag [1, 2] - [1, 9]
-        (tag_name [1, 3] - [1, 8]))
-      (element [2, 4] - [7, 9]
-        (start_tag [2, 4] - [2, 8]
-          (tag_name [2, 5] - [2, 7]))
-        (element [3, 6] - [3, 19]
-          (start_tag [3, 6] - [3, 10]
-            (tag_name [3, 7] - [3, 9]))
-          (text [3, 10] - [3, 14])
-          (end_tag [3, 14] - [3, 19]
-            (tag_name [3, 16] - [3, 18])))
-        (element [4, 6] - [4, 20]
-          (start_tag [4, 6] - [4, 10]
-            (tag_name [4, 7] - [4, 9]))
-          (text [4, 10] - [4, 15])
-          (end_tag [4, 15] - [4, 20]
-            (tag_name [4, 17] - [4, 19])))
-        (element [5, 6] - [5, 23]
-          (start_tag [5, 6] - [5, 10]
-            (tag_name [5, 7] - [5, 9]))
-          (text [5, 10] - [5, 18])
-          (end_tag [5, 18] - [5, 23]
-            (tag_name [5, 20] - [5, 22])))
-        (element [6, 6] - [6, 23]
-          (start_tag [6, 6] - [6, 10]
-            (tag_name [6, 7] - [6, 9]))
-          (text [6, 10] - [6, 18])
-          (end_tag [6, 18] - [6, 23]
-            (tag_name [6, 20] - [6, 22])))
-        (end_tag [7, 4] - [7, 9]
-          (tag_name [7, 6] - [7, 8])))
-      (end_tag [8, 2] - [8, 10]
-        (tag_name [8, 4] - [8, 9])))
-    (element [9, 2] - [37, 10]
-      (start_tag [9, 2] - [9, 35]
-        (tag_name [9, 3] - [9, 8])
-        (th_attribute [9, 9] - [9, 34]
-          attribute_name: (th_remove [9, 12] - [9, 18])
-          attribute_value: (remove_abf [9, 20] - [9, 33])))
-      (element [10, 6] - [10, 44]
-        (start_tag [10, 6] - [10, 33]
-          (tag_name [10, 7] - [10, 9])
-          (th_attribute [10, 10] - [10, 32]
-            attribute_name: (th_generic [10, 13] - [10, 17])
-            attribute_value: (th_attribute_value [10, 19] - [10, 31]
-              (ognl_th_std_expression [10, 19] - [10, 31]
-                (ognl_object_literal [10, 21] - [10, 30]
-                  (ognl_property_access [10, 25] - [10, 30]
-                    name: (ognl_object_literal [10, 26] - [10, 30])))))))
-        (text [10, 33] - [10, 39])
-        (end_tag [10, 39] - [10, 44]
-          (tag_name [10, 41] - [10, 43])))
-      (element [11, 6] - [11, 43]
-        (start_tag [11, 6] - [11, 34]
-          (tag_name [11, 7] - [11, 9])
-          (th_attribute [11, 10] - [11, 33]
-            attribute_name: (th_generic [11, 13] - [11, 17])
-            attribute_value: (th_attribute_value [11, 19] - [11, 32]
-              (ognl_th_std_expression [11, 19] - [11, 32]
-                (ognl_object_literal [11, 21] - [11, 31]
-                  (ognl_property_access [11, 25] - [11, 31]
-                    name: (ognl_object_literal [11, 26] - [11, 31])))))))
-        (text [11, 34] - [11, 38])
-        (end_tag [11, 38] - [11, 43]
-          (tag_name [11, 40] - [11, 42])))
-      (element [12, 6] - [12, 53]
-        (start_tag [12, 6] - [12, 45]
-          (tag_name [12, 7] - [12, 9])
-          (th_attribute [12, 10] - [12, 44]
-            attribute_name: (th_generic [12, 13] - [12, 17])
-            attribute_value: (th_attribute_value [12, 19] - [12, 43]
-              (ternary_th_std_expression [12, 19] - [12, 43]
-                condition: (ognl_th_std_expression [12, 19] - [12, 34]
-                  (ognl_object_literal [12, 21] - [12, 33]
-                    (ognl_property_access [12, 25] - [12, 33]
-                      name: (ognl_object_literal [12, 26] - [12, 33]))))
-                consequence: (message_th_std_expression [12, 36] - [12, 43]
-                  (message_std_expression [12, 38] - [12, 42]
-                    message: (message_name [12, 38] - [12, 42])))))))
-        (text [12, 45] - [12, 48])
-        (end_tag [12, 48] - [12, 53]
-          (tag_name [12, 50] - [12, 52])))
-      (element [13, 6] - [18, 11]
-        (start_tag [13, 6] - [13, 10]
-          (tag_name [13, 7] - [13, 9]))
-        (element [14, 8] - [14, 62]
-          (start_tag [14, 8] - [14, 54]
-            (tag_name [14, 9] - [14, 13])
-            (th_attribute [14, 14] - [14, 53]
-              attribute_name: (th_generic [14, 17] - [14, 21])
-              attribute_value: (th_attribute_value [14, 23] - [14, 52]
-                (ognl_th_std_expression [14, 23] - [14, 52]
-                  (ognl_variable [14, 25] - [14, 51]
-                    (ognl_method_access [14, 31] - [14, 51]
-                      (ognl_method_literal [14, 32] - [14, 51]
-                        name: (ognl_method_name [14, 32] - [14, 36])
-                        args: (ognl_method_args [14, 36] - [14, 51]
-                          (ognl_object_literal [14, 37] - [14, 50]
-                            (ognl_property_access [14, 41] - [14, 50]
-                              name: (ognl_object_literal [14, 42] - [14, 50])))))))))))
-          (text [14, 54] - [14, 55])
-          (end_tag [14, 55] - [14, 62]
-            (tag_name [14, 57] - [14, 61])))
-        (text [14, 63] - [14, 72])
-        (element [15, 8] - [17, 64]
-          (start_tag [15, 8] - [17, 56]
-            (tag_name [15, 9] - [15, 10])
-            (attribute [15, 11] - [15, 31]
-              (attribute_name [15, 11] - [15, 15])
-              (quoted_attribute_value [15, 16] - [15, 31]
-                (attribute_value [15, 17] - [15, 30])))
-            (th_attribute [16, 11] - [16, 60]
-              attribute_name: (th_generic [16, 14] - [16, 18])
-              attribute_value: (th_attribute_value [16, 20] - [16, 59]
-                (url_th_std_expression [16, 20] - [16, 59]
-                  (url_std_expression [16, 22] - [16, 58]
-                    (standard_url_fragment [16, 23] - [16, 30])
-                    (standard_url_fragment [16, 31] - [16, 39])
-                    (url_parameter_assignement [16, 40] - [16, 57]
-                      param: (url_parameter [16, 40] - [16, 46])
-                      value: (ognl_th_std_expression [16, 47] - [16, 57]
-                        (ognl_object_literal [16, 49] - [16, 56]
-                          (ognl_property_access [16, 53] - [16, 56]
-                            name: (ognl_object_literal [16, 54] - [16, 56])))))))))
-            (th_attribute [17, 11] - [17, 55]
-              attribute_name: (th_unless [17, 14] - [17, 20])
-              attribute_value: (th_attribute_value [17, 22] - [17, 54]
-                (ognl_th_std_expression [17, 22] - [17, 54]
-                  (ognl_variable [17, 24] - [17, 53]
-                    (ognl_method_access [17, 30] - [17, 53]
-                      (ognl_method_literal [17, 31] - [17, 53]
-                        name: (ognl_method_name [17, 31] - [17, 38])
-                        args: (ognl_method_args [17, 38] - [17, 53]
-                          (ognl_object_literal [17, 39] - [17, 52]
-                            (ognl_property_access [17, 43] - [17, 52]
-                              name: (ognl_object_literal [17, 44] - [17, 52])))))))))))
-          (text [17, 56] - [17, 60])
-          (end_tag [17, 60] - [17, 64]
-            (tag_name [17, 62] - [17, 63])))
-        (end_tag [18, 6] - [18, 11]
-          (tag_name [18, 8] - [18, 10])))
-      (erroneous_end_tag [19, 4] - [19, 9]
-        (erroneous_end_tag_name [19, 6] - [19, 8]))
-      (element [20, 4] - [27, 9]
-        (start_tag [20, 4] - [20, 20]
-          (tag_name [20, 5] - [20, 7])
-          (attribute [20, 8] - [20, 19]
-            (attribute_name [20, 8] - [20, 13])
-            (quoted_attribute_value [20, 14] - [20, 19]
-              (attribute_value [20, 15] - [20, 18]))))
-        (element [21, 6] - [21, 27]
-          (start_tag [21, 6] - [21, 10]
-            (tag_name [21, 7] - [21, 9]))
-          (text [21, 10] - [21, 22])
-          (end_tag [21, 22] - [21, 27]
-            (tag_name [21, 24] - [21, 26])))
-        (element [22, 6] - [22, 19]
-          (start_tag [22, 6] - [22, 10]
-            (tag_name [22, 7] - [22, 9]))
-          (text [22, 10] - [22, 14])
-          (end_tag [22, 14] - [22, 19]
-            (tag_name [22, 16] - [22, 18])))
-        (element [23, 6] - [23, 17]
-          (start_tag [23, 6] - [23, 10]
-            (tag_name [23, 7] - [23, 9]))
-          (text [23, 10] - [23, 12])
-          (end_tag [23, 12] - [23, 17]
-            (tag_name [23, 14] - [23, 16])))
-        (element [24, 6] - [26, 11]
-          (start_tag [24, 6] - [24, 10]
-            (tag_name [24, 7] - [24, 9]))
-          (element [25, 8] - [25, 22]
-            (start_tag [25, 8] - [25, 14]
-              (tag_name [25, 9] - [25, 13]))
-            (text [25, 14] - [25, 15])
-            (end_tag [25, 15] - [25, 22]
-              (tag_name [25, 17] - [25, 21])))
-          (text [25, 23] - [25, 32])
-          (end_tag [26, 6] - [26, 11]
-            (tag_name [26, 8] - [26, 10])))
-        (end_tag [27, 4] - [27, 9]
-          (tag_name [27, 6] - [27, 8])))
-      (element [28, 4] - [36, 9]
-        (start_tag [28, 4] - [28, 8]
-          (tag_name [28, 5] - [28, 7]))
-        (element [29, 6] - [29, 28]
-          (start_tag [29, 6] - [29, 10]
-            (tag_name [29, 7] - [29, 9]))
-          (text [29, 10] - [29, 23])
-          (end_tag [29, 23] - [29, 28]
-            (tag_name [29, 25] - [29, 27])))
-        (element [30, 6] - [30, 19]
-          (start_tag [30, 6] - [30, 10]
-            (tag_name [30, 7] - [30, 9]))
-          (text [30, 10] - [30, 14])
-          (end_tag [30, 14] - [30, 19]
-            (tag_name [30, 16] - [30, 18])))
-        (element [31, 6] - [31, 18]
-          (start_tag [31, 6] - [31, 10]
-            (tag_name [31, 7] - [31, 9]))
-          (text [31, 10] - [31, 13])
-          (end_tag [31, 13] - [31, 18]
-            (tag_name [31, 15] - [31, 17])))
-        (element [32, 6] - [35, 11]
-          (start_tag [32, 6] - [32, 10]
-            (tag_name [32, 7] - [32, 9]))
-          (element [33, 8] - [33, 22]
-            (start_tag [33, 8] - [33, 14]
-              (tag_name [33, 9] - [33, 13]))
-            (text [33, 14] - [33, 15])
-            (end_tag [33, 15] - [33, 22]
-              (tag_name [33, 17] - [33, 21])))
-          (text [33, 23] - [33, 32])
-          (element [34, 8] - [34, 40]
-            (start_tag [34, 8] - [34, 32]
-              (tag_name [34, 9] - [34, 10])
-              (attribute [34, 11] - [34, 31]
-                (attribute_name [34, 11] - [34, 15])
-                (quoted_attribute_value [34, 16] - [34, 31]
-                  (attribute_value [34, 17] - [34, 30]))))
-            (text [34, 32] - [34, 36])
-            (end_tag [34, 36] - [34, 40]
-              (tag_name [34, 38] - [34, 39])))
-          (end_tag [35, 6] - [35, 11]
-            (tag_name [35, 8] - [35, 10])))
-        (end_tag [36, 4] - [36, 9]
-          (tag_name [36, 6] - [36, 8])))
-      (end_tag [37, 2] - [37, 10]
-        (tag_name [37, 4] - [37, 9])))
-    (end_tag [38, 0] - [38, 8]
-      (tag_name [38, 2] - [38, 7]))))
+(document [0, 0] - [13, 0]
+  (element [0, 0] - [12, 10]
+    (start_tag [0, 0] - [0, 94]
+      (tag_name [0, 1] - [0, 8])
+      (attribute [0, 9] - [0, 93]
+        (attribute_name [0, 9] - [0, 14])
+        (quoted_attribute_value [0, 15] - [0, 93]
+          (attribute_value [0, 16] - [0, 92]))))
+    (element [1, 4] - [1, 126]
+      (start_tag [1, 4] - [1, 64]
+        (tag_name [1, 5] - [1, 7])
+        (attribute [1, 8] - [1, 63]
+          (attribute_name [1, 8] - [1, 13])
+          (quoted_attribute_value [1, 14] - [1, 63]
+            (attribute_value [1, 15] - [1, 62]))))
+      (text [1, 64] - [1, 77])
+      (element [1, 78] - [1, 121]
+        (start_tag [1, 78] - [1, 104]
+          (tag_name [1, 79] - [1, 83])
+          (attribute [1, 84] - [1, 103]
+            (attribute_name [1, 84] - [1, 89])
+            (quoted_attribute_value [1, 90] - [1, 103]
+              (attribute_value [1, 91] - [1, 102]))))
+        (text [1, 105] - [1, 114])
+        (end_tag [1, 114] - [1, 121]
+          (tag_name [1, 116] - [1, 120])))
+      (end_tag [1, 121] - [1, 126]
+        (tag_name [1, 123] - [1, 125])))
+    (element [2, 4] - [11, 10]
+      (start_tag [2, 4] - [2, 63]
+        (tag_name [2, 5] - [2, 8])
+        (attribute [2, 9] - [2, 62]
+          (attribute_name [2, 9] - [2, 14])
+          (quoted_attribute_value [2, 15] - [2, 62]
+            (attribute_value [2, 16] - [2, 61]))))
+      (text [3, 8] - [3, 18])
+      (element [4, 8] - [10, 14]
+        (start_tag [4, 8] - [4, 26]
+          (tag_name [4, 9] - [4, 12])
+          (attribute [4, 13] - [4, 25]
+            (attribute_name [4, 13] - [4, 18])
+            (quoted_attribute_value [4, 19] - [4, 25]
+              (attribute_value [4, 20] - [4, 24]))))
+        (element [5, 12] - [6, 12]
+          (start_tag [5, 12] - [5, 125]
+            (tag_name [5, 13] - [5, 18])
+            (attribute [5, 19] - [5, 85]
+              (attribute_name [5, 19] - [5, 24])
+              (quoted_attribute_value [5, 25] - [5, 85]
+                (attribute_value [5, 26] - [5, 84])))
+            (attribute [5, 86] - [5, 124]
+              (attribute_name [5, 86] - [5, 97])
+              (quoted_attribute_value [5, 98] - [5, 124]
+                (attribute_value [5, 99] - [5, 123])))))
+        (element [6, 12] - [7, 12]
+          (start_tag [6, 12] - [6, 95]
+            (tag_name [6, 13] - [6, 18])
+            (attribute [6, 19] - [6, 62]
+              (attribute_name [6, 19] - [6, 24])
+              (quoted_attribute_value [6, 25] - [6, 62]
+                (attribute_value [6, 26] - [6, 61])))
+            (attribute [6, 63] - [6, 94]
+              (attribute_name [6, 63] - [6, 74])
+              (quoted_attribute_value [6, 75] - [6, 94]
+                (attribute_value [6, 76] - [6, 93])))))
+        (element [7, 12] - [9, 18]
+          (start_tag [7, 12] - [7, 48]
+            (tag_name [7, 13] - [7, 16])
+            (attribute [7, 17] - [7, 47]
+              (attribute_name [7, 17] - [7, 22])
+              (quoted_attribute_value [7, 23] - [7, 47]
+                (attribute_value [7, 24] - [7, 46]))))
+          (element [8, 16] - [8, 207]
+            (start_tag [8, 16] - [8, 201]
+              (tag_name [8, 17] - [8, 20])
+              (attribute [8, 21] - [8, 33]
+                (attribute_name [8, 21] - [8, 29])
+                (quoted_attribute_value [8, 30] - [8, 33]
+                  (attribute_value [8, 31] - [8, 32])))
+              (attribute [8, 34] - [8, 152]
+                (attribute_name [8, 34] - [8, 39])
+                (quoted_attribute_value [8, 40] - [8, 152]
+                  (attribute_value [8, 41] - [8, 151])))
+              (th_attribute [8, 153] - [8, 200]
+                attribute_name: (th_insert [8, 156] - [8, 162])
+                attribute_value: (fragment_std_expression [8, 164] - [8, 199]
+                  (standard_url_fragment [8, 164] - [8, 167])
+                  (standard_url_fragment [8, 168] - [8, 180])
+                  (fragment_call [8, 184] - [8, 199]
+                    (string_literal [8, 188] - [8, 192])
+                    (string_literal [8, 194] - [8, 198])))))
+            (end_tag [8, 201] - [8, 207]
+              (tag_name [8, 203] - [8, 206])))
+          (end_tag [9, 12] - [9, 18]
+            (tag_name [9, 14] - [9, 17])))
+        (end_tag [10, 8] - [10, 14]
+          (tag_name [10, 10] - [10, 13])))
+      (end_tag [11, 4] - [11, 10]
+        (tag_name [11, 6] - [11, 9])))
+    (end_tag [12, 0] - [12, 10]
+      (tag_name [12, 2] - [12, 9]))))

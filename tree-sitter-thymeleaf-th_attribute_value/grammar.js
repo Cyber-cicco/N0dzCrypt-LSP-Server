@@ -154,6 +154,8 @@ module.exports = grammar({
                 seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
                 seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
                 seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
+                seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $._th_each_value),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", choice($._th_each_value, $.fragment_std_expression)),'"'),
             ),
         ),
 
@@ -176,6 +178,18 @@ module.exports = grammar({
             $.inline_javascript,
             $.inline_none
         ),
+
+        _th_each_value : $ => seq(
+            field("element", '[a-zA-Z]'),
+            optional(seq(
+                ',',
+                $.iterStat,
+            )),
+            ':',
+            $.ognl_th_std_expression
+        ),
+
+        iterStat : _ => 'iterStat',
 
         _th_remove_value : $ => choice(
             $.remove_all,
@@ -224,13 +238,16 @@ module.exports = grammar({
         ),
 
         _th_generic: $ => choice(
-            $.th_insert,
-            $.th_replace,
             $.th_if,
             $.th_switch,
             $.th_case,
             $.th_unless,
             $.th_generic,
+        ),
+
+        _th_fragments_insert : $ => choice(
+            $.th_insert,
+            $.th_replace,
         ),
 
         _th_ognl_only: $ => choice(
@@ -439,10 +456,8 @@ module.exports = grammar({
         fragment_std_expression : $ => seq(
             optional('/'),
             repeat1(seq(
-                choice(
-                    $.standard_url_fragment,
-                ),
-                '/'
+                $.standard_url_fragment,
+                optional('/'),
             )),  
             optional(seq(
                 '::',
@@ -465,7 +480,7 @@ module.exports = grammar({
             field("value", $._th_std_expression)
         ),
 
-        standard_url_fragment : _ => /[0-9a-zA-Z_]+/,
+        standard_url_fragment : _ => /[0-9a-zA-Z_\-]+/,
 
         url_parameter : _ => /[0-9a-zA-Z_]+/,
 
