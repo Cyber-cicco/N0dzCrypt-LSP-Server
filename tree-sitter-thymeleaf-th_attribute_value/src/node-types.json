@@ -1917,21 +1917,9 @@
         ]
       },
       "attribute_value": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": ":",
-            "named": false
-          },
-          {
-            "type": "[a-zA-Z]",
-            "named": false
-          },
           {
             "type": "fragment_std_expression",
             "named": true
@@ -1946,10 +1934,6 @@
           },
           {
             "type": "inline_text",
-            "named": true
-          },
-          {
-            "type": "iterStat",
             "named": true
           },
           {
@@ -1985,18 +1969,12 @@
             "named": true
           },
           {
+            "type": "th_each_value",
+            "named": true
+          },
+          {
             "type": "th_fragment_declaration",
             "named": true
-          }
-        ]
-      },
-      "element": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "[a-zA-Z]",
-            "named": false
           }
         ]
       }
@@ -2072,6 +2050,29 @@
         },
         {
           "type": "varselect_th_std_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "th_each_value",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "each_element",
+          "named": true
+        },
+        {
+          "type": "iterStat",
+          "named": true
+        },
+        {
+          "type": "ognl_th_std_expression",
           "named": true
         }
       ]
@@ -2504,10 +2505,6 @@
     "named": false
   },
   {
-    "type": "[a-zA-Z]",
-    "named": false
-  },
-  {
     "type": "]",
     "named": false
   },
@@ -2538,6 +2535,10 @@
   {
     "type": "doctype",
     "named": false
+  },
+  {
+    "type": "each_element",
+    "named": true
   },
   {
     "type": "entity",
@@ -2685,11 +2686,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "th:",

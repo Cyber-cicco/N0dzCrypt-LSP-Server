@@ -586,7 +586,7 @@
                   "name": "attribute_value",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_th_each_value"
+                    "name": "th_each_value"
                   }
                 },
                 {
@@ -622,7 +622,7 @@
                     "members": [
                       {
                         "type": "SYMBOL",
-                        "name": "_th_each_value"
+                        "name": "th_attribute_value"
                       },
                       {
                         "type": "SYMBOL",
@@ -701,16 +701,12 @@
         }
       ]
     },
-    "_th_each_value": {
+    "th_each_value": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "element",
-          "content": {
-            "type": "STRING",
-            "value": "[a-zA-Z]"
-          }
+          "type": "SYMBOL",
+          "name": "each_element"
         },
         {
           "type": "CHOICE",
@@ -746,6 +742,10 @@
     "iterStat": {
       "type": "STRING",
       "value": "iterStat"
+    },
+    "each_element": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z]+"
     },
     "_th_remove_value": {
       "type": "CHOICE",

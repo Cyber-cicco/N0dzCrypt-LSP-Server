@@ -1,7 +1,4 @@
-running: "c++" "--version"
-exit status: 0
-cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
-(document [0, 0] - [13, 0]
+(document [0, 0] - [15, 0]
   (element [0, 0] - [12, 10]
     (start_tag [0, 0] - [0, 94]
       (tag_name [0, 1] - [0, 8])
@@ -101,4 +98,12 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
       (end_tag [11, 4] - [11, 10]
         (tag_name [11, 6] - [11, 9])))
     (end_tag [12, 0] - [12, 10]
-      (tag_name [12, 2] - [12, 9]))))
+      (tag_name [12, 2] - [12, 9])))
+  (element [13, 0] - [13, 71]
+    (start_tag [13, 0] - [13, 60]
+      (tag_name [13, 1] - [13, 9])
+      (ERROR [13, 10] - [13, 59]
+        (th_each [13, 13] - [13, 17])))
+    (end_tag [13, 60] - [13, 71]
+      (tag_name [13, 62] - [13, 70]))))
+test-file.txt	   0.43 ms	  2180 bytes/ms	(ERROR [13, 10] - [13, 59])

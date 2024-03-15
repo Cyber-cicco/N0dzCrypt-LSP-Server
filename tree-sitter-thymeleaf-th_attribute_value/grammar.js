@@ -154,8 +154,8 @@ module.exports = grammar({
                 seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
                 seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
                 seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
-                seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $._th_each_value),'"'),
-                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", choice($._th_each_value, $.fragment_std_expression)),'"'),
+                seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $.th_each_value),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", choice($.th_attribute_value, $.fragment_std_expression)),'"'),
             ),
         ),
 
@@ -179,17 +179,19 @@ module.exports = grammar({
             $.inline_none
         ),
 
-        _th_each_value : $ => seq(
-            field("element", '[a-zA-Z]'),
+        th_each_value : $ => seq(
+            $.each_element, 
             optional(seq(
                 ',',
                 $.iterStat,
             )),
             ':',
-            $.ognl_th_std_expression
+            $.ognl_th_std_expression,
         ),
 
         iterStat : _ => 'iterStat',
+
+        each_element : _ => /[a-zA-Z]+/,
 
         _th_remove_value : $ => choice(
             $.remove_all,
