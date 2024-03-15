@@ -107,9 +107,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                     (quoted_attribute_value [23, 37] - [23, 43]
                       (attribute_value [23, 38] - [23, 42])))
                   (attribute [24, 32] - [24, 63]
-                    (attribute_name [24, 32] - [24, 37])
-                    (ERROR [24, 37] - [24, 52]
-                      (equal_2 [24, 46] - [24, 48]))
+                    (attribute_name [24, 32] - [24, 52])
                     (quoted_attribute_value [24, 53] - [24, 63]
                       (attribute_value [24, 54] - [24, 62])))
                   (attribute [25, 32] - [25, 53]
@@ -167,10 +165,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                   (quoted_attribute_value [38, 40] - [38, 46]
                     (attribute_value [38, 41] - [38, 45])))
                 (attribute [39, 28] - [39, 60]
-                  (attribute_name [39, 28] - [39, 33])
-                  (ERROR [39, 33] - [39, 49]
-                    (or [39, 38] - [39, 40])
-                    (equal_2 [39, 43] - [39, 45]))
+                  (attribute_name [39, 28] - [39, 49])
                   (quoted_attribute_value [39, 50] - [39, 60]
                     (attribute_value [39, 51] - [39, 59])))
                 (attribute [40, 28] - [40, 49]
@@ -201,10 +196,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                       right: (ognl_th_std_expression [46, 65] - [46, 72]
                         (ognl_object_literal [46, 67] - [46, 71])))))
                 (attribute [47, 28] - [47, 60]
-                  (attribute_name [47, 28] - [47, 33])
-                  (ERROR [47, 33] - [47, 49]
-                    (or [47, 38] - [47, 40])
-                    (equal_2 [47, 43] - [47, 45]))
+                  (attribute_name [47, 28] - [47, 49])
                   (quoted_attribute_value [47, 50] - [47, 60]
                     (attribute_value [47, 51] - [47, 59])))
                 (attribute [48, 28] - [48, 46]
@@ -472,8 +464,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                   (th_attribute [80, 28] - [85, 31]
                     attribute_name: (th_replace [80, 31] - [80, 38])
                     attribute_value: (fragment_th_std_expression [80, 40] - [85, 30]
-                      (standard_url [80, 42] - [80, 71])
-                      (ERROR [80, 71] - [80, 86])
+                      (standard_url [80, 42] - [80, 86])
                       (fragment_call [80, 90] - [85, 29]
                         (token_literal [80, 90] - [80, 95])
                         (ognl_th_std_expression [81, 32] - [81, 95]
@@ -610,8 +601,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                   (th_attribute [89, 28] - [94, 31]
                     attribute_name: (th_replace [89, 31] - [89, 38])
                     attribute_value: (fragment_th_std_expression [89, 40] - [94, 30]
-                      (standard_url [89, 42] - [89, 70])
-                      (ERROR [89, 70] - [89, 76])
+                      (standard_url [89, 42] - [89, 76])
                       (fragment_call [89, 80] - [94, 29]
                         (token_literal [89, 80] - [89, 85])
                         (ognl_th_std_expression [90, 32] - [90, 95]
@@ -722,8 +712,7 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
         (tag_name [100, 5] - [100, 11])
         (th_attribute [100, 12] - [100, 43]
           attribute_name: (th_insert [100, 15] - [100, 21])
-          attribute_value: (standard_url [100, 23] - [100, 39])
-          (ERROR [100, 39] - [100, 42])))
+          attribute_value: (standard_url [100, 23] - [100, 42])))
       (raw_text [100, 44] - [101, 4])
       (end_tag [101, 4] - [101, 13]
         (tag_name [101, 6] - [101, 12])))
@@ -735,4 +724,4 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
         (tag_name [104, 6] - [104, 12])))
     (end_tag [105, 0] - [105, 6]
       (tag_name [105, 2] - [105, 5]))))
-test-file.txt	   2.42 ms	  2616 bytes/ms	(ERROR [24, 37] - [24, 52])
+test-file.txt	   2.53 ms	  2504 bytes/ms	(ERROR [78, 46] - [78, 104])

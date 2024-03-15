@@ -212,17 +212,8 @@
       ]
     },
     "th_attribute_value": {
-      "type": "PREC",
-      "value": 17,
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_th_std_expression"
-          }
-        ]
-      }
+      "type": "SYMBOL",
+      "name": "_th_std_expression"
     },
     "script_start_tag": {
       "type": "SEQ",
@@ -354,8 +345,15 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": "th:"
+          "type": "TOKEN",
+          "content": {
+            "type": "PREC",
+            "value": 17,
+            "content": {
+              "type": "STRING",
+              "value": "th:"
+            }
+          }
         },
         {
           "type": "CHOICE",
@@ -669,7 +667,7 @@
     },
     "attribute_name": {
       "type": "PATTERN",
-      "value": "[^<>:\"'/=\\s]+"
+      "value": "[^<>\"'/=\\s]+"
     },
     "_th_inline_value": {
       "type": "CHOICE",
@@ -1879,11 +1877,11 @@
     },
     "standard_url": {
       "type": "PATTERN",
-      "value": "[0-9a-zA-Z_\\-\\/]+"
+      "value": "[0-9a-zA-Z_\\-\\/\\.]+"
     },
     "standard_url_fragment": {
       "type": "PATTERN",
-      "value": "[0-9a-zA-Z_\\-]+"
+      "value": "[0-9a-zA-Z_\\-\\.]+"
     },
     "url_parameter": {
       "type": "PATTERN",

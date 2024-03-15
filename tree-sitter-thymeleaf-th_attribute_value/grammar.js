@@ -112,12 +112,7 @@ module.exports = grammar({
         ),
 
 
-        th_attribute_value: $ => (
-            prec(
-                PREC.TH_STD_EXPRESSION, 
-                choice( $._th_std_expression)
-            )
-        ), 
+        th_attribute_value: $ => $._th_std_expression, 
 
         script_start_tag: $ => seq(
             '<',
@@ -153,7 +148,7 @@ module.exports = grammar({
         ),
 
         th_attribute: $ => seq(
-            'th:',
+            token(prec(PREC.TH_STD_EXPRESSION, 'th:')) ,
             choice(
                 seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
                 seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
@@ -177,7 +172,7 @@ module.exports = grammar({
             )),
         ),
 
-        attribute_name: _ => /[^<>:"'/=\s]+/,
+        attribute_name: _ => /[^<>"'/=\s]+/,
 
 
         _th_inline_value : $ => choice(

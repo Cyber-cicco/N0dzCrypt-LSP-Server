@@ -28,6 +28,11 @@
     }
   },
   {
+    "type": "attribute_name",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "binary_ognl_expression",
     "named": true,
     "fields": {
@@ -2210,6 +2215,11 @@
     }
   },
   {
+    "type": "th_generic",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "token_literal",
     "named": true,
     "fields": {}
@@ -2610,10 +2620,6 @@
     "named": true
   },
   {
-    "type": "attribute_name",
-    "named": true
-  },
-  {
     "type": "attribute_value",
     "named": true
   },
@@ -2779,11 +2785,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "th:",
@@ -2811,10 +2817,6 @@
   },
   {
     "type": "th_fragment",
-    "named": true
-  },
-  {
-    "type": "th_generic",
     "named": true
   },
   {
