@@ -636,7 +636,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "binary_th_std_expression",
@@ -714,11 +714,75 @@
       "required": true,
       "types": [
         {
+          "type": "binary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
           "type": "fragment_call",
           "named": true
         },
         {
-          "type": "standard_url_fragment",
+          "type": "fragment_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "interpolated_string_literal",
+          "named": true
+        },
+        {
+          "type": "message_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "ognl_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "parenthesized_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "standard_url",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "token_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "url_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "varselect_th_std_expression",
           "named": true
         }
       ]
@@ -2677,6 +2741,10 @@
     "named": true
   },
   {
+    "type": "standard_url",
+    "named": true
+  },
+  {
     "type": "standard_url_fragment",
     "named": true
   },
@@ -2686,11 +2754,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "th:",

@@ -27,7 +27,9 @@ const PREC = {
     ARRAY: 16,       // [Index]
     OBJ_ACCESS: 16,  // .
     PARENS: 16,      // (Expression)
-    CLASS_LITERAL: 17,  // .
+    TH_STD_EXPRESSION: 17,
+    FRAGMENT_EXPRESSION: 18,
+
 }
 
 module.exports = grammar({
@@ -105,12 +107,17 @@ module.exports = grammar({
         ),
 
         _attributes: $ => choice(
-             prec(10, $.th_attribute), 
-             prec(0, $.attribute), 
+             $.th_attribute, 
+             $.attribute, 
         ),
 
 
-        th_attribute_value: $ => choice( $._th_std_expression),
+        th_attribute_value: $ => (
+            prec(
+                PREC.TH_STD_EXPRESSION, 
+                choice( $._th_std_expression)
+            )
+        ), 
 
         script_start_tag: $ => seq(
             '<',
@@ -155,7 +162,7 @@ module.exports = grammar({
                 seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
                 seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
                 seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $.th_each_value),'"'),
-                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", choice($.th_attribute_value, $.fragment_std_expression)),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", $.fragment_std_expression,),'"'),
             ),
         ),
 
@@ -455,20 +462,19 @@ module.exports = grammar({
                
         ),
 
-        fragment_std_expression : $ => seq(
-            optional('/'),
-            repeat1(seq(
-                $.standard_url_fragment,
-                optional('/'),
-            )),  
+        fragment_std_expression : $ => prec(PREC.FRAGMENT_EXPRESSION, seq(
+            choice(
+                $.standard_url,
+                $._th_std_expression
+            ),
             optional(seq(
                 '::',
                 $.fragment_call
             ))
-        ),
+        )),
 
         fragment_call : $ => seq(
-            /[0-9a-zA-Z_]+/,
+            $._th_std_expression,
             optional(seq(
                 '(',
                 commaSep($._th_std_expression),
@@ -482,6 +488,7 @@ module.exports = grammar({
             field("value", $._th_std_expression)
         ),
 
+        standard_url : _ => /[0-9a-zA-Z_\-\/]+/,
         standard_url_fragment : _ => /[0-9a-zA-Z_\-]+/,
 
         url_parameter : _ => /[0-9a-zA-Z_]+/,

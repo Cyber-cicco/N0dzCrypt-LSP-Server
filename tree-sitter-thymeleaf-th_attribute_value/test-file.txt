@@ -1,2 +1,1 @@
-<th:block th:each="utilisateur, iterStat : ${utilisateurs}"></th:block>
-
+<div th:insert="svg/simple-arrow :: svg('25', '25')"></div>

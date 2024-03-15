@@ -1,109 +1,22 @@
-(document [0, 0] - [15, 0]
-  (element [0, 0] - [12, 10]
-    (start_tag [0, 0] - [0, 94]
-      (tag_name [0, 1] - [0, 8])
-      (attribute [0, 9] - [0, 93]
-        (attribute_name [0, 9] - [0, 14])
-        (quoted_attribute_value [0, 15] - [0, 93]
-          (attribute_value [0, 16] - [0, 92]))))
-    (element [1, 4] - [1, 126]
-      (start_tag [1, 4] - [1, 64]
-        (tag_name [1, 5] - [1, 7])
-        (attribute [1, 8] - [1, 63]
-          (attribute_name [1, 8] - [1, 13])
-          (quoted_attribute_value [1, 14] - [1, 63]
-            (attribute_value [1, 15] - [1, 62]))))
-      (text [1, 64] - [1, 77])
-      (element [1, 78] - [1, 121]
-        (start_tag [1, 78] - [1, 104]
-          (tag_name [1, 79] - [1, 83])
-          (attribute [1, 84] - [1, 103]
-            (attribute_name [1, 84] - [1, 89])
-            (quoted_attribute_value [1, 90] - [1, 103]
-              (attribute_value [1, 91] - [1, 102]))))
-        (text [1, 105] - [1, 114])
-        (end_tag [1, 114] - [1, 121]
-          (tag_name [1, 116] - [1, 120])))
-      (end_tag [1, 121] - [1, 126]
-        (tag_name [1, 123] - [1, 125])))
-    (element [2, 4] - [11, 10]
-      (start_tag [2, 4] - [2, 63]
-        (tag_name [2, 5] - [2, 8])
-        (attribute [2, 9] - [2, 62]
-          (attribute_name [2, 9] - [2, 14])
-          (quoted_attribute_value [2, 15] - [2, 62]
-            (attribute_value [2, 16] - [2, 61]))))
-      (text [3, 8] - [3, 18])
-      (element [4, 8] - [10, 14]
-        (start_tag [4, 8] - [4, 26]
-          (tag_name [4, 9] - [4, 12])
-          (attribute [4, 13] - [4, 25]
-            (attribute_name [4, 13] - [4, 18])
-            (quoted_attribute_value [4, 19] - [4, 25]
-              (attribute_value [4, 20] - [4, 24]))))
-        (element [5, 12] - [6, 12]
-          (start_tag [5, 12] - [5, 125]
-            (tag_name [5, 13] - [5, 18])
-            (attribute [5, 19] - [5, 85]
-              (attribute_name [5, 19] - [5, 24])
-              (quoted_attribute_value [5, 25] - [5, 85]
-                (attribute_value [5, 26] - [5, 84])))
-            (attribute [5, 86] - [5, 124]
-              (attribute_name [5, 86] - [5, 97])
-              (quoted_attribute_value [5, 98] - [5, 124]
-                (attribute_value [5, 99] - [5, 123])))))
-        (element [6, 12] - [7, 12]
-          (start_tag [6, 12] - [6, 95]
-            (tag_name [6, 13] - [6, 18])
-            (attribute [6, 19] - [6, 62]
-              (attribute_name [6, 19] - [6, 24])
-              (quoted_attribute_value [6, 25] - [6, 62]
-                (attribute_value [6, 26] - [6, 61])))
-            (attribute [6, 63] - [6, 94]
-              (attribute_name [6, 63] - [6, 74])
-              (quoted_attribute_value [6, 75] - [6, 94]
-                (attribute_value [6, 76] - [6, 93])))))
-        (element [7, 12] - [9, 18]
-          (start_tag [7, 12] - [7, 48]
-            (tag_name [7, 13] - [7, 16])
-            (attribute [7, 17] - [7, 47]
-              (attribute_name [7, 17] - [7, 22])
-              (quoted_attribute_value [7, 23] - [7, 47]
-                (attribute_value [7, 24] - [7, 46]))))
-          (element [8, 16] - [8, 207]
-            (start_tag [8, 16] - [8, 201]
-              (tag_name [8, 17] - [8, 20])
-              (attribute [8, 21] - [8, 33]
-                (attribute_name [8, 21] - [8, 29])
-                (quoted_attribute_value [8, 30] - [8, 33]
-                  (attribute_value [8, 31] - [8, 32])))
-              (attribute [8, 34] - [8, 152]
-                (attribute_name [8, 34] - [8, 39])
-                (quoted_attribute_value [8, 40] - [8, 152]
-                  (attribute_value [8, 41] - [8, 151])))
-              (th_attribute [8, 153] - [8, 200]
-                attribute_name: (th_insert [8, 156] - [8, 162])
-                attribute_value: (fragment_std_expression [8, 164] - [8, 199]
-                  (standard_url_fragment [8, 164] - [8, 167])
-                  (standard_url_fragment [8, 168] - [8, 180])
-                  (fragment_call [8, 184] - [8, 199]
-                    (string_literal [8, 188] - [8, 192])
-                    (string_literal [8, 194] - [8, 198])))))
-            (end_tag [8, 201] - [8, 207]
-              (tag_name [8, 203] - [8, 206])))
-          (end_tag [9, 12] - [9, 18]
-            (tag_name [9, 14] - [9, 17])))
-        (end_tag [10, 8] - [10, 14]
-          (tag_name [10, 10] - [10, 13])))
-      (end_tag [11, 4] - [11, 10]
-        (tag_name [11, 6] - [11, 9])))
-    (end_tag [12, 0] - [12, 10]
-      (tag_name [12, 2] - [12, 9])))
-  (element [13, 0] - [13, 71]
-    (start_tag [13, 0] - [13, 60]
-      (tag_name [13, 1] - [13, 9])
-      (ERROR [13, 10] - [13, 59]
-        (th_each [13, 13] - [13, 17])))
-    (end_tag [13, 60] - [13, 71]
-      (tag_name [13, 62] - [13, 70]))))
-test-file.txt	   0.43 ms	  2180 bytes/ms	(ERROR [13, 10] - [13, 59])
+running: "c++" "--version"
+exit status: 0
+cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
+(document [0, 0] - [1, 0]
+  (element [0, 0] - [0, 59]
+    (start_tag [0, 0] - [0, 53]
+      (tag_name [0, 1] - [0, 4])
+      (th_attribute [0, 5] - [0, 52]
+        attribute_name: (th_insert [0, 8] - [0, 14])
+        (ERROR [0, 16] - [0, 39]
+          (binary_th_std_expression [0, 16] - [0, 32]
+            left: (token_literal [0, 16] - [0, 19])
+            operator: (divide [0, 19] - [0, 20])
+            right: (token_literal [0, 20] - [0, 32])))
+        attribute_value: (th_attribute_value [0, 39] - [0, 51]
+          (parenthesized_th_std_expression [0, 39] - [0, 51]
+            (ERROR [0, 40] - [0, 45]
+              (string_literal [0, 40] - [0, 44]))
+            (string_literal [0, 46] - [0, 50])))))
+    (end_tag [0, 53] - [0, 59]
+      (tag_name [0, 55] - [0, 58]))))
+test-file.txt	   0.13 ms	   451 bytes/ms	(ERROR [0, 16] - [0, 39])
