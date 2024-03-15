@@ -550,6 +550,11 @@
     }
   },
   {
+    "type": "each_element",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "element",
     "named": true,
     "fields": {},
@@ -833,6 +838,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "iterStat",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "lesser_than",
@@ -2624,10 +2634,6 @@
     "named": false
   },
   {
-    "type": "each_element",
-    "named": true
-  },
-  {
     "type": "entity",
     "named": true
   },
@@ -2673,10 +2679,6 @@
   },
   {
     "type": "interpolated_string_literal_basic_content",
-    "named": true
-  },
-  {
-    "type": "iterStat",
     "named": true
   },
   {

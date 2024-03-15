@@ -727,8 +727,8 @@
       ]
     },
     "iterStat": {
-      "type": "STRING",
-      "value": "iterStat"
+      "type": "PATTERN",
+      "value": "[a-zA-Z]+"
     },
     "each_element": {
       "type": "PATTERN",

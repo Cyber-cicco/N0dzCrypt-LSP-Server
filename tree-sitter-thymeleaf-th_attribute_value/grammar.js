@@ -196,7 +196,7 @@ module.exports = grammar({
             $.ognl_th_std_expression,
         ),
 
-        iterStat : _ => 'iterStat',
+        iterStat : _ =>/[a-zA-Z]+/,
 
         each_element : _ => /[a-zA-Z]+/,
 
@@ -488,8 +488,8 @@ module.exports = grammar({
             field("value", $._th_std_expression)
         ),
 
-        standard_url : _ => /[0-9a-zA-Z_\-\/]+/,
-        standard_url_fragment : _ => /[0-9a-zA-Z_\-]+/,
+        standard_url : _ => /[0-9a-zA-Z_\-\/\.]+/,
+        standard_url_fragment : _ => /[0-9a-zA-Z_\-\.]+/,
 
         url_parameter : _ => /[0-9a-zA-Z_]+/,
 
