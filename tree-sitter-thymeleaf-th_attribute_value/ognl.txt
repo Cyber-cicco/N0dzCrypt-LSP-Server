@@ -1,0 +1,1 @@
+<th:block th:if="${hourMap.containsKey(dateUtil.getLdt(w.dateJour(), h.time())) && _user.isAdministrateur()}"></th:block>

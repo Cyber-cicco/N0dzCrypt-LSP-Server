@@ -76,7 +76,7 @@
                     th:class="(${iterStat.index} % 2 == 1) ? 'px-5 border-t-grey border-t-4 h-[50px] min-w-[200px] max-w-1/5 w-1/5 bg-white' : 'px-5 min-w-[200px] max-w-1/5 border-t-white border-t-4 h-[50px] w-1/5 bg-grey'"
                     th:data-draggable2="${dateUtil.getLdt(w.dateJour(), h.time()).toString()}"
                     th:each="w, iterStat: ${week}" >
-                    <th:block th:if="${hourMap.containsKey(dateUtil.getLdt(w.dateJour(), h.time())) && !_user.isAdministrateur()}">
+                    <th:block th:if="${hourMap.containsKey(dateUtil.getLdt(w.dateJour(), h.time())) && ! _user.isAdministrateur()}">
                         <th:block
                             th:replace="~{pages/agenda/fragments/agenda.calendar.cours :: cours(
                                 ${hourMap.get(dateUtil.getLdt(w.dateJour(), h.time())).getId()},

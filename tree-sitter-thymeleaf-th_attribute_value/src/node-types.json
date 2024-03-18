@@ -33,6 +33,16 @@
     "fields": {}
   },
   {
+    "type": "bigdec_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "bigint_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "binary_ognl_expression",
     "named": true,
     "fields": {
@@ -41,7 +51,19 @@
         "required": true,
         "types": [
           {
+            "type": "bigdec_literal",
+            "named": true
+          },
+          {
+            "type": "bigint_literal",
+            "named": true
+          },
+          {
             "type": "binary_ognl_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
             "named": true
           },
           {
@@ -49,11 +71,15 @@
             "named": true
           },
           {
-            "type": "null_literal",
+            "type": "float_literal",
             "named": true
           },
           {
-            "type": "number_literal",
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
             "named": true
           },
           {
@@ -95,6 +121,10 @@
           {
             "type": "true_literal",
             "named": true
+          },
+          {
+            "type": "unary_ognl_expression",
+            "named": true
           }
         ]
       },
@@ -111,15 +141,27 @@
             "named": true
           },
           {
-            "type": "bit_shift_left",
+            "type": "and_2",
             "named": true
           },
           {
-            "type": "bit_shift_right",
+            "type": "bitwise_and",
             "named": true
           },
           {
-            "type": "bitwise_not",
+            "type": "bitwise_and_2",
+            "named": true
+          },
+          {
+            "type": "bor",
+            "named": true
+          },
+          {
+            "type": "bor_2",
+            "named": true
+          },
+          {
+            "type": "comma",
             "named": true
           },
           {
@@ -159,10 +201,6 @@
             "named": true
           },
           {
-            "type": "logical_shift_right",
-            "named": true
-          },
-          {
             "type": "modulo",
             "named": true
           },
@@ -183,7 +221,15 @@
             "named": true
           },
           {
+            "type": "ognl_bit_shift_left_2",
+            "named": true
+          },
+          {
             "type": "ognl_bit_shift_right",
+            "named": true
+          },
+          {
+            "type": "ognl_bit_shift_right_2",
             "named": true
           },
           {
@@ -191,7 +237,19 @@
             "named": true
           },
           {
+            "type": "ognl_in",
+            "named": true
+          },
+          {
             "type": "ognl_instanceof",
+            "named": true
+          },
+          {
+            "type": "ognl_logical_shift_right",
+            "named": true
+          },
+          {
+            "type": "ognl_logical_shift_right_2",
             "named": true
           },
           {
@@ -199,11 +257,27 @@
             "named": true
           },
           {
+            "type": "ognl_not_in",
+            "named": true
+          },
+          {
             "type": "or",
             "named": true
           },
           {
+            "type": "or_2",
+            "named": true
+          },
+          {
             "type": "substract",
+            "named": true
+          },
+          {
+            "type": "xor",
+            "named": true
+          },
+          {
+            "type": "xor_2",
             "named": true
           }
         ]
@@ -213,7 +287,19 @@
         "required": true,
         "types": [
           {
+            "type": "bigdec_literal",
+            "named": true
+          },
+          {
+            "type": "bigint_literal",
+            "named": true
+          },
+          {
             "type": "binary_ognl_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
             "named": true
           },
           {
@@ -221,11 +307,15 @@
             "named": true
           },
           {
-            "type": "null_literal",
+            "type": "float_literal",
             "named": true
           },
           {
-            "type": "number_literal",
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
             "named": true
           },
           {
@@ -266,6 +356,10 @@
           },
           {
             "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_ognl_expression",
             "named": true
           }
         ]
@@ -359,6 +453,10 @@
             "named": true
           },
           {
+            "type": "and_2",
+            "named": true
+          },
+          {
             "type": "divide",
             "named": true
           },
@@ -420,6 +518,10 @@
           },
           {
             "type": "or",
+            "named": true
+          },
+          {
+            "type": "or_2",
             "named": true
           },
           {
@@ -501,7 +603,12 @@
     }
   },
   {
-    "type": "bitwise_not",
+    "type": "bor_2",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comma",
     "named": true,
     "fields": {}
   },
@@ -553,6 +660,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "double_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "each_element",
@@ -639,6 +751,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "float_literal",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "fragment_call",
@@ -810,6 +927,11 @@
   },
   {
     "type": "inline_text",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "integer_literal",
     "named": true,
     "fields": {}
   },
@@ -991,15 +1113,31 @@
         "required": true,
         "types": [
           {
+            "type": "bigdec_literal",
+            "named": true
+          },
+          {
+            "type": "bigint_literal",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
           {
-            "type": "null_literal",
+            "type": "float_literal",
             "named": true
           },
           {
-            "type": "number_literal",
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
             "named": true
           },
           {
@@ -1111,15 +1249,31 @@
       "required": false,
       "types": [
         {
+          "type": "bigdec_literal",
+          "named": true
+        },
+        {
+          "type": "bigint_literal",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
         {
-          "type": "null_literal",
+          "type": "float_literal",
           "named": true
         },
         {
-          "type": "number_literal",
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
           "named": true
         },
         {
@@ -1230,7 +1384,31 @@
         "required": true,
         "types": [
           {
+            "type": "bigdec_literal",
+            "named": true
+          },
+          {
+            "type": "bigint_literal",
+            "named": true
+          },
+          {
+            "type": "binary_ognl_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
             "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
             "named": true
           },
           {
@@ -1238,7 +1416,11 @@
             "named": true
           },
           {
-            "type": "number_literal",
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "ognl_assignement_expression",
             "named": true
           },
           {
@@ -1272,6 +1454,10 @@
           {
             "type": "true_literal",
             "named": true
+          },
+          {
+            "type": "unary_ognl_expression",
+            "named": true
           }
         ]
       }
@@ -1300,7 +1486,19 @@
       "required": false,
       "types": [
         {
+          "type": "bigdec_literal",
+          "named": true
+        },
+        {
+          "type": "bigint_literal",
+          "named": true
+        },
+        {
           "type": "binary_ognl_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
           "named": true
         },
         {
@@ -1308,11 +1506,15 @@
           "named": true
         },
         {
-          "type": "null_literal",
+          "type": "float_literal",
           "named": true
         },
         {
-          "type": "number_literal",
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
           "named": true
         },
         {
@@ -1353,6 +1555,10 @@
         },
         {
           "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_ognl_expression",
           "named": true
         }
       ]
@@ -2225,6 +2431,120 @@
     "fields": {}
   },
   {
+    "type": "unary_ognl_expression",
+    "named": true,
+    "fields": {
+      "operand": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bigdec_literal",
+            "named": true
+          },
+          {
+            "type": "bigint_literal",
+            "named": true
+          },
+          {
+            "type": "binary_ognl_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "ognl_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "ognl_instanceof",
+            "named": true
+          },
+          {
+            "type": "ognl_java_class",
+            "named": true
+          },
+          {
+            "type": "ognl_method_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_new",
+            "named": true
+          },
+          {
+            "type": "ognl_object_literal",
+            "named": true
+          },
+          {
+            "type": "ognl_variable",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_ognl_expression",
+            "named": true
+          }
+        ]
+      },
+      "operator": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "!",
+            "named": false
+          },
+          {
+            "type": "+",
+            "named": false
+          },
+          {
+            "type": "-",
+            "named": false
+          },
+          {
+            "type": "not",
+            "named": false
+          },
+          {
+            "type": "~",
+            "named": false
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "unary_th_std_expression",
     "named": true,
     "fields": {
@@ -2441,7 +2761,19 @@
       "required": false,
       "types": [
         {
+          "type": "bigdec_literal",
+          "named": true
+        },
+        {
+          "type": "bigint_literal",
+          "named": true
+        },
+        {
           "type": "binary_ognl_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
           "named": true
         },
         {
@@ -2449,11 +2781,15 @@
           "named": true
         },
         {
-          "type": "null_literal",
+          "type": "float_literal",
           "named": true
         },
         {
-          "type": "number_literal",
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
           "named": true
         },
         {
@@ -2494,6 +2830,10 @@
         },
         {
           "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_ognl_expression",
           "named": true
         }
       ]
@@ -2620,15 +2960,23 @@
     "named": true
   },
   {
+    "type": "and_2",
+    "named": true
+  },
+  {
     "type": "attribute_value",
     "named": true
   },
   {
-    "type": "bit_shift_left",
+    "type": "bitwise_and",
     "named": true
   },
   {
-    "type": "bit_shift_right",
+    "type": "bitwise_and_2",
+    "named": true
+  },
+  {
+    "type": "bor",
     "named": true
   },
   {
@@ -2654,6 +3002,10 @@
   {
     "type": "erroneous_end_tag_name",
     "named": true
+  },
+  {
+    "type": "f",
+    "named": false
   },
   {
     "type": "false_literal",
@@ -2688,6 +3040,10 @@
     "named": true
   },
   {
+    "type": "l",
+    "named": false
+  },
+  {
     "type": "lesser_or_equal",
     "named": true
   },
@@ -2700,15 +3056,15 @@
     "named": true
   },
   {
-    "type": "logical_shift_right",
-    "named": true
-  },
-  {
     "type": "modulo",
     "named": true
   },
   {
     "type": "none",
+    "named": false
+  },
+  {
+    "type": "not",
     "named": false
   },
   {
@@ -2728,7 +3084,15 @@
     "named": true
   },
   {
+    "type": "ognl_bit_shift_left_2",
+    "named": true
+  },
+  {
     "type": "ognl_bit_shift_right",
+    "named": true
+  },
+  {
+    "type": "ognl_bit_shift_right_2",
     "named": true
   },
   {
@@ -2736,7 +3100,19 @@
     "named": true
   },
   {
+    "type": "ognl_in",
+    "named": true
+  },
+  {
     "type": "ognl_instanceof",
+    "named": true
+  },
+  {
+    "type": "ognl_logical_shift_right",
+    "named": true
+  },
+  {
+    "type": "ognl_logical_shift_right_2",
     "named": true
   },
   {
@@ -2748,7 +3124,15 @@
     "named": true
   },
   {
+    "type": "ognl_not_in",
+    "named": true
+  },
+  {
     "type": "or",
+    "named": true
+  },
+  {
+    "type": "or_2",
     "named": true
   },
   {
@@ -2785,11 +3169,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "th:",
@@ -2857,6 +3241,14 @@
   },
   {
     "type": "true_literal",
+    "named": true
+  },
+  {
+    "type": "xor",
+    "named": true
+  },
+  {
+    "type": "xor_2",
     "named": true
   },
   {

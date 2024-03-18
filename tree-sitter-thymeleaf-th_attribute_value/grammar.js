@@ -6,6 +6,7 @@ const UNARY_OPERATORS = ['-'];
 const COMPARATIVE_OPERATORS = ['==', '!=', '<', '<=', '>', '>='];
 const PREC = {
     COMMENT: 0,      // //  /*  */
+    SEQUENCE: 0,
     ASSIGN: 1,       // =  += -=  *=  /=  %=  &=  ^=  |=  <<=  >>=  >>>=
     DECL: 2,
     ELEMENT_VAL: 2,
@@ -29,7 +30,6 @@ const PREC = {
     PARENS: 16,      // (Expression)
     TH_STD_EXPRESSION: 17,
     FRAGMENT_EXPRESSION: 18,
-
 }
 
 module.exports = grammar({
@@ -316,15 +316,49 @@ module.exports = grammar({
             $.token_literal,
         ),
 
+
+
         true_literal: _ => 'true',
         false_literal: _ => 'false',
         null_literal: _ => 'null',
-        number_literal: _ => seq(
+
+        number_literal : _ => seq(
             /[0-9]+/,
             optional(seq(
                 '.',
                 /[0-9]+/,
             ))
+        ),
+
+        bigdec_literal: _ => seq(
+            /[0-9]+/,
+            /[bB]/,
+        ),
+
+        bigint_literal: _ => seq(
+            /[0-9]+/,
+            /[hH]/,
+        ),
+
+        long_literal: _ => seq(
+            /[0-9]+/,
+            'l',
+        ),
+
+        integer_literal: _ => seq(
+            /[0-9]+/,
+        ),
+
+        float_literal: _ => seq(
+            /[0-9]+/,
+            '.',
+            /[0-9]+/,
+            'f',
+        ),
+        double_literal: _ => seq(
+            /[0-9]+/,
+            '.',
+            /[0-9]+/,
         ),
         
         token_literal: _ => repeat1(
@@ -385,7 +419,9 @@ module.exports = grammar({
         equal_2: $ => 'eq',
         not_equal_2: $ => 'ne',
         and: $ => 'and',
+        and_2: $ => '&&',
         or: $ => 'or',
+        or_2: $ => '||',
         add: $ => '+',
         substract: $ => '-',
         multiply: $ => '*',
@@ -556,7 +592,9 @@ module.exports = grammar({
                 [$.not_equal, PREC.EQUALITY],
                 [$.not_equal_2, PREC.EQUALITY],
                 [$.and, PREC.AND],
+                [$.and_2, PREC.AND],
                 [$.or, PREC.OR],
+                [$.or_2, PREC.OR],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
                 [$.multiply, PREC.MULT],
@@ -575,8 +613,22 @@ module.exports = grammar({
             //TODO : add rules for ognl
             $._ognl_primary_expression,
             $.binary_ognl_expression,
+            $.unary_ognl_expression,
             $.ognl_assignement_expression,
         ),
+
+        unary_ognl_expression : $ => choice(...[
+            ['+', PREC.UNARY],
+            ['-', PREC.UNARY],
+            ['!', PREC.UNARY],
+            ['~', PREC.UNARY],
+            ['not', PREC.UNARY],
+        ].map(([operator, precedence]) =>
+            prec.left(precedence, seq(
+                field('operator', operator),
+                field('operand', $._ognl_std_expression)
+            ))
+        )),
 
         _ognl_primary_expression : $ => choice(
             $._ognl_literal,
@@ -584,7 +636,12 @@ module.exports = grammar({
         ),
 
         _ognl_literal : $ => choice(
-            $.number_literal,
+            $.double_literal,
+            $.float_literal,
+            $.integer_literal,
+            $.double_literal,
+            $.bigdec_literal,
+            $.bigint_literal,
             $.string_literal,
             $.true_literal,
             $.false_literal,
@@ -615,17 +672,42 @@ module.exports = grammar({
         ognl_lower_or_equal: _ => 'lte',
         ognl_not_equal : _ => 'neq',
         ognl_in : _ => 'in',
-        ognl_new : $ => 'new',
-        ognl_instanceof : $ => 'instanceof',
-        bit_shift_left: $ => '<<',
-        ognl_bit_shift_left: $ => 'shl',
-        bit_shift_right: $ => '>>',
-        ognl_bit_shift_right: $ => 'shr',
-        logical_shift_right: $ => '>>>',
-        bitwise_not: $ => '~',
+        ognl_not_in : _ => 'not in',
+        ognl_new : _ => 'new',
+        ognl_instanceof : _ => 'instanceof',
+        ognl_bit_shift_left: _ => '<<',
+        ognl_bit_shift_left_2: _ => 'shl',
+        ognl_bit_shift_right: _ => '>>',
+        ognl_bit_shift_right_2: _ => 'shr',
+        ognl_logical_shift_right: _ => '>>>',
+        ognl_logical_shift_right_2: _ => 'ushr',
+        bitwise_not: _ => '~',
+        comma : _ => ',',
+        bitwise_and: _ => '&',
+        bitwise_and_2: _ => 'band',
+        bor : _ => 'bor',
+        bor_2 : _ => '|',
+        xor : _ => 'xor', 
+        xor_2 : _ => '^', 
+
 
         binary_ognl_expression : $ => choice(
             ...[
+                [$.comma, PREC.SEQUENCE],
+                [$.and, PREC.AND],
+                [$.and_2, PREC.AND],
+                [$.or, PREC.OR],
+                [$.or_2, PREC.OR],
+                [$.bor, PREC.BIT_OR],
+                [$.bor_2, PREC.BIT_OR],
+                [$.xor, PREC.BIT_XOR],
+                [$.xor_2, PREC.BIT_XOR],
+                [$.bitwise_and, PREC.BIT_AND],
+                [$.bitwise_and_2, PREC.BIT_AND],
+                [$.equal, PREC.EQUALITY],
+                [$.equal_2, PREC.EQUALITY],
+                [$.not_equal, PREC.EQUALITY],
+                [$.not_equal_2, PREC.EQUALITY],
                 [$.greater_than, PREC.REL],
                 [$.lesser_than, PREC.REL],
                 [$.greater_or_equal, PREC.REL],
@@ -634,24 +716,20 @@ module.exports = grammar({
                 [$.lesser_than_2, PREC.REL],
                 [$.ognl_greater_or_equal, PREC.REL],
                 [$.ognl_lower_or_equal, PREC.REL],
-                [$.equal, PREC.EQUALITY],
-                [$.equal_2, PREC.EQUALITY],
-                [$.not_equal, PREC.EQUALITY],
-                [$.not_equal_2, PREC.EQUALITY],
-                [$.and, PREC.AND],
-                [$.or, PREC.OR],
+                [$.ognl_in, PREC.REL],
+                [$.ognl_not_in, PREC.REL],
+                [$.ognl_bit_shift_left, PREC.SHIFT],
+                [$.ognl_bit_shift_left_2, PREC.SHIFT],
+                [$.ognl_bit_shift_right, PREC.SHIFT],
+                [$.ognl_bit_shift_right_2, PREC.SHIFT],
+                [$.ognl_logical_shift_right, PREC.SHIFT],
+                [$.ognl_logical_shift_right_2, PREC.SHIFT],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
                 [$.ognl_instanceof, PREC.INSTANCE_OF],
                 [$.multiply, PREC.MULT],
                 [$.divide, PREC.MULT],
                 [$.modulo, PREC.MULT],
-                [$.bit_shift_left, PREC.SHIFT],
-                [$.ognl_bit_shift_left, PREC.SHIFT],
-                [$.bit_shift_right, PREC.SHIFT],
-                [$.ognl_bit_shift_right, PREC.SHIFT],
-                [$.logical_shift_right, PREC.SHIFT],
-                [$.bitwise_not, PREC.UNARY],
             ].map(([operator, precedence]) =>
                 prec.left(precedence, seq(
                     field('left', $._ognl_std_expression),
@@ -718,7 +796,7 @@ module.exports = grammar({
             ),
             seq(
                 '[',
-                field('name',$._ognl_literal),
+                field('name',$._ognl_std_expression),
                 ']',
                 optional($._ognl_post_accessor)
             )

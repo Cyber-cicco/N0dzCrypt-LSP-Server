@@ -428,36 +428,40 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                   (ognl_th_std_expression [77, 42] - [77, 49]
                     (ognl_object_literal [77, 44] - [77, 48])))))
             (element [78, 20] - [86, 31]
-              (start_tag [78, 20] - [78, 131]
+              (start_tag [78, 20] - [78, 132]
                 (tag_name [78, 21] - [78, 29])
-                (th_attribute [78, 30] - [78, 130]
+                (th_attribute [78, 30] - [78, 131]
                   attribute_name: (th_if [78, 33] - [78, 35])
-                  attribute_value: (th_attribute_value [78, 37] - [78, 129]
-                    (ognl_th_std_expression [78, 37] - [78, 129]
-                      (ognl_object_literal [78, 39] - [78, 128]
-                        (ERROR [78, 46] - [78, 104]
-                          (ognl_method_name [78, 47] - [78, 58])
-                          (ognl_method_args [78, 58] - [78, 99]
-                            (ognl_object_literal [78, 59] - [78, 98]
-                              (ognl_method_access [78, 67] - [78, 98]
-                                (ognl_method_literal [78, 68] - [78, 98]
-                                  name: (ognl_method_name [78, 68] - [78, 74])
-                                  args: (ognl_method_args [78, 74] - [78, 98]
-                                    (ognl_object_literal [78, 75] - [78, 87]
-                                      (ognl_method_access [78, 76] - [78, 87]
-                                        (ognl_method_literal [78, 77] - [78, 87]
-                                          name: (ognl_method_name [78, 77] - [78, 85])
-                                          args: (ognl_method_args [78, 85] - [78, 87]))))
-                                    (ognl_object_literal [78, 89] - [78, 97]
-                                      (ognl_method_access [78, 90] - [78, 97]
-                                        (ognl_method_literal [78, 91] - [78, 97]
-                                          name: (ognl_method_name [78, 91] - [78, 95])
-                                          args: (ognl_method_args [78, 95] - [78, 97])))))))))
-                          (ERROR [78, 100] - [78, 102]))
-                        (ognl_method_access [78, 109] - [78, 128]
-                          (ognl_method_literal [78, 110] - [78, 128]
-                            name: (ognl_method_name [78, 110] - [78, 126])
-                            args: (ognl_method_args [78, 126] - [78, 128]))))))))
+                  attribute_value: (th_attribute_value [78, 37] - [78, 130]
+                    (ognl_th_std_expression [78, 37] - [78, 130]
+                      (binary_ognl_expression [78, 39] - [78, 129]
+                        left: (ognl_object_literal [78, 39] - [78, 99]
+                          (ognl_method_access [78, 46] - [78, 99]
+                            (ognl_method_literal [78, 47] - [78, 99]
+                              name: (ognl_method_name [78, 47] - [78, 58])
+                              args: (ognl_method_args [78, 58] - [78, 99]
+                                (ognl_object_literal [78, 59] - [78, 98]
+                                  (ognl_method_access [78, 67] - [78, 98]
+                                    (ognl_method_literal [78, 68] - [78, 98]
+                                      name: (ognl_method_name [78, 68] - [78, 74])
+                                      args: (ognl_method_args [78, 74] - [78, 98]
+                                        (ognl_object_literal [78, 75] - [78, 87]
+                                          (ognl_method_access [78, 76] - [78, 87]
+                                            (ognl_method_literal [78, 77] - [78, 87]
+                                              name: (ognl_method_name [78, 77] - [78, 85])
+                                              args: (ognl_method_args [78, 85] - [78, 87]))))
+                                        (ognl_object_literal [78, 89] - [78, 97]
+                                          (ognl_method_access [78, 90] - [78, 97]
+                                            (ognl_method_literal [78, 91] - [78, 97]
+                                              name: (ognl_method_name [78, 91] - [78, 95])
+                                              args: (ognl_method_args [78, 95] - [78, 97]))))))))))))
+                        operator: (and_2 [78, 100] - [78, 102])
+                        right: (unary_ognl_expression [78, 103] - [78, 129]
+                          operand: (ognl_object_literal [78, 105] - [78, 129]
+                            (ognl_method_access [78, 110] - [78, 129]
+                              (ognl_method_literal [78, 111] - [78, 129]
+                                name: (ognl_method_name [78, 111] - [78, 127])
+                                args: (ognl_method_args [78, 127] - [78, 129]))))))))))
               (element [79, 24] - [85, 43]
                 (start_tag [79, 24] - [85, 32]
                   (tag_name [79, 25] - [79, 33])
@@ -569,32 +573,33 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
                   attribute_name: (th_if [87, 33] - [87, 35])
                   attribute_value: (th_attribute_value [87, 37] - [87, 128]
                     (ognl_th_std_expression [87, 37] - [87, 128]
-                      (ognl_object_literal [87, 39] - [87, 127]
-                        (ognl_method_access [87, 46] - [87, 127]
-                          (ognl_method_literal [87, 47] - [87, 127]
-                            name: (ognl_method_name [87, 47] - [87, 58])
-                            args: (ognl_method_args [87, 58] - [87, 99]
-                              (ognl_object_literal [87, 59] - [87, 98]
-                                (ognl_method_access [87, 67] - [87, 98]
-                                  (ognl_method_literal [87, 68] - [87, 98]
-                                    name: (ognl_method_name [87, 68] - [87, 74])
-                                    args: (ognl_method_args [87, 74] - [87, 98]
-                                      (ognl_object_literal [87, 75] - [87, 87]
-                                        (ognl_method_access [87, 76] - [87, 87]
-                                          (ognl_method_literal [87, 77] - [87, 87]
-                                            name: (ognl_method_name [87, 77] - [87, 85])
-                                            args: (ognl_method_args [87, 85] - [87, 87]))))
-                                      (ognl_object_literal [87, 89] - [87, 97]
-                                        (ognl_method_access [87, 90] - [87, 97]
-                                          (ognl_method_literal [87, 91] - [87, 97]
-                                            name: (ognl_method_name [87, 91] - [87, 95])
-                                            args: (ognl_method_args [87, 95] - [87, 97])))))))))
-                            (ERROR [87, 100] - [87, 108]
-                              (ERROR [87, 100] - [87, 102]))
-                            (ognl_method_access [87, 108] - [87, 127]
-                              (ognl_method_literal [87, 109] - [87, 127]
-                                name: (ognl_method_name [87, 109] - [87, 125])
-                                args: (ognl_method_args [87, 125] - [87, 127]))))))))))
+                      (binary_ognl_expression [87, 39] - [87, 127]
+                        left: (ognl_object_literal [87, 39] - [87, 99]
+                          (ognl_method_access [87, 46] - [87, 99]
+                            (ognl_method_literal [87, 47] - [87, 99]
+                              name: (ognl_method_name [87, 47] - [87, 58])
+                              args: (ognl_method_args [87, 58] - [87, 99]
+                                (ognl_object_literal [87, 59] - [87, 98]
+                                  (ognl_method_access [87, 67] - [87, 98]
+                                    (ognl_method_literal [87, 68] - [87, 98]
+                                      name: (ognl_method_name [87, 68] - [87, 74])
+                                      args: (ognl_method_args [87, 74] - [87, 98]
+                                        (ognl_object_literal [87, 75] - [87, 87]
+                                          (ognl_method_access [87, 76] - [87, 87]
+                                            (ognl_method_literal [87, 77] - [87, 87]
+                                              name: (ognl_method_name [87, 77] - [87, 85])
+                                              args: (ognl_method_args [87, 85] - [87, 87]))))
+                                        (ognl_object_literal [87, 89] - [87, 97]
+                                          (ognl_method_access [87, 90] - [87, 97]
+                                            (ognl_method_literal [87, 91] - [87, 97]
+                                              name: (ognl_method_name [87, 91] - [87, 95])
+                                              args: (ognl_method_args [87, 95] - [87, 97]))))))))))))
+                        operator: (and_2 [87, 100] - [87, 102])
+                        right: (ognl_object_literal [87, 103] - [87, 127]
+                          (ognl_method_access [87, 108] - [87, 127]
+                            (ognl_method_literal [87, 109] - [87, 127]
+                              name: (ognl_method_name [87, 109] - [87, 125])
+                              args: (ognl_method_args [87, 125] - [87, 127])))))))))
               (element [88, 24] - [94, 43]
                 (start_tag [88, 24] - [94, 32]
                   (tag_name [88, 25] - [88, 33])
@@ -724,4 +729,3 @@ cargo:warning=Compiler version doesn't include clang or GCC: "c++" "--version"
         (tag_name [104, 6] - [104, 12])))
     (end_tag [105, 0] - [105, 6]
       (tag_name [105, 2] - [105, 5]))))
-test-file.txt	   2.53 ms	  2504 bytes/ms	(ERROR [78, 46] - [78, 104])
