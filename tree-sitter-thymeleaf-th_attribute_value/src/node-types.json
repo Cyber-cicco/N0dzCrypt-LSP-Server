@@ -5,6 +5,93 @@
     "fields": {}
   },
   {
+    "type": "arguments",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_creation",
+          "named": true
+        },
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "inline_map",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_string_literal",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "array_content",
     "named": true,
     "fields": {},
@@ -1473,11 +1560,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "spel_new",
+          "type": "arguments",
+          "named": true
+        },
+        {
+          "type": "spel_class",
           "named": true
         }
       ]
@@ -1918,6 +2009,11 @@
     }
   },
   {
+    "type": "spel_class",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "spel_method_access",
     "named": true,
     "fields": {},
@@ -2016,11 +2112,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "spel_new",
-    "named": true,
-    "fields": {}
   },
   {
     "type": "spel_object_literal",
@@ -3156,14 +3247,6 @@
           {
             "type": "-",
             "named": false
-          },
-          {
-            "type": "not",
-            "named": false
-          },
-          {
-            "type": "~",
-            "named": false
           }
         ]
       }
@@ -3710,10 +3793,6 @@
   },
   {
     "type": "none",
-    "named": false
-  },
-  {
-    "type": "not",
     "named": false
   },
   {

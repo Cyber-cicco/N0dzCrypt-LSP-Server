@@ -606,7 +606,7 @@ module.exports = grammar({
             $.binary_spel_expression,
             $.identifier,
             $.unary_spel_expression,
-            $.array_creation,
+            $._creation,
             $.spel_parenthesized_expression,
             $.spel_assignement_expression,
         ),
@@ -630,6 +630,11 @@ module.exports = grammar({
             'int',
             'long',
             'char'
+        ),
+
+        _creation : $ => choice(
+            $.array_creation,
+            $.object_creation_expression
         ),
 
         array_creation : $ => seq(
@@ -659,8 +664,6 @@ module.exports = grammar({
             ['+', PREC.UNARY],
             ['-', PREC.UNARY],
             ['!', PREC.UNARY],
-            ['~', PREC.UNARY],
-            ['not', PREC.UNARY],
         ].map(([operator, precedence]) =>
             prec.left(precedence, seq(
                 field('operator', operator),
@@ -670,7 +673,6 @@ module.exports = grammar({
 
         _spel_primary_expression : $ => choice(
             $._spel_literal,
-            $.object_creation_expression,
             $.inline_list,
             $.inline_map,
         ),
@@ -720,12 +722,19 @@ module.exports = grammar({
             seq('{:}', $._spel_post_accessor)
         ),
 
-        object_creation_expression : $ => seq(
-            $.spel_new,
-            /[a-zA-Z_]+/,
+        spel_class : $ => $._type_adress,
 
+        object_creation_expression : $ => seq(
+            'new',
+            $.spel_class,
+            $.arguments,
         ),
 
+        arguments : $ => seq(
+            '(',
+            commaSep($._spel_std_expression),
+            ')',
+        ),
 
         spel_assignement_expression: $ => prec.right(PREC.ASSIGN, seq(
             field('left', $.spel_variable),

@@ -2,5 +2,6 @@
 <div th:text="${123 between {100, 130}}"></div>
 <div th:text="${123 instanceof T(java.lang.Integer)}"></div>
 <div th:text="${T(java.math.RoundingMode).CEILING < T(java.math.RoundingMode).FLOOR}"></div>
+<div th:text="${new java.lang.Integer(3)}"></div>
 
 
