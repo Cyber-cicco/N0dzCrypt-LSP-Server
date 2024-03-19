@@ -606,10 +606,28 @@ module.exports = grammar({
             $.binary_spel_expression,
             $.identifier,
             $.unary_spel_expression,
+            $.ternary_spel_expression,
+            $.elvis_expression,
             $._creation,
             $.spel_parenthesized_expression,
             $.spel_assignement_expression,
         ),
+
+        elvis_expression: $ => prec.right(PREC.TERNARY, seq(
+            field('condition', $._spel_primary_expression),
+            '?:',
+            field('alternative', $._spel_std_expression)
+        )),
+
+        ternary_spel_expression: $ => prec.right(PREC.TERNARY, seq(
+            field('condition', $._spel_std_expression),
+            '?',
+            field('consequence', $._spel_std_expression),
+            optional(seq(
+                ':',
+                field('alternative', $._spel_std_expression)
+            )),
+        )),
 
         _type: $ => choice(
             $.integral_type,
@@ -675,6 +693,10 @@ module.exports = grammar({
             $._spel_literal,
             $.inline_list,
             $.inline_map,
+            $.spel_object_expression,
+            $.spel_method_expression,
+            $.spel_variable,
+            $.spel_bean_reference,
         ),
 
         _spel_literal : $ => choice(
@@ -686,9 +708,12 @@ module.exports = grammar({
             $.true_literal,
             $.false_literal,
             $.null_literal,
-            $.spel_object_literal,
-            $.spel_method_literal,
-            $.spel_variable,
+        ),
+
+        spel_bean_reference : $ => seq(
+            '@',
+            $._spel_name,
+            optional($._spel_post_accessor)
         ),
 
         spel_string_literal : $ => seq(
@@ -827,9 +852,9 @@ module.exports = grammar({
         spel_variable : $ => seq(
             '#',
             $._spel_name,
+            optional($.spel_method_args),
             optional($._spel_post_accessor),
         ),
-
 
         _spel_post_accessor : $ => choice(
             $.spel_property_access,
@@ -838,18 +863,17 @@ module.exports = grammar({
 
         index : _ => /[0-9]+/,
 
-        spel_object_literal : $ => seq(
+        spel_object_expression : $ => seq(
             /[A-Za-z_]+/,
             repeat(/[0-9A-Za-z_]/),
             optional($._spel_post_accessor),
         ),
 
-        null_operator : _ => '?',
+        null_operator : _ => '.?',
 
         spel_property_access : $ => choice(
             seq(
-                optional($.null_operator),
-                '.',
+                choice($.null_operator, '.'),
                 field('name',seq(
                     /[A-Za-z_]+/,
                     repeat(/[0-9A-Za-z_]/),
@@ -865,12 +889,11 @@ module.exports = grammar({
         ),
 
         spel_method_access : $ => seq(
-            optional($.null_operator),
-            '.',
-            $.spel_method_literal,
+            choice($.null_operator, '.'),
+            $.spel_method_expression,
         ),
 
-        spel_method_literal : $ => seq(
+        spel_method_expression : $ => seq(
             field('name', $._spel_name),
             field('args', $.spel_method_args),
             optional($._spel_post_accessor),

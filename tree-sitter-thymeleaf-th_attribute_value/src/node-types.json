@@ -25,6 +25,10 @@
           "named": true
         },
         {
+          "type": "elvis_expression",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
@@ -61,11 +65,15 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_bean_reference",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -78,6 +86,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -112,6 +124,10 @@
           "named": true
         },
         {
+          "type": "elvis_expression",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
@@ -148,11 +164,15 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_bean_reference",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -165,6 +185,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -258,6 +282,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -294,11 +322,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -311,6 +343,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -438,6 +474,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -478,11 +518,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -499,6 +543,10 @@
           },
           {
             "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -872,6 +920,164 @@
     }
   },
   {
+    "type": "elvis_expression",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_bean_reference",
+            "named": true
+          },
+          {
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "spel_bean_reference",
+            "named": true
+          },
+          {
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "end_tag",
     "named": true,
     "fields": {},
@@ -1118,6 +1324,10 @@
           "named": true
         },
         {
+          "type": "elvis_expression",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
@@ -1154,15 +1364,19 @@
           "named": true
         },
         {
+          "type": "spel_bean_reference",
+          "named": true
+        },
+        {
           "type": "spel_method_access",
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_method_expression",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -1179,6 +1393,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -1213,6 +1431,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -1249,11 +1471,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -1266,6 +1492,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -1295,6 +1525,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -1331,11 +1565,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -1348,6 +1586,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -1546,11 +1788,6 @@
     "fields": {}
   },
   {
-    "type": "null_operator",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "number_literal",
     "named": true,
     "fields": {}
@@ -1700,6 +1937,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -1736,11 +1977,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -1753,6 +1998,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -1782,6 +2031,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -1818,11 +2071,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -1835,6 +2092,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -1941,6 +2202,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -1977,11 +2242,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -1997,6 +2266,10 @@
             "named": true
           },
           {
+            "type": "ternary_spel_expression",
+            "named": true
+          },
+          {
             "type": "true_literal",
             "named": true
           },
@@ -2006,6 +2279,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "spel_bean_reference",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2026,7 +2318,7 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_method_expression",
           "named": true
         }
       ]
@@ -2061,19 +2353,7 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_object_literal",
-          "named": true
-        },
-        {
           "type": "spel_string_literal",
-          "named": true
-        },
-        {
-          "type": "spel_variable",
           "named": true
         },
         {
@@ -2084,7 +2364,7 @@
     }
   },
   {
-    "type": "spel_method_literal",
+    "type": "spel_method_expression",
     "named": true,
     "fields": {
       "args": {
@@ -2114,7 +2394,7 @@
     }
   },
   {
-    "type": "spel_object_literal",
+    "type": "spel_object_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -2150,6 +2430,10 @@
         },
         {
           "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "elvis_expression",
           "named": true
         },
         {
@@ -2189,11 +2473,15 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_bean_reference",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -2206,6 +2494,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -2237,6 +2529,10 @@
           },
           {
             "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "elvis_expression",
             "named": true
           },
           {
@@ -2276,11 +2572,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -2293,6 +2593,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -2365,6 +2669,10 @@
           "named": true
         },
         {
+          "type": "elvis_expression",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
@@ -2401,11 +2709,15 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_bean_reference",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -2418,6 +2730,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -2436,11 +2752,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
           "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_method_args",
           "named": true
         },
         {
@@ -2505,6 +2825,294 @@
     "type": "substract",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "ternary_spel_expression",
+    "named": true,
+    "fields": {
+      "alternative": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_bean_reference",
+            "named": true
+          },
+          {
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      },
+      "condition": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_bean_reference",
+            "named": true
+          },
+          {
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      },
+      "consequence": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_bean_reference",
+            "named": true
+          },
+          {
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      }
+    }
   },
   {
     "type": "ternary_th_std_expression",
@@ -3167,6 +3775,10 @@
             "named": true
           },
           {
+            "type": "elvis_expression",
+            "named": true
+          },
+          {
             "type": "false_literal",
             "named": true
           },
@@ -3203,11 +3815,15 @@
             "named": true
           },
           {
-            "type": "spel_method_literal",
+            "type": "spel_bean_reference",
             "named": true
           },
           {
-            "type": "spel_object_literal",
+            "type": "spel_method_expression",
+            "named": true
+          },
+          {
+            "type": "spel_object_expression",
             "named": true
           },
           {
@@ -3220,6 +3836,10 @@
           },
           {
             "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "ternary_spel_expression",
             "named": true
           },
           {
@@ -3481,6 +4101,10 @@
           "named": true
         },
         {
+          "type": "elvis_expression",
+          "named": true
+        },
+        {
           "type": "false_literal",
           "named": true
         },
@@ -3517,11 +4141,15 @@
           "named": true
         },
         {
-          "type": "spel_method_literal",
+          "type": "spel_bean_reference",
           "named": true
         },
         {
-          "type": "spel_object_literal",
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
           "named": true
         },
         {
@@ -3534,6 +4162,10 @@
         },
         {
           "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
           "named": true
         },
         {
@@ -3645,6 +4277,14 @@
   },
   {
     "type": "?",
+    "named": false
+  },
+  {
+    "type": "?:",
+    "named": false
+  },
+  {
+    "type": "@",
     "named": false
   },
   {
@@ -3808,6 +4448,10 @@
     "named": true
   },
   {
+    "type": "null_operator",
+    "named": true
+  },
+  {
     "type": "or",
     "named": true
   },
@@ -3865,11 +4509,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "th:",
