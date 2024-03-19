@@ -734,6 +734,9 @@ module.exports = grammar({
         ),
 
         spel_new : _ => 'new',
+        spel_instanceof: _ => 'instanceof',
+        spel_between: _ => 'between',
+        spel_matches: _ => 'matches',
         exp : _ => '^', 
 
 
@@ -765,7 +768,45 @@ module.exports = grammar({
                     field('operator', operator),
                     field('right', $._spel_std_expression)
                 ))
+            ),
+            prec.left(PREC.INSTANCE_OF, seq(
+                    field('left', $._spel_std_expression),
+                    field('operator', $.spel_between),
+                    field('right', $.range)
             )),
+            prec.left(PREC.INSTANCE_OF, seq(
+                    field('left', $._spel_std_expression),
+                    field('operator', $.spel_instanceof),
+                    field('right', $.type)
+            )),
+            prec.left(PREC.INSTANCE_OF, seq(
+                    field('left', $._spel_std_expression),
+                    field('operator', $.matches),
+                    field('right', $.string_literal)
+            )),
+        ),
+
+        range : $ => seq(
+            '{',
+            field('begin', $._spel_std_expression),
+            ',',
+            field('end', $._spel_std_expression),
+            '}',
+        ),
+
+        type : $ => seq(
+            'T(',
+            $._type_adress,
+            ')'
+        ),
+
+        _type_adress : $ => seq(
+            repeat(seq(
+                $._spel_name,
+                '.',
+            )),
+            $._spel_name
+        ),
 
 
         spel_variable : $ => seq(

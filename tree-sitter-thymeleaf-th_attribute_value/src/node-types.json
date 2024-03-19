@@ -309,6 +309,14 @@
             "named": true
           },
           {
+            "type": "spel_between",
+            "named": true
+          },
+          {
+            "type": "spel_instanceof",
+            "named": true
+          },
+          {
             "type": "substract",
             "named": true
           }
@@ -359,6 +367,10 @@
             "named": true
           },
           {
+            "type": "range",
+            "named": true
+          },
+          {
             "type": "spel_assignement_expression",
             "named": true
           },
@@ -384,6 +396,10 @@
           },
           {
             "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "type",
             "named": true
           },
           {
@@ -1515,6 +1531,168 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "range",
+    "named": true,
+    "fields": {
+      "begin": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      },
+      "end": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2748,6 +2926,11 @@
     "fields": {}
   },
   {
+    "type": "type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "unary_spel_expression",
     "named": true,
     "fields": {
@@ -3253,6 +3436,10 @@
     "named": false
   },
   {
+    "type": "T(",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -3441,6 +3628,14 @@
     "named": false
   },
   {
+    "type": "spel_between",
+    "named": true
+  },
+  {
+    "type": "spel_instanceof",
+    "named": true
+  },
+  {
     "type": "standard_url",
     "named": true
   },
@@ -3454,11 +3649,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "th:",
