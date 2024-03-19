@@ -4649,6 +4649,40 @@
         {
           "type": "SYMBOL",
           "name": "spel_method_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "spel_projection"
+        }
+      ]
+    },
+    "spel_projection": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "null_operator"
+            },
+            {
+              "type": "STRING",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "!["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_spel_primary_expression"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
         }
       ]
     },

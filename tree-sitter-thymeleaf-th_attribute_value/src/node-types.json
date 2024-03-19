@@ -1293,6 +1293,10 @@
           "named": true
         },
         {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
           "type": "spel_property_access",
           "named": true
         },
@@ -1381,6 +1385,10 @@
         },
         {
           "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
           "named": true
         },
         {
@@ -1609,6 +1617,10 @@
       "types": [
         {
           "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
           "named": true
         },
         {
@@ -2294,6 +2306,10 @@
           "named": true
         },
         {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
           "type": "spel_property_access",
           "named": true
         }
@@ -2387,6 +2403,10 @@
           "named": true
         },
         {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
           "type": "spel_property_access",
           "named": true
         }
@@ -2403,6 +2423,10 @@
       "types": [
         {
           "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
           "named": true
         },
         {
@@ -2506,6 +2530,73 @@
         },
         {
           "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_projection",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "inline_map",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "null_operator",
+          "named": true
+        },
+        {
+          "type": "spel_bean_reference",
+          "named": true
+        },
+        {
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
+          "named": true
+        },
+        {
+          "type": "spel_string_literal",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "true_literal",
           "named": true
         }
       ]
@@ -2623,6 +2714,10 @@
           "named": true
         },
         {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
           "type": "spel_property_access",
           "named": true
         }
@@ -2639,6 +2734,10 @@
       "types": [
         {
           "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
           "named": true
         },
         {
@@ -2761,6 +2860,10 @@
         },
         {
           "type": "spel_method_args",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
           "named": true
         },
         {
@@ -4181,6 +4284,10 @@
   },
   {
     "type": "!",
+    "named": false
+  },
+  {
+    "type": "![",
     "named": false
   },
   {

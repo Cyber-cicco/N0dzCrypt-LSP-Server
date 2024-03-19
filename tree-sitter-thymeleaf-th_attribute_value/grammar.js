@@ -859,6 +859,15 @@ module.exports = grammar({
         _spel_post_accessor : $ => choice(
             $.spel_property_access,
             $.spel_method_access,
+            $.spel_projection,
+        ),
+
+        spel_projection : $ => seq(
+            choice($.null_operator, '.'),
+            '![',
+            $._spel_primary_expression,
+            ']',
+
         ),
 
         index : _ => /[0-9]+/,
