@@ -22,6 +22,7 @@ const PREC = {
     SHIFT: 11,       // <<  >>  >>>
     ADD: 12,         // +  -
     MULT: 13,        // *  /  %
+    EXP:14,
     CAST: 14,        // (Type)
     UNARY: 15,
     INSTANCE_OF : 15,
@@ -604,8 +605,47 @@ module.exports = grammar({
             $._spel_primary_expression,
             $.binary_spel_expression,
             $.unary_spel_expression,
+            $.array_creation,
             $.spel_parenthesized_expression,
             $.spel_assignement_expression,
+        ),
+
+        _type: $ => choice(
+            $.integral_type,
+            $.floating_point_type,
+            $.boolean_type,
+        ),
+
+        boolean_type: _ => 'boolean',
+
+        floating_point_type: _ => choice(
+            'float',
+            'double'
+        ),
+
+        integral_type: _ => choice(
+            'byte',
+            'short',
+            'int',
+            'long',
+            'char'
+        ),
+
+        array_creation : $ => seq(
+            'new',
+            $._type,
+            repeat1(seq(
+                '[',
+                optional($.integer_literal),
+                ']',
+            )),
+            optional($.array_content),
+        ),
+
+        array_content : $ => seq(
+            '{',
+            commaSep($._spel_std_expression),
+            '}',
         ),
 
         spel_parenthesized_expression : $ => seq(
@@ -631,6 +671,7 @@ module.exports = grammar({
             $._spel_literal,
             $.object_creation_expression,
             $.inline_list,
+            $.inline_map,
         ),
 
         _spel_literal : $ => choice(
@@ -638,16 +679,23 @@ module.exports = grammar({
             $.float_literal,
             $.integer_literal,
             $.double_literal,
-            $.string_literal,
+            $.spel_string_literal,
             $.true_literal,
             $.false_literal,
             $.null_literal,
             $.spel_object_literal,
             $.spel_method_literal,
-            $.spel_instanceof,
-            $.spel_new,
-            $.spel_java_class,
             $.spel_variable,
+        ),
+
+        spel_string_literal : $ => seq(
+            "'",
+            repeat(choice(
+                $._interpreted_string_literal_basic_content,
+                $._escape_sequence,
+            )),
+            "'",
+            optional($._spel_post_accessor),
         ),
 
         inline_list : $ => seq(
@@ -657,14 +705,27 @@ module.exports = grammar({
             optional($._spel_post_accessor),
         ),
 
+        inline_map : $ => choice(
+            seq(
+            '{',
+            commaSep1(seq(
+                field("key", $._spel_std_expression),
+                ':',
+                field("value", $._spel_std_expression),
+            )),
+            '}',
+            optional($._spel_post_accessor),
+            ),
+            seq('{:}', $._spel_post_accessor)
+        ),
 
         object_creation_expression : $ => seq(
             $.spel_new,
             /[a-zA-Z_]+/,
-            '(',
-            ')'
-            //TODO continuer sur spel quand j'en aurai moins marre de ce langage de merde
+
         ),
+
+
 
         spel_assignement_expression : $ => seq(
             field("var", $.spel_variable), 
@@ -672,27 +733,8 @@ module.exports = grammar({
             field("value", $._spel_literal) 
         ),
 
-        spel_greater_or_equal: _ => 'gte',
-        spel_lower_or_equal: _ => 'lte',
-        spel_not_equal : _ => 'neq',
-        spel_in : _ => 'in',
-        spel_not_in : _ => 'not in',
         spel_new : _ => 'new',
-        spel_instanceof : _ => 'instanceof',
-        spel_bit_shift_left: _ => '<<',
-        spel_bit_shift_left_2: _ => 'shl',
-        spel_bit_shift_right: _ => '>>',
-        spel_bit_shift_right_2: _ => 'shr',
-        spel_logical_shift_right: _ => '>>>',
-        spel_logical_shift_right_2: _ => 'ushr',
-        bitwise_not: _ => '~',
-        comma : _ => ',',
-        bitwise_and: _ => '&',
-        bitwise_and_2: _ => 'band',
-        bor : _ => 'bor',
-        bor_2 : _ => '|',
-        xor : _ => 'xor', 
-        xor_2 : _ => '^', 
+        exp : _ => '^', 
 
 
         binary_spel_expression : $ => choice(
@@ -701,12 +743,6 @@ module.exports = grammar({
                 [$.and_2, PREC.AND],
                 [$.or, PREC.OR],
                 [$.or_2, PREC.OR],
-                [$.bor, PREC.BIT_OR],
-                [$.bor_2, PREC.BIT_OR],
-                [$.xor, PREC.BIT_XOR],
-                [$.xor_2, PREC.BIT_XOR],
-                [$.bitwise_and, PREC.BIT_AND],
-                [$.bitwise_and_2, PREC.BIT_AND],
                 [$.equal, PREC.EQUALITY],
                 [$.equal_2, PREC.EQUALITY],
                 [$.not_equal, PREC.EQUALITY],
@@ -714,25 +750,15 @@ module.exports = grammar({
                 [$.greater_than, PREC.REL],
                 [$.lesser_than, PREC.REL],
                 [$.greater_or_equal, PREC.REL],
+                [$.greater_or_equal_2, PREC.REL],
                 [$.lesser_or_equal, PREC.REL],
-                [$.greater_than_2, PREC.REL],
-                [$.lesser_than_2, PREC.REL],
-                [$.spel_greater_or_equal, PREC.REL],
-                [$.spel_lower_or_equal, PREC.REL],
-                [$.spel_in, PREC.REL],
-                [$.spel_not_in, PREC.REL],
-                [$.spel_bit_shift_left, PREC.SHIFT],
-                [$.spel_bit_shift_left_2, PREC.SHIFT],
-                [$.spel_bit_shift_right, PREC.SHIFT],
-                [$.spel_bit_shift_right_2, PREC.SHIFT],
-                [$.spel_logical_shift_right, PREC.SHIFT],
-                [$.spel_logical_shift_right_2, PREC.SHIFT],
+                [$.lesser_or_equal_2, PREC.REL],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
-                [$.spel_instanceof, PREC.INSTANCE_OF],
                 [$.multiply, PREC.MULT],
                 [$.divide, PREC.MULT],
                 [$.modulo, PREC.MULT],
+                [$.exp, PREC.EXP],
             ].map(([operator, precedence]) =>
                 prec.left(precedence, seq(
                     field('left', $._spel_std_expression),
@@ -752,37 +778,6 @@ module.exports = grammar({
         _spel_post_accessor : $ => choice(
             $.spel_property_access,
             $.spel_method_access,
-            $.spel_projection,
-        ),
-
-        spel_java_class : $ => seq(
-            '@',
-            repeat(seq(
-                /[a-zA-Z_]+/,
-                '.'
-            )),
-            /[a-zA-Z_]+/,
-            optional($._spel_post_java_class)
-        ),
-
-        _spel_post_java_class : $ => choice(
-            $.spel_java_method,
-            $.spel_java_field,
-        ),
-
-        spel_java_method : $ => seq(
-            seq(
-                '@',
-                /[a-zA-Z_]+/,
-                $.spel_method_args,
-            ),
-        ),
-
-        spel_java_field : $ => seq(
-            seq(
-                '@',
-                /[a-zA-Z_]+/,
-            ),
         ),
 
         index : _ => /[0-9]+/,
@@ -793,22 +788,23 @@ module.exports = grammar({
             optional($._spel_post_accessor),
         ),
 
-        spel_projection : $ => choice(
-            seq(
-                '.{',
-                $.spel_object_literal,
-                '}',
-            ),
-        ),
+        null_operator : _ => '?',
+
         spel_property_access : $ => choice(
             seq(
                 '.',
-                field('name',$.spel_object_literal),
+                field('name',seq(
+                    /[A-Za-z_]+/,
+                    repeat(/[0-9A-Za-z_]/),
+                )),
+                optional($.null_operator),
+                optional($._spel_post_accessor),
             ),
             seq(
                 '[',
                 field('name',$._spel_std_expression),
                 ']',
+                optional($.null_operator),
                 optional($._spel_post_accessor)
             )
         ),
@@ -819,12 +815,12 @@ module.exports = grammar({
         ),
 
         spel_method_literal : $ => seq(
-            field('name', $.spel_method_name),
+            field('name', $._spel_name),
             field('args', $.spel_method_args),
             optional($._spel_post_accessor),
         ),
 
-        spel_method_name : $ => seq(
+        _spel_name : $ => seq(
             /[A-Za-z_]+/,
             repeat(/[0-9A-Za-z_]/),
         ),

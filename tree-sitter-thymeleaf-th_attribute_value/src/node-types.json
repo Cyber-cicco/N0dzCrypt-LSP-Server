@@ -5,6 +5,120 @@
     "fields": {}
   },
   {
+    "type": "array_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_creation",
+          "named": true
+        },
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "inline_map",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_string_literal",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_creation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "array_content",
+          "named": true
+        },
+        {
+          "type": "boolean_type",
+          "named": true
+        },
+        {
+          "type": "floating_point_type",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "integral_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "attribute",
     "named": true,
     "fields": {},
@@ -41,6 +155,10 @@
         "required": true,
         "types": [
           {
+            "type": "array_creation",
+            "named": true
+          },
+          {
             "type": "binary_spel_expression",
             "named": true
           },
@@ -61,6 +179,10 @@
             "named": true
           },
           {
+            "type": "inline_map",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -77,19 +199,7 @@
             "named": true
           },
           {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_java_class",
-            "named": true
-          },
-          {
             "type": "spel_method_literal",
-            "named": true
-          },
-          {
-            "type": "spel_new",
             "named": true
           },
           {
@@ -101,11 +211,11 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_string_literal",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -135,22 +245,6 @@
             "named": true
           },
           {
-            "type": "bitwise_and",
-            "named": true
-          },
-          {
-            "type": "bitwise_and_2",
-            "named": true
-          },
-          {
-            "type": "bor",
-            "named": true
-          },
-          {
-            "type": "bor_2",
-            "named": true
-          },
-          {
             "type": "divide",
             "named": true
           },
@@ -163,7 +257,15 @@
             "named": true
           },
           {
+            "type": "exp",
+            "named": true
+          },
+          {
             "type": "greater_or_equal",
+            "named": true
+          },
+          {
+            "type": "greater_or_equal_2",
             "named": true
           },
           {
@@ -171,19 +273,15 @@
             "named": true
           },
           {
-            "type": "greater_than_2",
-            "named": true
-          },
-          {
             "type": "lesser_or_equal",
             "named": true
           },
           {
-            "type": "lesser_than",
+            "type": "lesser_or_equal_2",
             "named": true
           },
           {
-            "type": "lesser_than_2",
+            "type": "lesser_than",
             "named": true
           },
           {
@@ -211,59 +309,7 @@
             "named": true
           },
           {
-            "type": "spel_bit_shift_left",
-            "named": true
-          },
-          {
-            "type": "spel_bit_shift_left_2",
-            "named": true
-          },
-          {
-            "type": "spel_bit_shift_right",
-            "named": true
-          },
-          {
-            "type": "spel_bit_shift_right_2",
-            "named": true
-          },
-          {
-            "type": "spel_greater_or_equal",
-            "named": true
-          },
-          {
-            "type": "spel_in",
-            "named": true
-          },
-          {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_logical_shift_right",
-            "named": true
-          },
-          {
-            "type": "spel_logical_shift_right_2",
-            "named": true
-          },
-          {
-            "type": "spel_lower_or_equal",
-            "named": true
-          },
-          {
-            "type": "spel_not_in",
-            "named": true
-          },
-          {
             "type": "substract",
-            "named": true
-          },
-          {
-            "type": "xor",
-            "named": true
-          },
-          {
-            "type": "xor_2",
             "named": true
           }
         ]
@@ -272,6 +318,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
           {
             "type": "binary_spel_expression",
             "named": true
@@ -293,6 +343,10 @@
             "named": true
           },
           {
+            "type": "inline_map",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -309,19 +363,7 @@
             "named": true
           },
           {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_java_class",
-            "named": true
-          },
-          {
             "type": "spel_method_literal",
-            "named": true
-          },
-          {
-            "type": "spel_new",
             "named": true
           },
           {
@@ -333,11 +375,11 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_string_literal",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -589,11 +631,6 @@
     }
   },
   {
-    "type": "bor_2",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "divide",
     "named": true,
     "fields": {}
@@ -743,6 +780,11 @@
   },
   {
     "type": "float_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "floating_point_type",
     "named": true,
     "fields": {}
   },
@@ -918,6 +960,10 @@
       "required": false,
       "types": [
         {
+          "type": "array_creation",
+          "named": true
+        },
+        {
           "type": "binary_spel_expression",
           "named": true
         },
@@ -938,6 +984,10 @@
           "named": true
         },
         {
+          "type": "inline_map",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -954,23 +1004,11 @@
           "named": true
         },
         {
-          "type": "spel_instanceof",
-          "named": true
-        },
-        {
-          "type": "spel_java_class",
-          "named": true
-        },
-        {
           "type": "spel_method_access",
           "named": true
         },
         {
           "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_new",
           "named": true
         },
         {
@@ -982,19 +1020,15 @@
           "named": true
         },
         {
-          "type": "spel_projection",
-          "named": true
-        },
-        {
           "type": "spel_property_access",
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_string_literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -1003,6 +1037,182 @@
         },
         {
           "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inline_map",
+    "named": true,
+    "fields": {
+      "key": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "inline_map",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_string_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
           "named": true
         }
       ]
@@ -1020,6 +1230,11 @@
   },
   {
     "type": "integer_literal",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "integral_type",
     "named": true,
     "fields": {}
   },
@@ -1169,6 +1384,11 @@
   },
   {
     "type": "multiply",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "null_operator",
     "named": true,
     "fields": {}
   },
@@ -1377,19 +1597,7 @@
             "named": true
           },
           {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_java_class",
-            "named": true
-          },
-          {
             "type": "spel_method_literal",
-            "named": true
-          },
-          {
-            "type": "spel_new",
             "named": true
           },
           {
@@ -1397,11 +1605,11 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_string_literal",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -1420,45 +1628,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "spel_java_class",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "spel_java_field",
-          "named": true
-        },
-        {
-          "type": "spel_java_method",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "spel_java_field",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "spel_java_method",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "spel_method_args",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -1505,19 +1674,7 @@
           "named": true
         },
         {
-          "type": "spel_instanceof",
-          "named": true
-        },
-        {
-          "type": "spel_java_class",
-          "named": true
-        },
-        {
           "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_new",
           "named": true
         },
         {
@@ -1525,11 +1682,11 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_string_literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -1552,16 +1709,6 @@
             "named": true
           }
         ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "spel_method_name",
-            "named": true
-          }
-        ]
       }
     },
     "children": {
@@ -1573,10 +1720,6 @@
           "named": true
         },
         {
-          "type": "spel_projection",
-          "named": true
-        },
-        {
           "type": "spel_property_access",
           "named": true
         }
@@ -1584,7 +1727,7 @@
     }
   },
   {
-    "type": "spel_method_name",
+    "type": "spel_new",
     "named": true,
     "fields": {}
   },
@@ -1598,10 +1741,6 @@
       "types": [
         {
           "type": "spel_method_access",
-          "named": true
-        },
-        {
-          "type": "spel_projection",
           "named": true
         },
         {
@@ -1619,6 +1758,10 @@
       "multiple": false,
       "required": true,
       "types": [
+        {
+          "type": "array_creation",
+          "named": true
+        },
         {
           "type": "binary_spel_expression",
           "named": true
@@ -1640,6 +1783,10 @@
           "named": true
         },
         {
+          "type": "inline_map",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -1656,19 +1803,7 @@
           "named": true
         },
         {
-          "type": "spel_instanceof",
-          "named": true
-        },
-        {
-          "type": "spel_java_class",
-          "named": true
-        },
-        {
           "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_new",
           "named": true
         },
         {
@@ -1680,11 +1815,11 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_string_literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -1699,28 +1834,17 @@
     }
   },
   {
-    "type": "spel_projection",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "spel_object_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "spel_property_access",
     "named": true,
     "fields": {
       "name": {
-        "multiple": false,
+        "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": "array_creation",
+            "named": true
+          },
           {
             "type": "binary_spel_expression",
             "named": true
@@ -1742,6 +1866,10 @@
             "named": true
           },
           {
+            "type": "inline_map",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -1758,19 +1886,7 @@
             "named": true
           },
           {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_java_class",
-            "named": true
-          },
-          {
             "type": "spel_method_literal",
-            "named": true
-          },
-          {
-            "type": "spel_new",
             "named": true
           },
           {
@@ -1782,11 +1898,11 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_string_literal",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -1801,15 +1917,34 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "null_operator",
+          "named": true
+        },
         {
           "type": "spel_method_access",
           "named": true
         },
         {
-          "type": "spel_projection",
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_string_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
           "named": true
         },
         {
@@ -1827,6 +1962,10 @@
       "multiple": false,
       "required": false,
       "types": [
+        {
+          "type": "array_creation",
+          "named": true
+        },
         {
           "type": "binary_spel_expression",
           "named": true
@@ -1848,6 +1987,10 @@
           "named": true
         },
         {
+          "type": "inline_map",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -1864,19 +2007,7 @@
           "named": true
         },
         {
-          "type": "spel_instanceof",
-          "named": true
-        },
-        {
-          "type": "spel_java_class",
-          "named": true
-        },
-        {
           "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_new",
           "named": true
         },
         {
@@ -1888,11 +2019,11 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_string_literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -1916,10 +2047,6 @@
       "types": [
         {
           "type": "spel_method_access",
-          "named": true
-        },
-        {
-          "type": "spel_projection",
           "named": true
         },
         {
@@ -2629,6 +2756,10 @@
         "required": true,
         "types": [
           {
+            "type": "array_creation",
+            "named": true
+          },
+          {
             "type": "binary_spel_expression",
             "named": true
           },
@@ -2649,6 +2780,10 @@
             "named": true
           },
           {
+            "type": "inline_map",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -2665,19 +2800,7 @@
             "named": true
           },
           {
-            "type": "spel_instanceof",
-            "named": true
-          },
-          {
-            "type": "spel_java_class",
-            "named": true
-          },
-          {
             "type": "spel_method_literal",
-            "named": true
-          },
-          {
-            "type": "spel_new",
             "named": true
           },
           {
@@ -2689,11 +2812,11 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_string_literal",
             "named": true
           },
           {
-            "type": "string_literal",
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -2951,6 +3074,10 @@
       "required": false,
       "types": [
         {
+          "type": "array_creation",
+          "named": true
+        },
+        {
           "type": "binary_spel_expression",
           "named": true
         },
@@ -2971,6 +3098,10 @@
           "named": true
         },
         {
+          "type": "inline_map",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -2987,19 +3118,7 @@
           "named": true
         },
         {
-          "type": "spel_instanceof",
-          "named": true
-        },
-        {
-          "type": "spel_java_class",
-          "named": true
-        },
-        {
           "type": "spel_method_literal",
-          "named": true
-        },
-        {
-          "type": "spel_new",
           "named": true
         },
         {
@@ -3011,11 +3130,11 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_string_literal",
           "named": true
         },
         {
-          "type": "string_literal",
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -3090,10 +3209,6 @@
     "named": false
   },
   {
-    "type": ".{",
-    "named": false
-  },
-  {
     "type": "/",
     "named": false
   },
@@ -3134,10 +3249,6 @@
     "named": false
   },
   {
-    "type": "@",
-    "named": false
-  },
-  {
     "type": "@{",
     "named": false
   },
@@ -3162,16 +3273,16 @@
     "named": true
   },
   {
-    "type": "bitwise_and",
+    "type": "boolean_type",
     "named": true
   },
   {
-    "type": "bitwise_and_2",
-    "named": true
+    "type": "byte",
+    "named": false
   },
   {
-    "type": "bor",
-    "named": true
+    "type": "char",
+    "named": false
   },
   {
     "type": "comment",
@@ -3179,6 +3290,10 @@
   },
   {
     "type": "doctype",
+    "named": false
+  },
+  {
+    "type": "double",
     "named": false
   },
   {
@@ -3198,12 +3313,20 @@
     "named": true
   },
   {
+    "type": "exp",
+    "named": true
+  },
+  {
     "type": "f",
     "named": false
   },
   {
     "type": "false_literal",
     "named": true
+  },
+  {
+    "type": "float",
+    "named": false
   },
   {
     "type": "fragment_arg",
@@ -3230,6 +3353,10 @@
     "named": true
   },
   {
+    "type": "int",
+    "named": false
+  },
+  {
     "type": "interpolated_string_literal_basic_content",
     "named": true
   },
@@ -3250,8 +3377,16 @@
     "named": true
   },
   {
+    "type": "long",
+    "named": false
+  },
+  {
     "type": "modulo",
     "named": true
+  },
+  {
+    "type": "new",
+    "named": false
   },
   {
     "type": "none",
@@ -3302,52 +3437,8 @@
     "named": true
   },
   {
-    "type": "spel_bit_shift_left",
-    "named": true
-  },
-  {
-    "type": "spel_bit_shift_left_2",
-    "named": true
-  },
-  {
-    "type": "spel_bit_shift_right",
-    "named": true
-  },
-  {
-    "type": "spel_bit_shift_right_2",
-    "named": true
-  },
-  {
-    "type": "spel_greater_or_equal",
-    "named": true
-  },
-  {
-    "type": "spel_in",
-    "named": true
-  },
-  {
-    "type": "spel_instanceof",
-    "named": true
-  },
-  {
-    "type": "spel_logical_shift_right",
-    "named": true
-  },
-  {
-    "type": "spel_logical_shift_right_2",
-    "named": true
-  },
-  {
-    "type": "spel_lower_or_equal",
-    "named": true
-  },
-  {
-    "type": "spel_new",
-    "named": true
-  },
-  {
-    "type": "spel_not_in",
-    "named": true
+    "type": "short",
+    "named": false
   },
   {
     "type": "standard_url",
@@ -3363,11 +3454,11 @@
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "th:",
@@ -3438,15 +3529,11 @@
     "named": true
   },
   {
-    "type": "xor",
-    "named": true
-  },
-  {
-    "type": "xor_2",
-    "named": true
-  },
-  {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "{:}",
     "named": false
   },
   {

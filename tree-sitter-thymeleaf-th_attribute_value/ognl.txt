@@ -1,1 +1,2 @@
-<th:block th:if="${hourMap.containsKey(dateUtil.getLdt(w.dateJour(), h.time())) && _user.isAdministrateur()}"></th:block>
+<div class="text-white" th:text="${new boolean[]{3,4}}"></div>
+
