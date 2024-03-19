@@ -1,5 +1,6 @@
-<div class="text-white" th:text="${new boolean[]{3,4}}"></div>
-<div class="text-white" th:text="${123 between {100, 130}}"></div>
-<div class="text-white" th:text="${123 instanceof T(java.lang.Inteer)}"></div>
+<div th:text="${new boolean[]{3,4}}"></div>
+<div th:text="${123 between {100, 130}}"></div>
+<div th:text="${123 instanceof T(java.lang.Integer)}"></div>
+<div th:text="${T(java.math.RoundingMode).CEILING < T(java.math.RoundingMode).FLOOR}"></div>
 
 

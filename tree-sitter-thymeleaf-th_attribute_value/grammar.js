@@ -604,6 +604,7 @@ module.exports = grammar({
             //TODO : add rules for spel
             $._spel_primary_expression,
             $.binary_spel_expression,
+            $.identifier,
             $.unary_spel_expression,
             $.array_creation,
             $.spel_parenthesized_expression,
@@ -726,12 +727,12 @@ module.exports = grammar({
         ),
 
 
+        spel_assignement_expression: $ => prec.right(PREC.ASSIGN, seq(
+            field('left', $.spel_variable),
+            field('operator', '='),
+            field('right', $._spel_std_expression)
+        )),
 
-        spel_assignement_expression : $ => seq(
-            field("var", $.spel_variable), 
-            '=',
-            field("value", $._spel_literal) 
-        ),
 
         spel_new : _ => 'new',
         spel_instanceof: _ => 'instanceof',
@@ -781,7 +782,7 @@ module.exports = grammar({
             )),
             prec.left(PREC.INSTANCE_OF, seq(
                     field('left', $._spel_std_expression),
-                    field('operator', $.matches),
+                    field('operator', $.spel_matches),
                     field('right', $.string_literal)
             )),
         ),
@@ -792,6 +793,11 @@ module.exports = grammar({
             ',',
             field('end', $._spel_std_expression),
             '}',
+        ),
+
+        identifier : $ => seq(
+            $.type,
+            optional($._spel_post_accessor)
         ),
 
         type : $ => seq(
@@ -811,7 +817,7 @@ module.exports = grammar({
 
         spel_variable : $ => seq(
             '#',
-            /[a-zA-Z_]+/,
+            $._spel_name,
             optional($._spel_post_accessor),
         ),
 
@@ -833,24 +839,24 @@ module.exports = grammar({
 
         spel_property_access : $ => choice(
             seq(
+                optional($.null_operator),
                 '.',
                 field('name',seq(
                     /[A-Za-z_]+/,
                     repeat(/[0-9A-Za-z_]/),
                 )),
-                optional($.null_operator),
                 optional($._spel_post_accessor),
             ),
             seq(
                 '[',
                 field('name',$._spel_std_expression),
                 ']',
-                optional($.null_operator),
                 optional($._spel_post_accessor)
             )
         ),
 
         spel_method_access : $ => seq(
+            optional($.null_operator),
             '.',
             $.spel_method_literal,
         ),

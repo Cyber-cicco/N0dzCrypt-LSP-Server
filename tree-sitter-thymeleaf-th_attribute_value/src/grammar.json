@@ -2939,6 +2939,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
           "name": "unary_spel_expression"
         },
         {
@@ -3553,29 +3557,37 @@
       ]
     },
     "spel_assignement_expression": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "var",
-          "content": {
-            "type": "SYMBOL",
-            "name": "spel_variable"
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "left",
+            "content": {
+              "type": "SYMBOL",
+              "name": "spel_variable"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operator",
+            "content": {
+              "type": "STRING",
+              "value": "="
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "right",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_spel_std_expression"
+            }
           }
-        },
-        {
-          "type": "STRING",
-          "value": "="
-        },
-        {
-          "type": "FIELD",
-          "name": "value",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_spel_literal"
-          }
-        }
-      ]
+        ]
+      }
     },
     "spel_new": {
       "type": "STRING",
@@ -3588,6 +3600,10 @@
     "spel_between": {
       "type": "STRING",
       "value": "between"
+    },
+    "spel_matches": {
+      "type": "STRING",
+      "value": "matches"
     },
     "exp": {
       "type": "STRING",
@@ -4321,6 +4337,39 @@
               }
             ]
           }
+        },
+        {
+          "type": "PREC_LEFT",
+          "value": 15,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "left",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_spel_std_expression"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "operator",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "spel_matches"
+                }
+              },
+              {
+                "type": "FIELD",
+                "name": "right",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "string_literal"
+                }
+              }
+            ]
+          }
         }
       ]
     },
@@ -4354,6 +4403,27 @@
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "identifier": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_spel_post_accessor"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -4407,8 +4477,8 @@
           "value": "#"
         },
         {
-          "type": "PATTERN",
-          "value": "[a-zA-Z_]+"
+          "type": "SYMBOL",
+          "name": "_spel_name"
         },
         {
           "type": "CHOICE",
@@ -4480,6 +4550,18 @@
           "type": "SEQ",
           "members": [
             {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "null_operator"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
               "type": "STRING",
               "value": "."
             },
@@ -4502,18 +4584,6 @@
                   }
                 ]
               }
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "null_operator"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
             },
             {
               "type": "CHOICE",
@@ -4553,18 +4623,6 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "null_operator"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
                   "name": "_spel_post_accessor"
                 },
                 {
@@ -4579,6 +4637,18 @@
     "spel_method_access": {
       "type": "SEQ",
       "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "null_operator"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
         {
           "type": "STRING",
           "value": "."
