@@ -33,17 +33,7 @@
     "fields": {}
   },
   {
-    "type": "bigdec_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "bigint_literal",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "binary_ognl_expression",
+    "type": "binary_spel_expression",
     "named": true,
     "fields": {
       "left": {
@@ -51,15 +41,7 @@
         "required": true,
         "types": [
           {
-            "type": "bigdec_literal",
-            "named": true
-          },
-          {
-            "type": "bigint_literal",
-            "named": true
-          },
-          {
-            "type": "binary_ognl_expression",
+            "type": "binary_spel_expression",
             "named": true
           },
           {
@@ -75,6 +57,10 @@
             "named": true
           },
           {
+            "type": "inline_list",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -87,31 +73,35 @@
             "named": true
           },
           {
-            "type": "ognl_assignement_expression",
+            "type": "spel_assignement_expression",
             "named": true
           },
           {
-            "type": "ognl_instanceof",
+            "type": "spel_instanceof",
             "named": true
           },
           {
-            "type": "ognl_java_class",
+            "type": "spel_java_class",
             "named": true
           },
           {
-            "type": "ognl_method_literal",
+            "type": "spel_method_literal",
             "named": true
           },
           {
-            "type": "ognl_new",
+            "type": "spel_new",
             "named": true
           },
           {
-            "type": "ognl_object_literal",
+            "type": "spel_object_literal",
             "named": true
           },
           {
-            "type": "ognl_variable",
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -123,7 +113,7 @@
             "named": true
           },
           {
-            "type": "unary_ognl_expression",
+            "type": "unary_spel_expression",
             "named": true
           }
         ]
@@ -158,10 +148,6 @@
           },
           {
             "type": "bor_2",
-            "named": true
-          },
-          {
-            "type": "comma",
             "named": true
           },
           {
@@ -217,55 +203,55 @@
             "named": true
           },
           {
-            "type": "ognl_bit_shift_left",
-            "named": true
-          },
-          {
-            "type": "ognl_bit_shift_left_2",
-            "named": true
-          },
-          {
-            "type": "ognl_bit_shift_right",
-            "named": true
-          },
-          {
-            "type": "ognl_bit_shift_right_2",
-            "named": true
-          },
-          {
-            "type": "ognl_greater_or_equal",
-            "named": true
-          },
-          {
-            "type": "ognl_in",
-            "named": true
-          },
-          {
-            "type": "ognl_instanceof",
-            "named": true
-          },
-          {
-            "type": "ognl_logical_shift_right",
-            "named": true
-          },
-          {
-            "type": "ognl_logical_shift_right_2",
-            "named": true
-          },
-          {
-            "type": "ognl_lower_or_equal",
-            "named": true
-          },
-          {
-            "type": "ognl_not_in",
-            "named": true
-          },
-          {
             "type": "or",
             "named": true
           },
           {
             "type": "or_2",
+            "named": true
+          },
+          {
+            "type": "spel_bit_shift_left",
+            "named": true
+          },
+          {
+            "type": "spel_bit_shift_left_2",
+            "named": true
+          },
+          {
+            "type": "spel_bit_shift_right",
+            "named": true
+          },
+          {
+            "type": "spel_bit_shift_right_2",
+            "named": true
+          },
+          {
+            "type": "spel_greater_or_equal",
+            "named": true
+          },
+          {
+            "type": "spel_in",
+            "named": true
+          },
+          {
+            "type": "spel_instanceof",
+            "named": true
+          },
+          {
+            "type": "spel_logical_shift_right",
+            "named": true
+          },
+          {
+            "type": "spel_logical_shift_right_2",
+            "named": true
+          },
+          {
+            "type": "spel_lower_or_equal",
+            "named": true
+          },
+          {
+            "type": "spel_not_in",
             "named": true
           },
           {
@@ -287,15 +273,7 @@
         "required": true,
         "types": [
           {
-            "type": "bigdec_literal",
-            "named": true
-          },
-          {
-            "type": "bigint_literal",
-            "named": true
-          },
-          {
-            "type": "binary_ognl_expression",
+            "type": "binary_spel_expression",
             "named": true
           },
           {
@@ -311,6 +289,10 @@
             "named": true
           },
           {
+            "type": "inline_list",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -323,31 +305,35 @@
             "named": true
           },
           {
-            "type": "ognl_assignement_expression",
+            "type": "spel_assignement_expression",
             "named": true
           },
           {
-            "type": "ognl_instanceof",
+            "type": "spel_instanceof",
             "named": true
           },
           {
-            "type": "ognl_java_class",
+            "type": "spel_java_class",
             "named": true
           },
           {
-            "type": "ognl_method_literal",
+            "type": "spel_method_literal",
             "named": true
           },
           {
-            "type": "ognl_new",
+            "type": "spel_new",
             "named": true
           },
           {
-            "type": "ognl_object_literal",
+            "type": "spel_object_literal",
             "named": true
           },
           {
-            "type": "ognl_variable",
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -359,7 +345,7 @@
             "named": true
           },
           {
-            "type": "unary_ognl_expression",
+            "type": "unary_spel_expression",
             "named": true
           }
         ]
@@ -403,11 +389,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -563,11 +549,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -608,11 +594,6 @@
     "fields": {}
   },
   {
-    "type": "comma",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "divide",
     "named": true,
     "fields": {}
@@ -630,6 +611,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "doctype",
           "named": true
@@ -679,6 +664,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
         {
           "type": "doctype",
           "named": true
@@ -794,11 +783,11 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
-          "type": "parenthesized_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         },
         {
@@ -873,11 +862,11 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
-          "type": "parenthesized_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         },
         {
@@ -921,6 +910,105 @@
     "fields": {}
   },
   {
+    "type": "inline_list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_instanceof",
+          "named": true
+        },
+        {
+          "type": "spel_java_class",
+          "named": true
+        },
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_new",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "inline_none",
     "named": true,
     "fields": {}
@@ -952,7 +1040,7 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         },
         {
@@ -1030,11 +1118,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -1098,486 +1186,7 @@
       "required": true,
       "types": [
         {
-          "type": "ognl_new",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_assignement_expression",
-    "named": true,
-    "fields": {
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "bigdec_literal",
-            "named": true
-          },
-          {
-            "type": "bigint_literal",
-            "named": true
-          },
-          {
-            "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "false_literal",
-            "named": true
-          },
-          {
-            "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "ognl_instanceof",
-            "named": true
-          },
-          {
-            "type": "ognl_java_class",
-            "named": true
-          },
-          {
-            "type": "ognl_method_literal",
-            "named": true
-          },
-          {
-            "type": "ognl_new",
-            "named": true
-          },
-          {
-            "type": "ognl_object_literal",
-            "named": true
-          },
-          {
-            "type": "ognl_variable",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "true_literal",
-            "named": true
-          }
-        ]
-      },
-      "var": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "ognl_variable",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "ognl_java_class",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ognl_java_field",
-          "named": true
-        },
-        {
-          "type": "ognl_java_method",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_java_field",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "ognl_java_method",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "ognl_method_args",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_method_access",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "ognl_method_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_method_args",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "bigdec_literal",
-          "named": true
-        },
-        {
-          "type": "bigint_literal",
-          "named": true
-        },
-        {
-          "type": "double_literal",
-          "named": true
-        },
-        {
-          "type": "false_literal",
-          "named": true
-        },
-        {
-          "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "null_literal",
-          "named": true
-        },
-        {
-          "type": "ognl_instanceof",
-          "named": true
-        },
-        {
-          "type": "ognl_java_class",
-          "named": true
-        },
-        {
-          "type": "ognl_method_literal",
-          "named": true
-        },
-        {
-          "type": "ognl_new",
-          "named": true
-        },
-        {
-          "type": "ognl_object_literal",
-          "named": true
-        },
-        {
-          "type": "ognl_variable",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "true_literal",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_method_literal",
-    "named": true,
-    "fields": {
-      "args": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "ognl_method_args",
-            "named": true
-          }
-        ]
-      },
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "ognl_method_name",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ognl_method_access",
-          "named": true
-        },
-        {
-          "type": "ognl_property_access",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_method_name",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "ognl_object_literal",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ognl_method_access",
-          "named": true
-        },
-        {
-          "type": "ognl_property_access",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_property_access",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "bigdec_literal",
-            "named": true
-          },
-          {
-            "type": "bigint_literal",
-            "named": true
-          },
-          {
-            "type": "binary_ognl_expression",
-            "named": true
-          },
-          {
-            "type": "double_literal",
-            "named": true
-          },
-          {
-            "type": "false_literal",
-            "named": true
-          },
-          {
-            "type": "float_literal",
-            "named": true
-          },
-          {
-            "type": "integer_literal",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "object_creation_expression",
-            "named": true
-          },
-          {
-            "type": "ognl_assignement_expression",
-            "named": true
-          },
-          {
-            "type": "ognl_instanceof",
-            "named": true
-          },
-          {
-            "type": "ognl_java_class",
-            "named": true
-          },
-          {
-            "type": "ognl_method_literal",
-            "named": true
-          },
-          {
-            "type": "ognl_new",
-            "named": true
-          },
-          {
-            "type": "ognl_object_literal",
-            "named": true
-          },
-          {
-            "type": "ognl_variable",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "true_literal",
-            "named": true
-          },
-          {
-            "type": "unary_ognl_expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ognl_method_access",
-          "named": true
-        },
-        {
-          "type": "ognl_property_access",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_th_std_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "bigdec_literal",
-          "named": true
-        },
-        {
-          "type": "bigint_literal",
-          "named": true
-        },
-        {
-          "type": "binary_ognl_expression",
-          "named": true
-        },
-        {
-          "type": "double_literal",
-          "named": true
-        },
-        {
-          "type": "false_literal",
-          "named": true
-        },
-        {
-          "type": "float_literal",
-          "named": true
-        },
-        {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
-          "type": "null_literal",
-          "named": true
-        },
-        {
-          "type": "object_creation_expression",
-          "named": true
-        },
-        {
-          "type": "ognl_assignement_expression",
-          "named": true
-        },
-        {
-          "type": "ognl_instanceof",
-          "named": true
-        },
-        {
-          "type": "ognl_java_class",
-          "named": true
-        },
-        {
-          "type": "ognl_method_literal",
-          "named": true
-        },
-        {
-          "type": "ognl_new",
-          "named": true
-        },
-        {
-          "type": "ognl_object_literal",
-          "named": true
-        },
-        {
-          "type": "ognl_variable",
-          "named": true
-        },
-        {
-          "type": "string_literal",
-          "named": true
-        },
-        {
-          "type": "true_literal",
-          "named": true
-        },
-        {
-          "type": "unary_ognl_expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "ognl_variable",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "ognl_method_access",
-          "named": true
-        },
-        {
-          "type": "ognl_property_access",
+          "type": "spel_new",
           "named": true
         }
       ]
@@ -1635,11 +1244,11 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
-          "type": "parenthesized_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         },
         {
@@ -1740,6 +1349,587 @@
     }
   },
   {
+    "type": "spel_assignement_expression",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "spel_instanceof",
+            "named": true
+          },
+          {
+            "type": "spel_java_class",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_new",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          }
+        ]
+      },
+      "var": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spel_variable",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "spel_java_class",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_java_field",
+          "named": true
+        },
+        {
+          "type": "spel_java_method",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_java_field",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "spel_java_method",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "spel_method_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_method_access",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "spel_method_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_method_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "spel_instanceof",
+          "named": true
+        },
+        {
+          "type": "spel_java_class",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_new",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_method_literal",
+    "named": true,
+    "fields": {
+      "args": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spel_method_args",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spel_method_name",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_method_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "spel_object_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_parenthesized_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_instanceof",
+          "named": true
+        },
+        {
+          "type": "spel_java_class",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_new",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_projection",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "spel_object_literal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_property_access",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_spel_expression",
+            "named": true
+          },
+          {
+            "type": "double_literal",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "float_literal",
+            "named": true
+          },
+          {
+            "type": "inline_list",
+            "named": true
+          },
+          {
+            "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "object_creation_expression",
+            "named": true
+          },
+          {
+            "type": "spel_assignement_expression",
+            "named": true
+          },
+          {
+            "type": "spel_instanceof",
+            "named": true
+          },
+          {
+            "type": "spel_java_class",
+            "named": true
+          },
+          {
+            "type": "spel_method_literal",
+            "named": true
+          },
+          {
+            "type": "spel_new",
+            "named": true
+          },
+          {
+            "type": "spel_object_literal",
+            "named": true
+          },
+          {
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_spel_expression",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_th_std_expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
+          "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "float_literal",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_instanceof",
+          "named": true
+        },
+        {
+          "type": "spel_java_class",
+          "named": true
+        },
+        {
+          "type": "spel_method_literal",
+          "named": true
+        },
+        {
+          "type": "spel_new",
+          "named": true
+        },
+        {
+          "type": "spel_object_literal",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "spel_variable",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "start_tag",
     "named": true,
     "fields": {},
@@ -1832,11 +2022,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -1902,11 +2092,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -1972,11 +2162,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -2048,11 +2238,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -2224,10 +2414,6 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
-            "named": true
-          },
-          {
             "type": "parenthesized_th_std_expression",
             "named": true
           },
@@ -2249,6 +2435,10 @@
           },
           {
             "type": "remove_tag",
+            "named": true
+          },
+          {
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -2340,11 +2530,11 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "parenthesized_th_std_expression",
           "named": true
         },
         {
-          "type": "parenthesized_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         },
         {
@@ -2395,7 +2585,7 @@
           "named": true
         },
         {
-          "type": "ognl_th_std_expression",
+          "type": "spel_th_std_expression",
           "named": true
         }
       ]
@@ -2431,7 +2621,7 @@
     "fields": {}
   },
   {
-    "type": "unary_ognl_expression",
+    "type": "unary_spel_expression",
     "named": true,
     "fields": {
       "operand": {
@@ -2439,15 +2629,7 @@
         "required": true,
         "types": [
           {
-            "type": "bigdec_literal",
-            "named": true
-          },
-          {
-            "type": "bigint_literal",
-            "named": true
-          },
-          {
-            "type": "binary_ognl_expression",
+            "type": "binary_spel_expression",
             "named": true
           },
           {
@@ -2463,6 +2645,10 @@
             "named": true
           },
           {
+            "type": "inline_list",
+            "named": true
+          },
+          {
             "type": "integer_literal",
             "named": true
           },
@@ -2475,31 +2661,35 @@
             "named": true
           },
           {
-            "type": "ognl_assignement_expression",
+            "type": "spel_assignement_expression",
             "named": true
           },
           {
-            "type": "ognl_instanceof",
+            "type": "spel_instanceof",
             "named": true
           },
           {
-            "type": "ognl_java_class",
+            "type": "spel_java_class",
             "named": true
           },
           {
-            "type": "ognl_method_literal",
+            "type": "spel_method_literal",
             "named": true
           },
           {
-            "type": "ognl_new",
+            "type": "spel_new",
             "named": true
           },
           {
-            "type": "ognl_object_literal",
+            "type": "spel_object_literal",
             "named": true
           },
           {
-            "type": "ognl_variable",
+            "type": "spel_parenthesized_expression",
+            "named": true
+          },
+          {
+            "type": "spel_variable",
             "named": true
           },
           {
@@ -2511,7 +2701,7 @@
             "named": true
           },
           {
-            "type": "unary_ognl_expression",
+            "type": "unary_spel_expression",
             "named": true
           }
         ]
@@ -2581,11 +2771,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -2690,11 +2880,11 @@
             "named": true
           },
           {
-            "type": "ognl_th_std_expression",
+            "type": "parenthesized_th_std_expression",
             "named": true
           },
           {
-            "type": "parenthesized_th_std_expression",
+            "type": "spel_th_std_expression",
             "named": true
           },
           {
@@ -2761,15 +2951,7 @@
       "required": false,
       "types": [
         {
-          "type": "bigdec_literal",
-          "named": true
-        },
-        {
-          "type": "bigint_literal",
-          "named": true
-        },
-        {
-          "type": "binary_ognl_expression",
+          "type": "binary_spel_expression",
           "named": true
         },
         {
@@ -2785,6 +2967,10 @@
           "named": true
         },
         {
+          "type": "inline_list",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -2797,31 +2983,35 @@
           "named": true
         },
         {
-          "type": "ognl_assignement_expression",
+          "type": "spel_assignement_expression",
           "named": true
         },
         {
-          "type": "ognl_instanceof",
+          "type": "spel_instanceof",
           "named": true
         },
         {
-          "type": "ognl_java_class",
+          "type": "spel_java_class",
           "named": true
         },
         {
-          "type": "ognl_method_literal",
+          "type": "spel_method_literal",
           "named": true
         },
         {
-          "type": "ognl_new",
+          "type": "spel_new",
           "named": true
         },
         {
-          "type": "ognl_object_literal",
+          "type": "spel_object_literal",
           "named": true
         },
         {
-          "type": "ognl_variable",
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
+          "type": "spel_variable",
           "named": true
         },
         {
@@ -2833,7 +3023,7 @@
           "named": true
         },
         {
-          "type": "unary_ognl_expression",
+          "type": "unary_spel_expression",
           "named": true
         }
       ]
@@ -2897,6 +3087,10 @@
   },
   {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": ".{",
     "named": false
   },
   {
@@ -3080,54 +3274,6 @@
     "named": true
   },
   {
-    "type": "ognl_bit_shift_left",
-    "named": true
-  },
-  {
-    "type": "ognl_bit_shift_left_2",
-    "named": true
-  },
-  {
-    "type": "ognl_bit_shift_right",
-    "named": true
-  },
-  {
-    "type": "ognl_bit_shift_right_2",
-    "named": true
-  },
-  {
-    "type": "ognl_greater_or_equal",
-    "named": true
-  },
-  {
-    "type": "ognl_in",
-    "named": true
-  },
-  {
-    "type": "ognl_instanceof",
-    "named": true
-  },
-  {
-    "type": "ognl_logical_shift_right",
-    "named": true
-  },
-  {
-    "type": "ognl_logical_shift_right_2",
-    "named": true
-  },
-  {
-    "type": "ognl_lower_or_equal",
-    "named": true
-  },
-  {
-    "type": "ognl_new",
-    "named": true
-  },
-  {
-    "type": "ognl_not_in",
-    "named": true
-  },
-  {
     "type": "or",
     "named": true
   },
@@ -3156,6 +3302,54 @@
     "named": true
   },
   {
+    "type": "spel_bit_shift_left",
+    "named": true
+  },
+  {
+    "type": "spel_bit_shift_left_2",
+    "named": true
+  },
+  {
+    "type": "spel_bit_shift_right",
+    "named": true
+  },
+  {
+    "type": "spel_bit_shift_right_2",
+    "named": true
+  },
+  {
+    "type": "spel_greater_or_equal",
+    "named": true
+  },
+  {
+    "type": "spel_in",
+    "named": true
+  },
+  {
+    "type": "spel_instanceof",
+    "named": true
+  },
+  {
+    "type": "spel_logical_shift_right",
+    "named": true
+  },
+  {
+    "type": "spel_logical_shift_right_2",
+    "named": true
+  },
+  {
+    "type": "spel_lower_or_equal",
+    "named": true
+  },
+  {
+    "type": "spel_new",
+    "named": true
+  },
+  {
+    "type": "spel_not_in",
+    "named": true
+  },
+  {
     "type": "standard_url",
     "named": true
   },
@@ -3169,11 +3363,11 @@
   },
   {
     "type": "text",
-    "named": false
+    "named": true
   },
   {
     "type": "text",
-    "named": true
+    "named": false
   },
   {
     "type": "th:",

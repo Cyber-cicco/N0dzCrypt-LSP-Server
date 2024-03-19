@@ -68,6 +68,10 @@
         {
           "type": "SYMBOL",
           "name": "erroneous_end_tag"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
         }
       ]
     },
@@ -399,7 +403,7 @@
                   "name": "attribute_name",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_th_ognl_only"
+                    "name": "_th_spel_only"
                   }
                 },
                 {
@@ -415,7 +419,7 @@
                   "name": "attribute_value",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "ognl_th_std_expression"
+                    "name": "spel_th_std_expression"
                   }
                 },
                 {
@@ -720,7 +724,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_th_std_expression"
+          "name": "spel_th_std_expression"
         }
       ]
     },
@@ -966,7 +970,7 @@
         }
       ]
     },
-    "_th_ognl_only": {
+    "_th_spel_only": {
       "type": "CHOICE",
       "members": [
         {
@@ -1220,32 +1224,6 @@
         }
       ]
     },
-    "bigdec_literal": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[0-9]+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[bB]"
-        }
-      ]
-    },
-    "bigint_literal": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "[0-9]+"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[hH]"
-        }
-      ]
-    },
     "long_literal": {
       "type": "SEQ",
       "members": [
@@ -1357,7 +1335,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "ognl_th_std_expression"
+                "name": "spel_th_std_expression"
               },
               {
                 "type": "SYMBOL",
@@ -1572,7 +1550,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_th_std_expression"
+          "name": "spel_th_std_expression"
         },
         {
           "type": "SYMBOL",
@@ -1679,7 +1657,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_std_expression"
+              "name": "_spel_std_expression"
             },
             {
               "type": "BLANK"
@@ -1692,7 +1670,7 @@
         }
       ]
     },
-    "ognl_th_std_expression": {
+    "spel_th_std_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -1704,7 +1682,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_std_expression"
+              "name": "_spel_std_expression"
             },
             {
               "type": "BLANK"
@@ -2948,28 +2926,49 @@
         }
       ]
     },
-    "_ognl_std_expression": {
+    "_spel_std_expression": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_ognl_primary_expression"
+          "name": "_spel_primary_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "binary_ognl_expression"
+          "name": "binary_spel_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "unary_ognl_expression"
+          "name": "unary_spel_expression"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_assignement_expression"
+          "name": "spel_parenthesized_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "spel_assignement_expression"
         }
       ]
     },
-    "unary_ognl_expression": {
+    "spel_parenthesized_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_spel_std_expression"
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "unary_spel_expression": {
       "type": "CHOICE",
       "members": [
         {
@@ -2991,7 +2990,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3016,7 +3015,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3041,7 +3040,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3066,7 +3065,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3091,7 +3090,7 @@
                 "name": "operand",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3099,20 +3098,24 @@
         }
       ]
     },
-    "_ognl_primary_expression": {
+    "_spel_primary_expression": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_ognl_literal"
+          "name": "_spel_literal"
         },
         {
           "type": "SYMBOL",
           "name": "object_creation_expression"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "inline_list"
         }
       ]
     },
-    "_ognl_literal": {
+    "_spel_literal": {
       "type": "CHOICE",
       "members": [
         {
@@ -3133,14 +3136,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "bigdec_literal"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "bigint_literal"
-        },
-        {
-          "type": "SYMBOL",
           "name": "string_literal"
         },
         {
@@ -3157,27 +3152,85 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_object_literal"
+          "name": "spel_object_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_method_literal"
+          "name": "spel_method_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_instanceof"
+          "name": "spel_instanceof"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_new"
+          "name": "spel_new"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_java_class"
+          "name": "spel_java_class"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_variable"
+          "name": "spel_variable"
+        }
+      ]
+    },
+    "inline_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_spel_std_expression"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": ","
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_spel_std_expression"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_spel_post_accessor"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -3186,7 +3239,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "ognl_new"
+          "name": "spel_new"
         },
         {
           "type": "PATTERN",
@@ -3202,7 +3255,7 @@
         }
       ]
     },
-    "ognl_assignement_expression": {
+    "spel_assignement_expression": {
       "type": "SEQ",
       "members": [
         {
@@ -3210,7 +3263,7 @@
           "name": "var",
           "content": {
             "type": "SYMBOL",
-            "name": "ognl_variable"
+            "name": "spel_variable"
           }
         },
         {
@@ -3222,60 +3275,60 @@
           "name": "value",
           "content": {
             "type": "SYMBOL",
-            "name": "_ognl_literal"
+            "name": "_spel_literal"
           }
         }
       ]
     },
-    "ognl_greater_or_equal": {
+    "spel_greater_or_equal": {
       "type": "STRING",
       "value": "gte"
     },
-    "ognl_lower_or_equal": {
+    "spel_lower_or_equal": {
       "type": "STRING",
       "value": "lte"
     },
-    "ognl_not_equal": {
+    "spel_not_equal": {
       "type": "STRING",
       "value": "neq"
     },
-    "ognl_in": {
+    "spel_in": {
       "type": "STRING",
       "value": "in"
     },
-    "ognl_not_in": {
+    "spel_not_in": {
       "type": "STRING",
       "value": "not in"
     },
-    "ognl_new": {
+    "spel_new": {
       "type": "STRING",
       "value": "new"
     },
-    "ognl_instanceof": {
+    "spel_instanceof": {
       "type": "STRING",
       "value": "instanceof"
     },
-    "ognl_bit_shift_left": {
+    "spel_bit_shift_left": {
       "type": "STRING",
       "value": "<<"
     },
-    "ognl_bit_shift_left_2": {
+    "spel_bit_shift_left_2": {
       "type": "STRING",
       "value": "shl"
     },
-    "ognl_bit_shift_right": {
+    "spel_bit_shift_right": {
       "type": "STRING",
       "value": ">>"
     },
-    "ognl_bit_shift_right_2": {
+    "spel_bit_shift_right_2": {
       "type": "STRING",
       "value": "shr"
     },
-    "ognl_logical_shift_right": {
+    "spel_logical_shift_right": {
       "type": "STRING",
       "value": ">>>"
     },
-    "ognl_logical_shift_right_2": {
+    "spel_logical_shift_right_2": {
       "type": "STRING",
       "value": "ushr"
     },
@@ -3311,42 +3364,9 @@
       "type": "STRING",
       "value": "^"
     },
-    "binary_ognl_expression": {
+    "binary_spel_expression": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "PREC_LEFT",
-          "value": 0,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "FIELD",
-                "name": "left",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
-                }
-              },
-              {
-                "type": "FIELD",
-                "name": "operator",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "comma"
-                }
-              },
-              {
-                "type": "FIELD",
-                "name": "right",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
-                }
-              }
-            ]
-          }
-        },
         {
           "type": "PREC_LEFT",
           "value": 5,
@@ -3358,7 +3378,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3374,7 +3394,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3391,7 +3411,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3407,7 +3427,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3424,7 +3444,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3440,7 +3460,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3457,7 +3477,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3473,7 +3493,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3490,7 +3510,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3506,7 +3526,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3523,7 +3543,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3539,7 +3559,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3556,7 +3576,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3572,7 +3592,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3589,7 +3609,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3605,7 +3625,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3622,7 +3642,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3638,7 +3658,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3655,7 +3675,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3671,7 +3691,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3688,7 +3708,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3704,7 +3724,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3721,7 +3741,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3737,7 +3757,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3754,7 +3774,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3770,7 +3790,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3787,7 +3807,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3803,7 +3823,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3820,7 +3840,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3836,7 +3856,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3853,7 +3873,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3869,7 +3889,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3886,7 +3906,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3902,7 +3922,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3919,7 +3939,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3935,7 +3955,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3952,7 +3972,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -3968,7 +3988,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -3985,7 +4005,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4001,7 +4021,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4018,7 +4038,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4026,7 +4046,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_greater_or_equal"
+                  "name": "spel_greater_or_equal"
                 }
               },
               {
@@ -4034,7 +4054,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4051,7 +4071,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4059,7 +4079,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_lower_or_equal"
+                  "name": "spel_lower_or_equal"
                 }
               },
               {
@@ -4067,7 +4087,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4084,7 +4104,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4092,7 +4112,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_in"
+                  "name": "spel_in"
                 }
               },
               {
@@ -4100,7 +4120,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4117,7 +4137,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4125,7 +4145,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_not_in"
+                  "name": "spel_not_in"
                 }
               },
               {
@@ -4133,7 +4153,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4150,7 +4170,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4158,7 +4178,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_bit_shift_left"
+                  "name": "spel_bit_shift_left"
                 }
               },
               {
@@ -4166,7 +4186,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4183,7 +4203,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4191,7 +4211,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_bit_shift_left_2"
+                  "name": "spel_bit_shift_left_2"
                 }
               },
               {
@@ -4199,7 +4219,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4216,7 +4236,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4224,7 +4244,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_bit_shift_right"
+                  "name": "spel_bit_shift_right"
                 }
               },
               {
@@ -4232,7 +4252,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4249,7 +4269,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4257,7 +4277,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_bit_shift_right_2"
+                  "name": "spel_bit_shift_right_2"
                 }
               },
               {
@@ -4265,7 +4285,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4282,7 +4302,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4290,7 +4310,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_logical_shift_right"
+                  "name": "spel_logical_shift_right"
                 }
               },
               {
@@ -4298,7 +4318,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4315,7 +4335,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4323,7 +4343,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_logical_shift_right_2"
+                  "name": "spel_logical_shift_right_2"
                 }
               },
               {
@@ -4331,7 +4351,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4348,7 +4368,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4364,7 +4384,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4381,7 +4401,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4397,7 +4417,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4414,7 +4434,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4422,7 +4442,7 @@
                 "name": "operator",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "ognl_instanceof"
+                  "name": "spel_instanceof"
                 }
               },
               {
@@ -4430,7 +4450,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4447,7 +4467,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4463,7 +4483,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4480,7 +4500,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4496,7 +4516,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4513,7 +4533,7 @@
                 "name": "left",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               },
               {
@@ -4529,7 +4549,7 @@
                 "name": "right",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "_ognl_std_expression"
+                  "name": "_spel_std_expression"
                 }
               }
             ]
@@ -4537,7 +4557,7 @@
         }
       ]
     },
-    "ognl_variable": {
+    "spel_variable": {
       "type": "SEQ",
       "members": [
         {
@@ -4553,7 +4573,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_post_accessor"
+              "name": "_spel_post_accessor"
             },
             {
               "type": "BLANK"
@@ -4562,20 +4582,24 @@
         }
       ]
     },
-    "_ognl_post_accessor": {
+    "_spel_post_accessor": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "ognl_property_access"
+          "name": "spel_property_access"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_method_access"
+          "name": "spel_method_access"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "spel_projection"
         }
       ]
     },
-    "ognl_java_class": {
+    "spel_java_class": {
       "type": "SEQ",
       "members": [
         {
@@ -4607,7 +4631,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_post_java_class"
+              "name": "_spel_post_java_class"
             },
             {
               "type": "BLANK"
@@ -4616,20 +4640,20 @@
         }
       ]
     },
-    "_ognl_post_java_class": {
+    "_spel_post_java_class": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "ognl_java_method"
+          "name": "spel_java_method"
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_java_field"
+          "name": "spel_java_field"
         }
       ]
     },
-    "ognl_java_method": {
+    "spel_java_method": {
       "type": "SEQ",
       "members": [
         {
@@ -4645,13 +4669,13 @@
             },
             {
               "type": "SYMBOL",
-              "name": "ognl_method_args"
+              "name": "spel_method_args"
             }
           ]
         }
       ]
     },
-    "ognl_java_field": {
+    "spel_java_field": {
       "type": "SEQ",
       "members": [
         {
@@ -4673,7 +4697,7 @@
       "type": "PATTERN",
       "value": "[0-9]+"
     },
-    "ognl_object_literal": {
+    "spel_object_literal": {
       "type": "SEQ",
       "members": [
         {
@@ -4692,7 +4716,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_post_accessor"
+              "name": "_spel_post_accessor"
             },
             {
               "type": "BLANK"
@@ -4701,7 +4725,29 @@
         }
       ]
     },
-    "ognl_property_access": {
+    "spel_projection": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": ".{"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "spel_object_literal"
+            },
+            {
+              "type": "STRING",
+              "value": "}"
+            }
+          ]
+        }
+      ]
+    },
+    "spel_property_access": {
       "type": "CHOICE",
       "members": [
         {
@@ -4716,7 +4762,7 @@
               "name": "name",
               "content": {
                 "type": "SYMBOL",
-                "name": "ognl_object_literal"
+                "name": "spel_object_literal"
               }
             }
           ]
@@ -4733,7 +4779,7 @@
               "name": "name",
               "content": {
                 "type": "SYMBOL",
-                "name": "_ognl_std_expression"
+                "name": "_spel_std_expression"
               }
             },
             {
@@ -4745,7 +4791,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_ognl_post_accessor"
+                  "name": "_spel_post_accessor"
                 },
                 {
                   "type": "BLANK"
@@ -4756,7 +4802,7 @@
         }
       ]
     },
-    "ognl_method_access": {
+    "spel_method_access": {
       "type": "SEQ",
       "members": [
         {
@@ -4765,11 +4811,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "ognl_method_literal"
+          "name": "spel_method_literal"
         }
       ]
     },
-    "ognl_method_literal": {
+    "spel_method_literal": {
       "type": "SEQ",
       "members": [
         {
@@ -4777,7 +4823,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "ognl_method_name"
+            "name": "spel_method_name"
           }
         },
         {
@@ -4785,7 +4831,7 @@
           "name": "args",
           "content": {
             "type": "SYMBOL",
-            "name": "ognl_method_args"
+            "name": "spel_method_args"
           }
         },
         {
@@ -4793,7 +4839,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_ognl_post_accessor"
+              "name": "_spel_post_accessor"
             },
             {
               "type": "BLANK"
@@ -4802,7 +4848,7 @@
         }
       ]
     },
-    "ognl_method_name": {
+    "spel_method_name": {
       "type": "SEQ",
       "members": [
         {
@@ -4818,7 +4864,7 @@
         }
       ]
     },
-    "ognl_method_args": {
+    "spel_method_args": {
       "type": "SEQ",
       "members": [
         {
@@ -4833,7 +4879,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_ognl_literal"
+                  "name": "_spel_literal"
                 },
                 {
                   "type": "REPEAT",
@@ -4846,7 +4892,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "_ognl_literal"
+                        "name": "_spel_literal"
                       }
                     ]
                   }
@@ -4866,10 +4912,6 @@
     }
   },
   "extras": [
-    {
-      "type": "SYMBOL",
-      "name": "comment"
-    },
     {
       "type": "PATTERN",
       "value": "\\s+"

@@ -36,7 +36,6 @@ module.exports = grammar({
     name: 'thymeleaf',
 
     extras: $ => [
-        $.comment,
         /\s+/,
         /\n/,
         /\r/,
@@ -76,6 +75,7 @@ module.exports = grammar({
             $.script_element,
             $.style_element,
             $.erroneous_end_tag,
+            $.comment,
         ),
 
         element: $ => choice(
@@ -151,7 +151,7 @@ module.exports = grammar({
             token(prec(PREC.TH_STD_EXPRESSION, 'th:')) ,
             choice(
                 seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
-                seq(field("attribute_name",$._th_ognl_only), '=', '"', field("attribute_value", $.ognl_th_std_expression),'"'),
+                seq(field("attribute_name",$._th_spel_only), '=', '"', field("attribute_value", $.spel_th_std_expression),'"'),
                 seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
                 seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
                 seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
@@ -188,7 +188,7 @@ module.exports = grammar({
                 $.iterStat,
             )),
             ':',
-            $.ognl_th_std_expression,
+            $.spel_th_std_expression,
         ),
 
         iterStat : _ =>/[a-zA-Z]+/,
@@ -254,7 +254,7 @@ module.exports = grammar({
             $.th_replace,
         ),
 
-        _th_ognl_only: $ => choice(
+        _th_spel_only: $ => choice(
             $.th_object,
             $.th_with,
         ),
@@ -330,16 +330,6 @@ module.exports = grammar({
             ))
         ),
 
-        bigdec_literal: _ => seq(
-            /[0-9]+/,
-            /[bB]/,
-        ),
-
-        bigint_literal: _ => seq(
-            /[0-9]+/,
-            /[hH]/,
-        ),
-
         long_literal: _ => seq(
             /[0-9]+/,
             'l',
@@ -376,7 +366,7 @@ module.exports = grammar({
             "|",
             repeat(choice(
                 $.interpolated_string_literal_basic_content,
-                $.ognl_th_std_expression,
+                $.spel_th_std_expression,
                 $.varselect_th_std_expression,
                 $.message_th_std_expression,
                 $.url_th_std_expression,
@@ -434,7 +424,7 @@ module.exports = grammar({
             $.ternary_th_std_expression,
             $.parenthesized_th_std_expression,
             $._literal,
-            $.ognl_th_std_expression,
+            $.spel_th_std_expression,
             $.varselect_th_std_expression,
             $.message_th_std_expression,
             $.url_th_std_expression,
@@ -461,13 +451,13 @@ module.exports = grammar({
 
         varselect_th_std_expression : $ => seq(
             '*{',
-            optional($._ognl_std_expression),
+            optional($._spel_std_expression),
             '}',
         ),
 
-        ognl_th_std_expression : $ => seq(
+        spel_th_std_expression : $ => seq(
             '${',
-            optional($._ognl_std_expression),
+            optional($._spel_std_expression),
             '}',
         ),
 
@@ -608,16 +598,23 @@ module.exports = grammar({
                 ))
             )),
 
-        //OGNL 
-        _ognl_std_expression : $ => choice(
-            //TODO : add rules for ognl
-            $._ognl_primary_expression,
-            $.binary_ognl_expression,
-            $.unary_ognl_expression,
-            $.ognl_assignement_expression,
+        //spel 
+        _spel_std_expression : $ => choice(
+            //TODO : add rules for spel
+            $._spel_primary_expression,
+            $.binary_spel_expression,
+            $.unary_spel_expression,
+            $.spel_parenthesized_expression,
+            $.spel_assignement_expression,
         ),
 
-        unary_ognl_expression : $ => choice(...[
+        spel_parenthesized_expression : $ => seq(
+            '(',
+            $._spel_std_expression,
+            ')',
+        ),
+
+        unary_spel_expression : $ => choice(...[
             ['+', PREC.UNARY],
             ['-', PREC.UNARY],
             ['!', PREC.UNARY],
@@ -626,61 +623,68 @@ module.exports = grammar({
         ].map(([operator, precedence]) =>
             prec.left(precedence, seq(
                 field('operator', operator),
-                field('operand', $._ognl_std_expression)
+                field('operand', $._spel_std_expression)
             ))
         )),
 
-        _ognl_primary_expression : $ => choice(
-            $._ognl_literal,
+        _spel_primary_expression : $ => choice(
+            $._spel_literal,
             $.object_creation_expression,
+            $.inline_list,
         ),
 
-        _ognl_literal : $ => choice(
+        _spel_literal : $ => choice(
             $.double_literal,
             $.float_literal,
             $.integer_literal,
             $.double_literal,
-            $.bigdec_literal,
-            $.bigint_literal,
             $.string_literal,
             $.true_literal,
             $.false_literal,
             $.null_literal,
-            $.ognl_object_literal,
-            $.ognl_method_literal,
-            $.ognl_instanceof,
-            $.ognl_new,
-            $.ognl_java_class,
-            $.ognl_variable,
+            $.spel_object_literal,
+            $.spel_method_literal,
+            $.spel_instanceof,
+            $.spel_new,
+            $.spel_java_class,
+            $.spel_variable,
         ),
 
+        inline_list : $ => seq(
+            '{',
+            commaSep($._spel_std_expression),
+            '}',
+            optional($._spel_post_accessor),
+        ),
+
+
         object_creation_expression : $ => seq(
-            $.ognl_new,
+            $.spel_new,
             /[a-zA-Z_]+/,
             '(',
             ')'
-            //TODO continuer sur OGNL quand j'en aurai moins marre de ce langage de merde
+            //TODO continuer sur spel quand j'en aurai moins marre de ce langage de merde
         ),
 
-        ognl_assignement_expression : $ => seq(
-            field("var", $.ognl_variable), 
+        spel_assignement_expression : $ => seq(
+            field("var", $.spel_variable), 
             '=',
-            field("value", $._ognl_literal) 
+            field("value", $._spel_literal) 
         ),
 
-        ognl_greater_or_equal: _ => 'gte',
-        ognl_lower_or_equal: _ => 'lte',
-        ognl_not_equal : _ => 'neq',
-        ognl_in : _ => 'in',
-        ognl_not_in : _ => 'not in',
-        ognl_new : _ => 'new',
-        ognl_instanceof : _ => 'instanceof',
-        ognl_bit_shift_left: _ => '<<',
-        ognl_bit_shift_left_2: _ => 'shl',
-        ognl_bit_shift_right: _ => '>>',
-        ognl_bit_shift_right_2: _ => 'shr',
-        ognl_logical_shift_right: _ => '>>>',
-        ognl_logical_shift_right_2: _ => 'ushr',
+        spel_greater_or_equal: _ => 'gte',
+        spel_lower_or_equal: _ => 'lte',
+        spel_not_equal : _ => 'neq',
+        spel_in : _ => 'in',
+        spel_not_in : _ => 'not in',
+        spel_new : _ => 'new',
+        spel_instanceof : _ => 'instanceof',
+        spel_bit_shift_left: _ => '<<',
+        spel_bit_shift_left_2: _ => 'shl',
+        spel_bit_shift_right: _ => '>>',
+        spel_bit_shift_right_2: _ => 'shr',
+        spel_logical_shift_right: _ => '>>>',
+        spel_logical_shift_right_2: _ => 'ushr',
         bitwise_not: _ => '~',
         comma : _ => ',',
         bitwise_and: _ => '&',
@@ -691,9 +695,8 @@ module.exports = grammar({
         xor_2 : _ => '^', 
 
 
-        binary_ognl_expression : $ => choice(
+        binary_spel_expression : $ => choice(
             ...[
-                [$.comma, PREC.SEQUENCE],
                 [$.and, PREC.AND],
                 [$.and_2, PREC.AND],
                 [$.or, PREC.OR],
@@ -714,67 +717,68 @@ module.exports = grammar({
                 [$.lesser_or_equal, PREC.REL],
                 [$.greater_than_2, PREC.REL],
                 [$.lesser_than_2, PREC.REL],
-                [$.ognl_greater_or_equal, PREC.REL],
-                [$.ognl_lower_or_equal, PREC.REL],
-                [$.ognl_in, PREC.REL],
-                [$.ognl_not_in, PREC.REL],
-                [$.ognl_bit_shift_left, PREC.SHIFT],
-                [$.ognl_bit_shift_left_2, PREC.SHIFT],
-                [$.ognl_bit_shift_right, PREC.SHIFT],
-                [$.ognl_bit_shift_right_2, PREC.SHIFT],
-                [$.ognl_logical_shift_right, PREC.SHIFT],
-                [$.ognl_logical_shift_right_2, PREC.SHIFT],
+                [$.spel_greater_or_equal, PREC.REL],
+                [$.spel_lower_or_equal, PREC.REL],
+                [$.spel_in, PREC.REL],
+                [$.spel_not_in, PREC.REL],
+                [$.spel_bit_shift_left, PREC.SHIFT],
+                [$.spel_bit_shift_left_2, PREC.SHIFT],
+                [$.spel_bit_shift_right, PREC.SHIFT],
+                [$.spel_bit_shift_right_2, PREC.SHIFT],
+                [$.spel_logical_shift_right, PREC.SHIFT],
+                [$.spel_logical_shift_right_2, PREC.SHIFT],
                 [$.add, PREC.ADD],
                 [$.substract, PREC.ADD],
-                [$.ognl_instanceof, PREC.INSTANCE_OF],
+                [$.spel_instanceof, PREC.INSTANCE_OF],
                 [$.multiply, PREC.MULT],
                 [$.divide, PREC.MULT],
                 [$.modulo, PREC.MULT],
             ].map(([operator, precedence]) =>
                 prec.left(precedence, seq(
-                    field('left', $._ognl_std_expression),
+                    field('left', $._spel_std_expression),
                     field('operator', operator),
-                    field('right', $._ognl_std_expression)
+                    field('right', $._spel_std_expression)
                 ))
             )),
 
 
-        ognl_variable : $ => seq(
+        spel_variable : $ => seq(
             '#',
             /[a-zA-Z_]+/,
-            optional($._ognl_post_accessor),
+            optional($._spel_post_accessor),
         ),
 
 
-        _ognl_post_accessor : $ => choice(
-            $.ognl_property_access,
-            $.ognl_method_access,
+        _spel_post_accessor : $ => choice(
+            $.spel_property_access,
+            $.spel_method_access,
+            $.spel_projection,
         ),
 
-        ognl_java_class : $ => seq(
+        spel_java_class : $ => seq(
             '@',
             repeat(seq(
                 /[a-zA-Z_]+/,
                 '.'
             )),
             /[a-zA-Z_]+/,
-            optional($._ognl_post_java_class)
+            optional($._spel_post_java_class)
         ),
 
-        _ognl_post_java_class : $ => choice(
-            $.ognl_java_method,
-            $.ognl_java_field,
+        _spel_post_java_class : $ => choice(
+            $.spel_java_method,
+            $.spel_java_field,
         ),
 
-        ognl_java_method : $ => seq(
+        spel_java_method : $ => seq(
             seq(
                 '@',
                 /[a-zA-Z_]+/,
-                $.ognl_method_args,
+                $.spel_method_args,
             ),
         ),
 
-        ognl_java_field : $ => seq(
+        spel_java_field : $ => seq(
             seq(
                 '@',
                 /[a-zA-Z_]+/,
@@ -783,44 +787,51 @@ module.exports = grammar({
 
         index : _ => /[0-9]+/,
 
-        ognl_object_literal : $ => seq(
+        spel_object_literal : $ => seq(
             /[A-Za-z_]+/,
             repeat(/[0-9A-Za-z_]/),
-            optional($._ognl_post_accessor),
+            optional($._spel_post_accessor),
         ),
 
-        ognl_property_access : $ => choice(
+        spel_projection : $ => choice(
+            seq(
+                '.{',
+                $.spel_object_literal,
+                '}',
+            ),
+        ),
+        spel_property_access : $ => choice(
             seq(
                 '.',
-                field('name',$.ognl_object_literal),
+                field('name',$.spel_object_literal),
             ),
             seq(
                 '[',
-                field('name',$._ognl_std_expression),
+                field('name',$._spel_std_expression),
                 ']',
-                optional($._ognl_post_accessor)
+                optional($._spel_post_accessor)
             )
         ),
 
-        ognl_method_access : $ => seq(
+        spel_method_access : $ => seq(
             '.',
-            $.ognl_method_literal,
+            $.spel_method_literal,
         ),
 
-        ognl_method_literal : $ => seq(
-            field('name', $.ognl_method_name),
-            field('args', $.ognl_method_args),
-            optional($._ognl_post_accessor),
+        spel_method_literal : $ => seq(
+            field('name', $.spel_method_name),
+            field('args', $.spel_method_args),
+            optional($._spel_post_accessor),
         ),
 
-        ognl_method_name : $ => seq(
+        spel_method_name : $ => seq(
             /[A-Za-z_]+/,
             repeat(/[0-9A-Za-z_]/),
         ),
 
-        ognl_method_args : $ => seq(
+        spel_method_args : $ => seq(
             '(',
-            commaSep($._ognl_literal),
+            commaSep($._spel_literal),
             ')',
         ), 
     }
