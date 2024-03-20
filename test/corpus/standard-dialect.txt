@@ -218,3 +218,74 @@ TH URL expression
     (end_tag
       (tag_name))))
 
+================================================================================
+TH SPEL Expression 
+================================================================================
+
+<a th:href="${}"></a>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_generic)
+        attribute_value: (th_attribute_value
+          (spel_th_std_expression))))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+TH Varselect Expression 
+================================================================================
+
+<a th:href="*{}"></a>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_generic)
+        attribute_value: (th_attribute_value
+          (varselect_th_std_expression))))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+TH Message Expression 
+================================================================================
+
+<a th:href="#{}"></a>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_generic)
+        attribute_value: (th_attribute_value
+          (message_th_std_expression))))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+TH Fragment Expression 
+================================================================================
+
+<a th:href="~{}"></a>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_generic)
+        attribute_value: (th_attribute_value
+          (fragment_th_std_expression))))
+    (end_tag
+      (tag_name))))

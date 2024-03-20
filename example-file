@@ -1,2 +1,1 @@
-<a th:href="@{}" ></a>
-<a th:href="@{} + 'test'"></a>
+<div th:text="${bonjour['test'].boulgour.test(1+2, 'test')}"> </div>

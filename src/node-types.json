@@ -2364,7 +2364,19 @@
       "required": false,
       "types": [
         {
+          "type": "array_creation",
+          "named": true
+        },
+        {
+          "type": "binary_spel_expression",
+          "named": true
+        },
+        {
           "type": "double_literal",
+          "named": true
+        },
+        {
+          "type": "elvis_expression",
           "named": true
         },
         {
@@ -2376,6 +2388,18 @@
           "named": true
         },
         {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inline_list",
+          "named": true
+        },
+        {
+          "type": "inline_map",
+          "named": true
+        },
+        {
           "type": "integer_literal",
           "named": true
         },
@@ -2384,11 +2408,47 @@
           "named": true
         },
         {
+          "type": "object_creation_expression",
+          "named": true
+        },
+        {
+          "type": "spel_assignement_expression",
+          "named": true
+        },
+        {
+          "type": "spel_bean_reference",
+          "named": true
+        },
+        {
+          "type": "spel_method_expression",
+          "named": true
+        },
+        {
+          "type": "spel_object_expression",
+          "named": true
+        },
+        {
+          "type": "spel_parenthesized_expression",
+          "named": true
+        },
+        {
           "type": "spel_string_literal",
           "named": true
         },
         {
+          "type": "spel_variable",
+          "named": true
+        },
+        {
+          "type": "ternary_spel_expression",
+          "named": true
+        },
+        {
           "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_spel_expression",
           "named": true
         }
       ]
@@ -2622,7 +2682,7 @@
     "named": true,
     "fields": {
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -2694,6 +2754,10 @@
             "named": true
           },
           {
+            "type": "spel_property_name",
+            "named": true
+          },
+          {
             "type": "spel_string_literal",
             "named": true
           },
@@ -2738,6 +2802,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "spel_property_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "spel_string_literal",
@@ -4723,10 +4792,6 @@
   },
   {
     "type": "}",
-    "named": false
-  },
-  {
-    "type": "~",
     "named": false
   },
   {

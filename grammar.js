@@ -330,27 +330,6 @@ module.exports = grammar({
                 /[0-9]+/,
             ))
         ),
-
-        long_literal: _ => seq(
-            /[0-9]+/,
-            'l',
-        ),
-
-        integer_literal: _ => seq(
-            /[0-9]+/,
-        ),
-
-        float_literal: _ => seq(
-            /[0-9]+/,
-            '.',
-            /[0-9]+/,
-            'f',
-        ),
-        double_literal: _ => seq(
-            /[0-9]+/,
-            '.',
-            /[0-9]+/,
-        ),
         
         token_literal: _ => repeat1(
             seq(
@@ -372,7 +351,7 @@ module.exports = grammar({
                 $.message_th_std_expression,
                 $.url_th_std_expression,
                 '#',
-                '~',
+                '@',
                 '$',
                 '*',
             )),
@@ -707,17 +686,31 @@ module.exports = grammar({
             $.double_literal,
             $.float_literal,
             $.integer_literal,
-            $.double_literal,
             $.spel_string_literal,
             $.true_literal,
             $.false_literal,
             $.null_literal,
         ),
 
-        spel_bean_reference : $ => seq(
-            '@',
-            $._spel_name,
-            optional($._spel_post_accessor)
+        long_literal: _ => seq(
+            /[0-9]+/,
+            'l',
+        ),
+
+        integer_literal: _ => seq(
+            /[0-9]+/,
+        ),
+
+        float_literal: _ => seq(
+            /[0-9]+/,
+            '.',
+            /[0-9]+/,
+            'f',
+        ),
+        double_literal: _ => seq(
+            /[0-9]+/,
+            '.',
+            /[0-9]+/,
         ),
 
         spel_string_literal : $ => seq(
@@ -729,6 +722,13 @@ module.exports = grammar({
             "'",
             optional($._spel_post_accessor),
         ),
+
+        spel_bean_reference : $ => seq(
+            '@',
+            $._spel_name,
+            optional($._spel_post_accessor)
+        ),
+
 
         inline_list : $ => seq(
             '{',
@@ -748,7 +748,7 @@ module.exports = grammar({
             '}',
             optional($._spel_post_accessor),
             ),
-            seq('{:}', $._spel_post_accessor)
+            seq('{:}', optional($._spel_post_accessor))
         ),
 
         spel_class : $ => $._type_adress,
@@ -884,13 +884,12 @@ module.exports = grammar({
 
         null_operator : _ => '.?',
 
+        spel_property_name : $ => $._spel_name,
+
         spel_property_access : $ => choice(
             seq(
                 choice($.null_operator, '.'),
-                field('name',seq(
-                    /[A-Za-z_]+/,
-                    repeat(/[0-9A-Za-z_]/),
-                )),
+                field('name',$.spel_property_name),
                 optional($._spel_post_accessor),
             ),
             seq(
@@ -919,7 +918,7 @@ module.exports = grammar({
 
         spel_method_args : $ => seq(
             '(',
-            commaSep($._spel_literal),
+            commaSep($._spel_std_expression),
             ')',
         ), 
     }
