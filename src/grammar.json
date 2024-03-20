@@ -1335,7 +1335,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "interpolated_string_literal_basic_content"
+                "name": "_interpolated_string_literal_basic_content"
               },
               {
                 "type": "SYMBOL",
@@ -1418,7 +1418,7 @@
         }
       }
     },
-    "interpolated_string_literal_basic_content": {
+    "_interpolated_string_literal_basic_content": {
       "type": "IMMEDIATE_TOKEN",
       "content": {
         "type": "PREC",
@@ -2964,7 +2964,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "java_ref"
         },
         {
           "type": "SYMBOL",
@@ -3147,6 +3147,31 @@
         }
       ]
     },
+    "array_creation_suffix": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "integer_literal"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
     "array_creation": {
       "type": "SEQ",
       "members": [
@@ -3161,29 +3186,8 @@
         {
           "type": "REPEAT1",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "["
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "integer_literal"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "STRING",
-                "value": "]"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "array_creation_suffix"
           }
         },
         {
@@ -3276,8 +3280,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "+"
+                  "type": "SYMBOL",
+                  "name": "plus"
                 }
               },
               {
@@ -3301,8 +3305,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "-"
+                  "type": "SYMBOL",
+                  "name": "minus"
                 }
               },
               {
@@ -3326,8 +3330,8 @@
                 "type": "FIELD",
                 "name": "operator",
                 "content": {
-                  "type": "STRING",
-                  "value": "!"
+                  "type": "SYMBOL",
+                  "name": "not"
                 }
               },
               {
@@ -3368,7 +3372,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "spel_variable"
+          "name": "spel_varref"
         },
         {
           "type": "SYMBOL",
@@ -3789,7 +3793,7 @@
             "name": "left",
             "content": {
               "type": "SYMBOL",
-              "name": "spel_variable"
+              "name": "spel_varref"
             }
           },
           {
@@ -4628,7 +4632,7 @@
         }
       ]
     },
-    "identifier": {
+    "java_ref": {
       "type": "SEQ",
       "members": [
         {
@@ -4691,7 +4695,11 @@
         }
       ]
     },
-    "spel_variable": {
+    "spel_varname": {
+      "type": "SYMBOL",
+      "name": "_spel_name"
+    },
+    "spel_varref": {
       "type": "SEQ",
       "members": [
         {
@@ -4699,8 +4707,12 @@
           "value": "#"
         },
         {
-          "type": "SYMBOL",
-          "name": "_spel_name"
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "spel_varname"
+          }
         },
         {
           "type": "CHOICE",
@@ -4913,6 +4925,10 @@
         }
       ]
     },
+    "spel_method_name": {
+      "type": "SYMBOL",
+      "name": "_spel_name"
+    },
     "spel_method_expression": {
       "type": "SEQ",
       "members": [
@@ -4921,7 +4937,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "_spel_name"
+            "name": "spel_method_name"
           }
         },
         {

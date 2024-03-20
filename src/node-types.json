@@ -37,10 +37,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -50,6 +46,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -85,7 +85,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -136,10 +136,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -149,6 +145,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -184,7 +184,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -215,6 +215,10 @@
           "named": true
         },
         {
+          "type": "array_creation_suffix",
+          "named": true
+        },
+        {
           "type": "boolean_type",
           "named": true
         },
@@ -223,11 +227,22 @@
           "named": true
         },
         {
-          "type": "integer_literal",
-          "named": true
-        },
-        {
           "type": "integral_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_creation_suffix",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "integer_literal",
           "named": true
         }
       ]
@@ -294,10 +309,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -307,6 +318,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -342,7 +357,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -486,10 +501,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -499,6 +510,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -538,7 +553,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -952,10 +967,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -965,6 +976,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -1000,7 +1015,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -1066,7 +1081,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -1281,33 +1296,6 @@
     "fields": {}
   },
   {
-    "type": "identifier",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "spel_method_access",
-          "named": true
-        },
-        {
-          "type": "spel_projection",
-          "named": true
-        },
-        {
-          "type": "spel_property_access",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "inline_list",
     "named": true,
     "fields": {},
@@ -1340,10 +1328,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -1353,6 +1337,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -1400,7 +1388,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -1451,10 +1439,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -1464,6 +1448,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -1499,7 +1487,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -1545,10 +1533,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -1558,6 +1542,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -1593,7 +1581,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -1659,10 +1647,6 @@
       "required": false,
       "types": [
         {
-          "type": "interpolated_string_literal_basic_content",
-          "named": true
-        },
-        {
           "type": "message_th_std_expression",
           "named": true
         },
@@ -1685,6 +1669,33 @@
     "type": "iterStat",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "java_ref",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "spel_method_access",
+          "named": true
+        },
+        {
+          "type": "spel_projection",
+          "named": true
+        },
+        {
+          "type": "spel_property_access",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "lesser_than",
@@ -1976,10 +1987,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -1989,6 +1996,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -2024,7 +2035,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -2070,10 +2081,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -2083,6 +2090,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -2118,7 +2129,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -2197,7 +2208,7 @@
         "required": true,
         "types": [
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           }
         ]
@@ -2241,10 +2252,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -2254,6 +2261,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -2289,7 +2300,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -2388,10 +2399,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -2401,6 +2408,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -2436,7 +2447,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -2467,6 +2478,16 @@
             "named": true
           }
         ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spel_method_name",
+            "named": true
+          }
+        ]
       }
     },
     "children": {
@@ -2487,6 +2508,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "spel_method_name",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "spel_object_expression",
@@ -2544,10 +2570,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -2557,6 +2579,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -2592,7 +2618,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -2667,7 +2693,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -2710,10 +2736,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -2723,6 +2745,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -2762,7 +2788,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -2864,10 +2890,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -2877,6 +2899,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -2912,7 +2938,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -2931,9 +2957,25 @@
     }
   },
   {
-    "type": "spel_variable",
+    "type": "spel_varname",
     "named": true,
-    "fields": {},
+    "fields": {}
+  },
+  {
+    "type": "spel_varref",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "spel_varname",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": false,
@@ -3046,10 +3088,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -3059,6 +3097,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -3094,7 +3136,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -3140,10 +3182,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -3153,6 +3191,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -3188,7 +3230,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -3234,10 +3276,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -3247,6 +3285,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -3282,7 +3324,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -3974,10 +4016,6 @@
             "named": true
           },
           {
-            "type": "identifier",
-            "named": true
-          },
-          {
             "type": "inline_list",
             "named": true
           },
@@ -3987,6 +4025,10 @@
           },
           {
             "type": "integer_literal",
+            "named": true
+          },
+          {
+            "type": "java_ref",
             "named": true
           },
           {
@@ -4022,7 +4064,7 @@
             "named": true
           },
           {
-            "type": "spel_variable",
+            "type": "spel_varref",
             "named": true
           },
           {
@@ -4044,16 +4086,16 @@
         "required": true,
         "types": [
           {
-            "type": "!",
-            "named": false
+            "type": "minus",
+            "named": true
           },
           {
-            "type": "+",
-            "named": false
+            "type": "not",
+            "named": true
           },
           {
-            "type": "-",
-            "named": false
+            "type": "plus",
+            "named": true
           }
         ]
       }
@@ -4300,10 +4342,6 @@
           "named": true
         },
         {
-          "type": "identifier",
-          "named": true
-        },
-        {
           "type": "inline_list",
           "named": true
         },
@@ -4313,6 +4351,10 @@
         },
         {
           "type": "integer_literal",
+          "named": true
+        },
+        {
+          "type": "java_ref",
           "named": true
         },
         {
@@ -4348,7 +4390,7 @@
           "named": true
         },
         {
-          "type": "spel_variable",
+          "type": "spel_varref",
           "named": true
         },
         {
@@ -4589,10 +4631,6 @@
   {
     "type": "int",
     "named": false
-  },
-  {
-    "type": "interpolated_string_literal_basic_content",
-    "named": true
   },
   {
     "type": "l",

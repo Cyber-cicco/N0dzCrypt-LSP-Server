@@ -345,7 +345,7 @@ module.exports = grammar({
         interpolated_string_literal: $ => seq(
             "|",
             repeat(choice(
-                $.interpolated_string_literal_basic_content,
+                $._interpolated_string_literal_basic_content,
                 $.spel_th_std_expression,
                 $.varselect_th_std_expression,
                 $.message_th_std_expression,
@@ -369,7 +369,7 @@ module.exports = grammar({
 
         _interpreted_string_literal_basic_content: _ => token.immediate(prec(1, /[^'\\]+/)),
 
-        interpolated_string_literal_basic_content: _ => token.immediate(prec(1, /[^@|#~$*]+/)),
+        _interpolated_string_literal_basic_content: _ => token.immediate(prec(1, /[^@|#~$*]+/)),
 
         _escape_sequence: _ => token.immediate(seq(
             '\\',
@@ -584,10 +584,9 @@ module.exports = grammar({
 
         //spel 
         _spel_std_expression : $ => choice(
-            //TODO : add rules for spel
             $._spel_primary_expression,
             $.binary_spel_expression,
-            $.identifier,
+            $.java_ref,
             $.unary_spel_expression,
             $.ternary_spel_expression,
             $.elvis_expression,
@@ -638,14 +637,16 @@ module.exports = grammar({
             $.object_creation_expression
         ),
 
+        array_creation_suffix : $ =>seq(
+            '[',
+            optional($.integer_literal),
+            ']',
+        ),
+
         array_creation : $ => seq(
             'new',
             $._type,
-            repeat1(seq(
-                '[',
-                optional($.integer_literal),
-                ']',
-            )),
+            repeat1($.array_creation_suffix),
             optional($.array_content),
         ),
 
@@ -662,9 +663,9 @@ module.exports = grammar({
         ),
 
         unary_spel_expression : $ => choice(...[
-            ['+', PREC.UNARY],
-            ['-', PREC.UNARY],
-            ['!', PREC.UNARY],
+            [$.plus, PREC.UNARY],
+            [$.minus, PREC.UNARY],
+            [$.not, PREC.UNARY],
         ].map(([operator, precedence]) =>
             prec.left(precedence, seq(
                 field('operator', operator),
@@ -678,7 +679,7 @@ module.exports = grammar({
             $.inline_map,
             $.spel_object_expression,
             $.spel_method_expression,
-            $.spel_variable,
+            $.spel_varref,
             $.spel_bean_reference,
         ),
 
@@ -766,7 +767,7 @@ module.exports = grammar({
         ),
 
         spel_assignement_expression: $ => prec.right(PREC.ASSIGN, seq(
-            field('left', $.spel_variable),
+            field('left', $.spel_varref),
             field('operator', '='),
             field('right', $._spel_std_expression)
         )),
@@ -833,7 +834,7 @@ module.exports = grammar({
             '}',
         ),
 
-        identifier : $ => seq(
+        java_ref : $ => seq(
             $.type,
             optional($._spel_post_accessor)
         ),
@@ -852,10 +853,12 @@ module.exports = grammar({
             $._spel_name
         ),
 
+        spel_varname : $ => $._spel_name,
 
-        spel_variable : $ => seq(
+
+        spel_varref: $ => seq(
             '#',
-            $._spel_name,
+            field("name", $.spel_varname),
             optional($.spel_method_args),
             optional($._spel_post_accessor),
         ),
@@ -905,8 +908,10 @@ module.exports = grammar({
             $.spel_method_expression,
         ),
 
+        spel_method_name : $ => $._spel_name,
+
         spel_method_expression : $ => seq(
-            field('name', $._spel_name),
+            field('name', $.spel_method_name),
             field('args', $.spel_method_args),
             optional($._spel_post_accessor),
         ),

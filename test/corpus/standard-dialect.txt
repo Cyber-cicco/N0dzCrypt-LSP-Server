@@ -32,8 +32,7 @@ TH Literals
       (th_attribute
         attribute_name: (th_generic)
         attribute_value: (th_attribute_value
-          (interpolated_string_literal
-            (interpolated_string_literal_basic_content))))
+          (interpolated_string_literal)))
       (th_attribute
         attribute_name: (th_generic)
         attribute_value: (th_attribute_value
@@ -64,10 +63,8 @@ TH Interpolated Strings
         attribute_name: (th_generic)
         attribute_value: (th_attribute_value
           (interpolated_string_literal
-            (interpolated_string_literal_basic_content)
             (spel_th_std_expression
-              (spel_string_literal))
-            (interpolated_string_literal_basic_content)))))
+              (spel_string_literal))))))
     (end_tag
       (tag_name))))
 
