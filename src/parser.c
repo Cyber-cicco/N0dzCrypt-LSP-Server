@@ -1829,20 +1829,20 @@ static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [7] = {.index = 9, .length = 2},
   [8] = {.index = 11, .length = 3},
   [9] = {.index = 14, .length = 2},
-  [10] = {.index = 16, .length = 1},
-  [11] = {.index = 17, .length = 3},
-  [12] = {.index = 20, .length = 2},
-  [13] = {.index = 22, .length = 2},
-  [14] = {.index = 24, .length = 4},
-  [15] = {.index = 28, .length = 3},
-  [16] = {.index = 31, .length = 2},
-  [17] = {.index = 33, .length = 2},
-  [18] = {.index = 35, .length = 5},
-  [19] = {.index = 40, .length = 2},
-  [20] = {.index = 42, .length = 4},
-  [21] = {.index = 46, .length = 4},
-  [22] = {.index = 50, .length = 1},
-  [23] = {.index = 51, .length = 2},
+  [10] = {.index = 16, .length = 2},
+  [11] = {.index = 18, .length = 3},
+  [12] = {.index = 21, .length = 2},
+  [13] = {.index = 23, .length = 4},
+  [14] = {.index = 27, .length = 4},
+  [15] = {.index = 31, .length = 3},
+  [16] = {.index = 34, .length = 4},
+  [17] = {.index = 38, .length = 2},
+  [18] = {.index = 40, .length = 5},
+  [19] = {.index = 45, .length = 2},
+  [20] = {.index = 47, .length = 4},
+  [21] = {.index = 51, .length = 4},
+  [22] = {.index = 55, .length = 2},
+  [23] = {.index = 57, .length = 2},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -1872,54 +1872,60 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
     {field_condition, 0},
     {field_consequence, 2},
   [16] =
+    {field_name, 0},
     {field_value, 2},
-  [17] =
+  [18] =
     {field_args, 1},
     {field_args, 2},
     {field_message, 0},
-  [20] =
+  [21] =
     {field_alternative, 2},
     {field_condition, 0},
-  [22] =
+  [23] =
+    {field_name, 0},
+    {field_name, 3, .inherited = true},
     {field_value, 2},
     {field_value, 3, .inherited = true},
-  [24] =
+  [27] =
     {field_args, 1},
     {field_args, 2},
     {field_args, 3},
     {field_message, 0},
-  [28] =
+  [31] =
     {field_alternative, 4},
     {field_condition, 0},
     {field_consequence, 2},
-  [31] =
+  [34] =
+    {field_name, 0, .inherited = true},
+    {field_name, 1, .inherited = true},
     {field_value, 0, .inherited = true},
     {field_value, 1, .inherited = true},
-  [33] =
+  [38] =
     {field_param, 0},
     {field_value, 2},
-  [35] =
+  [40] =
     {field_args, 1},
     {field_args, 2},
     {field_args, 3},
     {field_args, 4},
     {field_message, 0},
-  [40] =
+  [45] =
     {field_key, 1},
     {field_value, 3},
-  [42] =
+  [47] =
     {field_key, 1},
     {field_key, 4, .inherited = true},
     {field_value, 3},
     {field_value, 4, .inherited = true},
-  [46] =
+  [51] =
     {field_key, 0, .inherited = true},
     {field_key, 1, .inherited = true},
     {field_value, 0, .inherited = true},
     {field_value, 1, .inherited = true},
-  [50] =
+  [55] =
+    {field_name, 1},
     {field_value, 3},
-  [51] =
+  [57] =
     {field_begin, 1},
     {field_end, 3},
 };

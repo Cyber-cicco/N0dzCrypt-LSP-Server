@@ -235,7 +235,7 @@ module.exports = grammar({
 
         th_assignation_sequence: $ => seq(
             commaSep1(seq(
-                $.attribute_name,
+                field('name' , $.attribute_name),
                 '=',
                 field("value", $._th_std_expression) 
             )),
