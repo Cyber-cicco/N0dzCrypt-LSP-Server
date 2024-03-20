@@ -1,7 +1,2 @@
-    <div
-        class="bg-white text-primary"
-        th:text="(3 > 4) ? -2.2 * ${'Hello world !'} + null : ((-3) + 3)"
-        th:truc="| ceci n'est pas une 
-        ${pipe(test['0'][0]['jean michel jarre'], non()) > 'caca'} jean, c'est un lien : @{ouiiiiiiiiii}|"
-        >Sommaire</div>
-
+<a th:href="@{}" ></a>
+<a th:href="@{} + 'test'"></a>

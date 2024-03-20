@@ -1,0 +1,72 @@
+================================================================================
+TH Generic
+================================================================================
+
+<div 
+    class=""
+    th:test=""
+    th:insert=""
+    th::test=""
+    hx-on::before-request=""
+    ></div>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value))
+      (th_attribute
+        attribute_name: (th_generic))
+      (th_attribute
+        attribute_name: (th_insert))
+      (th_attribute
+        attribute_name: (th_generic))
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value)))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+TH Attribute Types
+================================================================================
+
+<div 
+    class=""
+    th:each=""
+    th:insert=""
+    th:replace=""
+    th:text=""
+    th:attrappend=""
+    th:inline=""
+    th:object=""
+    ></div>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (attribute
+        (attribute_name)
+        (quoted_attribute_value))
+      (th_attribute
+        attribute_name: (th_each))
+      (th_attribute
+        attribute_name: (th_insert))
+      (th_attribute
+        attribute_name: (th_replace))
+      (th_attribute
+        attribute_name: (th_generic))
+      (th_attribute
+        attribute_name: (th_attrappend))
+      (th_attribute
+        attribute_name: (th_inline))
+      (th_attribute
+        attribute_name: (th_object)))
+    (end_tag
+      (tag_name))))
+

@@ -151,14 +151,14 @@ module.exports = grammar({
         th_attribute: $ => seq(
             token(prec(PREC.TH_STD_EXPRESSION, 'th:')) ,
             choice(
-                seq(field("attribute_name",$._th_generic), '=', '"', field("attribute_value", $.th_attribute_value), '"'),
-                seq(field("attribute_name",$._th_spel_only), '=', '"', field("attribute_value", $.spel_th_std_expression),'"'),
-                seq(field("attribute_name",$._th_assignation_sequence), '=', '"', field("attribute_value", $.th_assignation_sequence),'"'),
-                seq(field("attribute_name",$.th_fragment), '=', '"', field("attribute_value", $.th_fragment_declaration),'"'),
-                seq(field("attribute_name",$.th_inline), '=', '"', field("attribute_value", $._th_inline_value),'"'),
-                seq(field("attribute_name",$.th_remove), '=', '"', field("attribute_value", $._th_remove_value),'"'),
-                seq(field("attribute_name",$.th_each), '=', '"', field("attribute_value", $.th_each_value),'"'),
-                seq(field("attribute_name",$._th_fragments_insert), '=', '"', field("attribute_value", $._fragment_std_expression,),'"'),
+                seq(field("attribute_name",$._th_generic), '=', '"', optional(field("attribute_value", $.th_attribute_value)), '"'),
+                seq(field("attribute_name",$._th_spel_only), '=', '"', optional(field("attribute_value", $.spel_th_std_expression)),'"'),
+                seq(field("attribute_name",$._th_assignation_sequence), '=', '"', optional(field("attribute_value", $.th_assignation_sequence)),'"'),
+                seq(field("attribute_name",$.th_fragment), '=', '"',optional(field("attribute_value", $.th_fragment_declaration)),'"'),
+                seq(field("attribute_name",$.th_inline), '=', '"', optional(field("attribute_value", $._th_inline_value)),'"'),
+                seq(field("attribute_name",$.th_remove), '=', '"', optional(field("attribute_value", $._th_remove_value)),'"'),
+                seq(field("attribute_name",$.th_each), '=', '"', optional(field("attribute_value", $.th_each_value)),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', optional(field("attribute_value", $._fragment_std_expression,)),'"'),
             ),
         ),
 
@@ -550,10 +550,14 @@ module.exports = grammar({
             )),
         )),
 
+        plus : _ => '+',
+        minus : _ => '-',
+        not : _ => choice('!', 'not'),
+
         unary_th_std_expression : $ => choice(...[
-            ['+', PREC.UNARY],
-            ['-', PREC.UNARY],
-            ['!', PREC.UNARY],
+            [$.plus, PREC.UNARY],
+            [$.minus, PREC.UNARY],
+            [$.not, PREC.UNARY],
         ].map(([operator, precedence]) =>
             prec.left(precedence, seq(
                 field('operator', operator),
