@@ -113,8 +113,8 @@ TH Spel Only attribute ERROR
 TH Fragment reference
 ================================================================================
 
-<div th:replace="test :: test(1+1)"></div>
-<div th:insert="test :: test(1+1)"></div>
+<div th:replace="test :: test"></div>
+<div th:insert="test :: test"></div>
 
 --------------------------------------------------------------------------------
 
@@ -124,13 +124,10 @@ TH Fragment reference
       (tag_name)
       (th_attribute
         attribute_name: (th_replace)
-        attribute_value: (token_literal)
-        attribute_value: (fragment_call
+        attribute_value: (fragment_std_expression
           (token_literal)
-          (binary_th_std_expression
-            left: (number_literal)
-            operator: (add)
-            right: (number_literal)))))
+          (fragment_call
+            (token_literal)))))
     (end_tag
       (tag_name)))
   (element
@@ -138,16 +135,12 @@ TH Fragment reference
       (tag_name)
       (th_attribute
         attribute_name: (th_insert)
-        attribute_value: (token_literal)
-        attribute_value: (fragment_call
+        attribute_value: (fragment_std_expression
           (token_literal)
-          (binary_th_std_expression
-            left: (number_literal)
-            operator: (add)
-            right: (number_literal)))))
-    (end_tag 
+          (fragment_call
+            (token_literal)))))
+    (end_tag
       (tag_name))))
-
 
 ================================================================================
 TH Fragment reference ERROR

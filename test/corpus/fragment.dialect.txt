@@ -1,0 +1,59 @@
+================================================================================
+FRAG Base declaration
+================================================================================
+
+<div th:fragment="test"></div>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_fragment)
+        attribute_value: (th_fragment_declaration
+          (fragment_name))))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+FRAG args declaration
+================================================================================
+
+<div th:fragment="test(arg1, arg2)"></div>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_fragment)
+        attribute_value: (th_fragment_declaration
+          (fragment_name)
+          (fragment_args
+            (fragment_arg)
+            (fragment_arg)))))
+    (end_tag
+      (tag_name))))
+
+================================================================================
+FRAG args declaration edge case
+================================================================================
+
+<div th:fragment="test(1${!}c\acçççèèa__--1*, 1${{{{{{}}}}}!}c\acçççèèa__--1*)"></div>
+
+--------------------------------------------------------------------------------
+(document
+  (element
+    (start_tag
+      (tag_name)
+      (th_attribute
+        attribute_name: (th_fragment)
+        attribute_value: (th_fragment_declaration
+          (fragment_name)
+          (fragment_args
+            (fragment_arg)
+            (fragment_arg)))))
+    (end_tag
+      (tag_name))))

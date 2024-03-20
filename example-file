@@ -1,1 +1,1 @@
-<div th:text="#{message.test(2, 'test')}"></div>
+<div th:insert="test :: test(1,2)"></div>

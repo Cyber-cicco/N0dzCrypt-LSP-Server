@@ -158,7 +158,7 @@ module.exports = grammar({
                 seq(field("attribute_name",$.th_inline), '=', '"', optional(field("attribute_value", $._th_inline_value)),'"'),
                 seq(field("attribute_name",$.th_remove), '=', '"', optional(field("attribute_value", $._th_remove_value)),'"'),
                 seq(field("attribute_name",$.th_each), '=', '"', optional(field("attribute_value", $.th_each_value)),'"'),
-                seq(field("attribute_name",$._th_fragments_insert), '=', '"', optional(field("attribute_value", $._fragment_std_expression,)),'"'),
+                seq(field("attribute_name",$._th_fragments_insert), '=', '"', optional(field("attribute_value", $.fragment_std_expression,)),'"'),
             ),
         ),
 
@@ -216,16 +216,18 @@ module.exports = grammar({
 
         th_fragment_declaration : $ => seq(
             $.fragment_name,
-            seq(
-                '(',
-                commaSep($.fragment_arg),
-                ')'
-            )
+            optional($.fragment_args),
+        ),
+
+        fragment_args : $ => seq(
+            '(',
+            commaSep($.fragment_arg),
+            ')'
         ),
 
         //WTF THYMELEAF
         //This regex is wrong because you can actually put parenthesis in the name of the fragment
-        fragment_name : _ => /[^\.%\/\(\)]+/ ,
+        fragment_name : _ => /[^\.%\/\(\)"]+/ ,
 
         //exemple of a perfectly valid thymeleaf arg :
         //1${!}c\acçççèèa__--1*
@@ -413,7 +415,7 @@ module.exports = grammar({
 
         fragment_th_std_expression : $ => seq(
             '~{',
-            optional($._fragment_std_expression),
+            optional($.fragment_std_expression),
             '}',
         ),
 
@@ -463,24 +465,24 @@ module.exports = grammar({
                
         ),
 
-        _fragment_std_expression : $ => prec(PREC.FRAGMENT_EXPRESSION, seq(
+        fragment_std_expression : $ => seq(
             choice(
                 $.standard_url,
                 $._th_std_expression
             ),
-            optional(seq(
-                '::',
-                $.fragment_call
-            ))
-        )),
+            optional( $.fragment_call),
+        ),
 
         fragment_call : $ => seq(
+            '::',
             $._th_std_expression,
-            optional(seq(
-                '(',
-                commaSep($._th_std_expression),
-                ')',
-            ))
+            optional($.frag_insert_params)
+        ),
+
+        frag_insert_params : $ => seq(
+            '(',
+            commaSep($._th_std_expression),
+            ')',
         ),
 
         url_parameter_assignement : $ => seq(
