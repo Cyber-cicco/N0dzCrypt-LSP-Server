@@ -1,1 +1,1 @@
-<div th:attrappend="class='bg-' + 'red-500'"></div>
+<div th:text="#{message.test(2, 'test')}"></div>

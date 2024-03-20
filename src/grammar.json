@@ -1736,7 +1736,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "parameterized_url_fragment"
+                    "name": "_parameterized_url_fragment"
                   }
                 ]
               },
@@ -1756,7 +1756,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "parameterized_url_fragment"
+              "name": "_parameterized_url_fragment"
             }
           ]
         },
@@ -1942,7 +1942,7 @@
           "name": "param",
           "content": {
             "type": "SYMBOL",
-            "name": "url_parameter"
+            "name": "_th_std_expression"
           }
         },
         {
@@ -1965,13 +1965,13 @@
     },
     "standard_url_fragment": {
       "type": "PATTERN",
-      "value": "[0-9a-zA-Z_\\-\\.]+"
+      "value": "[^\\{}\\/\\()]+"
     },
     "url_parameter": {
       "type": "PATTERN",
       "value": "[0-9a-zA-Z_]+"
     },
-    "parameterized_url_fragment": {
+    "_parameterized_url_fragment": {
       "type": "SEQ",
       "members": [
         {
@@ -2030,62 +2030,62 @@
           }
         },
         {
-          "type": "FIELD",
-          "name": "args",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "("
-                  },
-                  {
-                    "type": "CHOICE",
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "method_args"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "method_args": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_th_std_expression"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
                     "members": [
                       {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "SYMBOL",
-                            "name": "_th_std_expression"
-                          },
-                          {
-                            "type": "REPEAT",
-                            "content": {
-                              "type": "SEQ",
-                              "members": [
-                                {
-                                  "type": "STRING",
-                                  "value": ","
-                                },
-                                {
-                                  "type": "SYMBOL",
-                                  "name": "_th_std_expression"
-                                }
-                              ]
-                            }
-                          }
-                        ]
+                        "type": "STRING",
+                        "value": ","
                       },
                       {
-                        "type": "BLANK"
+                        "type": "SYMBOL",
+                        "name": "_th_std_expression"
                       }
                     ]
-                  },
-                  {
-                    "type": "STRING",
-                    "value": ")"
                   }
-                ]
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          }
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

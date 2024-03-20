@@ -446,13 +446,13 @@ module.exports = grammar({
             repeat(seq(
                 choice(
                     $.standard_url_fragment,
-                    $.parameterized_url_fragment
+                    $._parameterized_url_fragment
                 ),
                 '/'
             )),  
             choice(
                 $.standard_url_fragment,
-                $.parameterized_url_fragment
+                $._parameterized_url_fragment
             ),
             optional('/'),
             optional(seq(
@@ -484,17 +484,17 @@ module.exports = grammar({
         ),
 
         url_parameter_assignement : $ => seq(
-            field("param", $.url_parameter),
+            field("param", $._th_std_expression),
             '=',
             field("value", $._th_std_expression)
         ),
 
         standard_url : _ => /[0-9a-zA-Z_\-\/\.]+/,
-        standard_url_fragment : _ => /[0-9a-zA-Z_\-\.]+/,
+        standard_url_fragment : _ => /[^\{}\/\()]+/,
 
         url_parameter : _ => /[0-9a-zA-Z_]+/,
 
-        parameterized_url_fragment : $ => seq(
+        _parameterized_url_fragment : $ => seq(
             '{',
             $.url_parameter,
             '}'
@@ -510,14 +510,14 @@ module.exports = grammar({
 
         _message_std_expression : $ => seq(
             field("message", $.message_name),
-            field("args", 
-                optional(seq(
-                    '(',
-                        commaSep($._th_std_expression),
-                    ')',
-                ))
-            )
+            optional($.method_args),
         ),
+
+        method_args : $ => seq(
+            '(',
+            commaSep($._th_std_expression),
+            ')',
+        ), 
 
         ternary_th_std_expression: $ => prec.right(PREC.TERNARY, seq(
             field('condition', $._th_std_expression),

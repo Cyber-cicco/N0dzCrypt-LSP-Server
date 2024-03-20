@@ -1711,88 +1711,6 @@
     "type": "message_th_std_expression",
     "named": true,
     "fields": {
-      "args": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "binary_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "false_literal",
-            "named": true
-          },
-          {
-            "type": "fragment_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "interpolated_string_literal",
-            "named": true
-          },
-          {
-            "type": "message_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "null_literal",
-            "named": true
-          },
-          {
-            "type": "number_literal",
-            "named": true
-          },
-          {
-            "type": "parenthesized_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "spel_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "string_literal",
-            "named": true
-          },
-          {
-            "type": "ternary_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "token_literal",
-            "named": true
-          },
-          {
-            "type": "true_literal",
-            "named": true
-          },
-          {
-            "type": "unary_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "url_th_std_expression",
-            "named": true
-          },
-          {
-            "type": "varselect_th_std_expression",
-            "named": true
-          }
-        ]
-      },
       "message": {
         "multiple": false,
         "required": false,
@@ -1803,6 +1721,91 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "method_args",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "method_args",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "false_literal",
+          "named": true
+        },
+        {
+          "type": "fragment_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "interpolated_string_literal",
+          "named": true
+        },
+        {
+          "type": "message_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "null_literal",
+          "named": true
+        },
+        {
+          "type": "number_literal",
+          "named": true
+        },
+        {
+          "type": "parenthesized_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "spel_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "string_literal",
+          "named": true
+        },
+        {
+          "type": "ternary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "token_literal",
+          "named": true
+        },
+        {
+          "type": "true_literal",
+          "named": true
+        },
+        {
+          "type": "unary_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "url_th_std_expression",
+          "named": true
+        },
+        {
+          "type": "varselect_th_std_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1839,21 +1842,6 @@
         },
         {
           "type": "spel_class",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "parameterized_url_fragment",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "url_parameter",
           "named": true
         }
       ]
@@ -4209,7 +4197,67 @@
         "required": true,
         "types": [
           {
-            "type": "url_parameter",
+            "type": "binary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "false_literal",
+            "named": true
+          },
+          {
+            "type": "fragment_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "interpolated_string_literal",
+            "named": true
+          },
+          {
+            "type": "message_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "null_literal",
+            "named": true
+          },
+          {
+            "type": "number_literal",
+            "named": true
+          },
+          {
+            "type": "parenthesized_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "spel_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "string_literal",
+            "named": true
+          },
+          {
+            "type": "ternary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "token_literal",
+            "named": true
+          },
+          {
+            "type": "true_literal",
+            "named": true
+          },
+          {
+            "type": "unary_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "url_th_std_expression",
+            "named": true
+          },
+          {
+            "type": "varselect_th_std_expression",
             "named": true
           }
         ]
@@ -4295,11 +4343,11 @@
       "required": false,
       "types": [
         {
-          "type": "parameterized_url_fragment",
+          "type": "standard_url_fragment",
           "named": true
         },
         {
-          "type": "standard_url_fragment",
+          "type": "url_parameter",
           "named": true
         },
         {
