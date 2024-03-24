@@ -37,19 +37,17 @@ type InitializeRequest struct {
 }
 
 type InitializeRequestParams struct {
-    /**
-    * The process Id of the parent process that started the server. Is null if
-    * the process has not been started by another process. If the parent
-    * process is not alive then the server should exit (see exit notification)
-    * its process.
-    */
+
+    //The process Id of the parent process that started the server. Is null if
+    //the process has not been started by another process. If the parent
+    //process is not alive then the server should exit (see exit notification)
+    //its process.
     ProcessId *int  `json:"processId"`
 
-    /**
-    * Information about the client
-    *
-    * @since 3.15.0
-    */
+    //Information about the client
+    //
+    //@since 3.15.0
+    //
     ClientInfo *ClientInfo  `json:"clientInfo"`
 
     /**
@@ -72,13 +70,11 @@ type InitializeRequestParams struct {
     */
     RootPath *string
 
-    /**
-    * The rootUri of the workspace. Is null if no
-    * folder is open. If both `rootPath` and `rootUri` are set
-    * `rootUri` wins.
-    *
-    * @deprecated in favour of `workspaceFolders`
-    */
+    //The rootUri of the workspace. Is null if no
+    //folder is open. If both `rootPath` and `rootUri` are set
+    //`rootUri` wins.
+    //
+    //@deprecated in favour of `workspaceFolders`
     RootUri *DocumentUri `json:"rootUri"`
 
     /**
@@ -88,24 +84,19 @@ type InitializeRequestParams struct {
 
     */
 
-    /**
-    * The capabilities provided by the client (editor or tool)
-    */
+    //The capabilities provided by the client (editor or tool)
     Capabilities ClientCapabilities `json:"capabilities"`
 
-    /**
-    * The initial trace setting. If omitted trace is disabled ('off').
-    */
+    //The initial trace setting. If omitted trace is disabled ('off').
     Trace TraceValue `json:"trace"`
 
-    /**
-    * The workspace folders configured in the client when the server starts.
-    * This property is only available if the client supports workspace folders.
-    * It can be `null` if the client supports workspace folders but none are
-    * configured.
-    *
-    * @since 3.6.0
-    */
+    //The workspace folders configured in the client when the server starts.
+    //This property is only available if the client supports workspace folders.
+    //It can be `null` if the client supports workspace folders but none are
+    //configured.
+    //
+    //@since 3.6.0
+    //
     WorkspaceFolders []WorkspaceFolder `json:"workspaceFolders"`
 }
 
