@@ -1,7 +1,11 @@
-# Thymeleaf grammar for tree-sitter (with SPEL integration)
+# Nodzcript LSP
 
-Grammar for the base thymeleaf templating language used in Spring boot.
+Golang LSP that aims to give automcompletion on thymeleaf HTML templates in Nodzcript apps.
 
-There are two possible versions of base thymeleaf : one using OGNL expression, and the other using SPEL expressions. The choice has been made to implement SPEL instead of OGNL, since Spring Boot uses SPEL, and this parser was made to act as the basis of an LSP for a meta-framework that implements Spring Boot and Thymeleaf.
+Should include :
 
-Thymeleaf is extremely flexible, and might be personalised to have a syntax that differs from this tree-sitter implementation. So keep in mind that it will only parse correctly if you haven't messed too much with thymeleaf base configuration.
+    - Automcompletion of java objects based on attributes defined in irrigators.
+    - Automcompletion on backend URLs
+    - Automcompletion on fragment URLs
+    - Automcompletion of thymeleaf attributes on HTML tags after typing "th:"
+
