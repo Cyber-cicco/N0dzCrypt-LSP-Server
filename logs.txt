@@ -1,3 +1,8 @@
-[nodzcript lsp]2024/03/24 17:08:16 main.go:16: LSP server started
-[nodzcript lsp]2024/03/24 17:08:16 main.go:33: Received message with method : initialize
-[nodzcript lsp]2024/03/24 17:08:16 main.go:40: Connected to : Neovim, 0.10.0-dev
+[nodzcript lsp]2024/03/24 18:24:01 main.go:17: LSP server started
+[nodzcript lsp]2024/03/24 18:24:01 main.go:34: Received message with method : initialize
+[nodzcript lsp]2024/03/24 18:24:01 main.go:43: Connected to : Neovim, 0.10.0-dev
+[nodzcript lsp]2024/03/24 18:24:01 main.go:52: Sent the reply
+[nodzcript lsp]2024/03/24 18:24:01 main.go:34: Received message with method : initialized
+[nodzcript lsp]2024/03/24 18:24:01 main.go:34: Received message with method : textDocument/didOpen
+[nodzcript lsp]2024/03/24 18:24:01 main.go:59: Text document URI : file:///home/hijokaidan/PC/nodzcript-lsp/test.html. Text document content : <div class="bonjour">bonjour</div>
+<div id="test"></div>

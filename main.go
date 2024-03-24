@@ -1,4 +1,5 @@
 package main
+
 import (
 	"bufio"
 	"encoding/json"
@@ -32,12 +33,31 @@ func main() {
 func HandleMessage(logger *log.Logger, method string, content []byte) {
     logger.Printf("Received message with method : %s", method)
     switch method {
-    case "initialize" :{
+
+    case "initialize" :
+
         var request lsp.InitializeRequest 
         if err := json.Unmarshal(content, &request); err != nil {
             logger.Printf("Error parsing the request : %s", err)
         }
         logger.Printf("Connected to : %s, %s", request.Params.ClientInfo.Name, request.Params.ClientInfo.Version)
-    }
+        msg := lsp.NewInitializeResponse(request.ID)
+        reply, err := rpc.EncodeMessage(msg)
+        if err != nil {
+            logger.Printf("Error parsing encoding the response : %s", err)
+            break
+        }
+        writer := os.Stdout
+        writer.Write([]byte(reply))
+        logger.Println("Sent the reply")
+
+    case "textDocument/didOpen":
+        var request lsp.DidOpenTextDocumentNotification 
+        if err := json.Unmarshal(content, &request); err != nil {
+            logger.Printf("Error parsing the request : %s", err)
+        }
+        logger.Printf("Text document URI : %s. Text document content : %s",
+            request.Params.TextDocument.URI,
+            request.Params.TextDocument.Text)
     }
 }
