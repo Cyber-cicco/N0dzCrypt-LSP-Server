@@ -77,3 +77,64 @@ func TestGetRouteReferences(t *testing.T) {
         t.Fatalf("Expected %s, got %s", expectedRoute2, route[1])
     }
 }
+
+func TestJavaDocExistsAndUpToDate(t *testing.T) {
+
+    uri1 := "file:///home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
+    textDoc1 := ` 
+<div class="bonjour">bonjour</div>
+<div id="test"></div>
+    `
+    javaFileURI :=  "/home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/java/fr/edpurolo/freelearning/page/AboutController.java"
+
+    graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    check, err := javaDocExistsAndUpToDate(&graph1, javaFileURI)
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    if check {
+        t.Fatalf("Check shouldn't be true")
+
+    }
+
+    sum := [20]byte{169, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
+    graph1.JavaNodes[javaFileURI] = &JavaDocument{
+        ShaSum: sum,
+    }
+    check, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    if !check {
+        t.Fatalf("Check should be true")
+    }
+
+    sum = [20]byte{168, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
+    graph1.JavaNodes[javaFileURI] = &JavaDocument{
+        ShaSum: sum,
+    }
+
+    check, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    if check {
+        t.Fatalf("Check shouldn't be true")
+    }
+
+}
