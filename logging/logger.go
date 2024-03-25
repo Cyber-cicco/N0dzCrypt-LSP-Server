@@ -5,11 +5,17 @@ import (
 	"os"
 )
 
-//TODO : implement a better logger once it is needed
-func GetLogger(filename string) *log.Logger {
-    logfile, err := os.OpenFile(filename, os.O_CREATE | os.O_TRUNC | os.O_WRONLY, 0666)
-    if err != nil {
-        panic("couldn't open file")
+var logger *log.Logger
+var filename = "/home/hijokaidan/PC/nodzcript-lsp/logs.txt"
+
+func Logger() *log.Logger {
+    if logger == nil {
+        logfile, err := os.OpenFile(filename, os.O_CREATE | os.O_TRUNC | os.O_WRONLY, 0666)
+        if err != nil {
+            panic("couldn't open file")
+        }
+        logger = log.New(logfile, "[nodzcript lsp]", log.Ldate | log.Ltime | log.Lshortfile)
+        return logger
     }
-    return log.New(logfile, "[nodzcript lsp]", log.Ldate | log.Ltime | log.Lshortfile)
+    return logger
 }

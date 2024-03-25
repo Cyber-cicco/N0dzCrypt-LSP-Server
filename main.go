@@ -7,13 +7,14 @@ import (
 	"log"
 	"os"
 
+	"github.com/Cyber-cicco/nodzcript-lsp/cache"
 	"github.com/Cyber-cicco/nodzcript-lsp/logging"
 	"github.com/Cyber-cicco/nodzcript-lsp/lsp"
 	"github.com/Cyber-cicco/nodzcript-lsp/rpc"
 )
 
 func main() {
-    logger := logging.GetLogger("/home/hijokaidan/PC/nodzcript-lsp/logs.txt")
+    logger := logging.Logger()
     logger.Println("LSP server started")
     scanner := bufio.NewScanner(os.Stdin)
     scanner.Split(rpc.SplitFunc)
@@ -59,5 +60,6 @@ func HandleMessage(logger *log.Logger, method string, content []byte) {
         logger.Printf("Text document URI : %s. Text document content : %s",
             request.Params.TextDocument.URI,
             request.Params.TextDocument.Text)
+        cache.New(request.Params.TextDocument.URI, []byte(request.Params.TextDocument.Text))
     }
 }
