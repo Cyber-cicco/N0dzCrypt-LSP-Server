@@ -97,13 +97,13 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    check, err := javaDocExistsAndUpToDate(&graph1, javaFileURI)
+    _, exists, upToDate, err := javaDocExistsAndUpToDate(&graph1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    if check {
+    if exists || upToDate {
         t.Fatalf("Check shouldn't be true")
 
     }
@@ -112,13 +112,14 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     graph1.JavaNodes[javaFileURI] = &JavaDocument{
         ShaSum: sum,
     }
-    check, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+
+    _, exists, upToDate, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    if !check {
+    if !exists || !upToDate {
         t.Fatalf("Check should be true")
     }
 
@@ -127,13 +128,13 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
         ShaSum: sum,
     }
 
-    check, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+    _, exists, upToDate, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    if check {
+    if !exists || upToDate {
         t.Fatalf("Check shouldn't be true")
     }
 

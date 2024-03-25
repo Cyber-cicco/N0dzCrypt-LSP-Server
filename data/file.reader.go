@@ -3,25 +3,29 @@ package data
 import (
 	"encoding/json"
 	"errors"
+	"io/fs"
 	"os"
 
 	"github.com/Cyber-cicco/nodzcript-lsp/config"
 )
 
+type fileFunc func(fileContent, filePath string) error
+type checkFunc func(path string) bool
+
 //Get the nodzcript config file of the project if it exists in any
 //of the parent directoris of the current document
-func GetNodzcriptFile(path string) (*config.NodzcriptFile, error) {
+func GetNodzcriptFile(path string) (*config.NodzcriptFile, string, error) {
 
     path, fileName, err := GetConfigFilePath(path)
 
     if err != nil {
-        return nil, err
+        return nil, "", err
     }
 
     file, err := os.ReadFile(path + "/" + fileName)
 
     if err != nil {
-        return nil, err
+        return nil, "", err
     }
 
     fileTree := config.NodzcriptFile{
@@ -29,7 +33,7 @@ func GetNodzcriptFile(path string) (*config.NodzcriptFile, error) {
     }
 
     json.Unmarshal(file, &fileTree)
-    return &fileTree, nil
+    return &fileTree, path, nil
 }
 
 func GetConfigFilePath(path string) (string, string, error) {
@@ -83,4 +87,47 @@ func FileExists(path string) bool {
         panic(err)
 	}
 	return true
+}
+
+func parseFolders(files []fs.DirEntry, path string, check checkFunc, executable fileFunc) error {
+
+    for _, file := range files {
+
+        if file.IsDir() {
+
+            dirname := path+"/"+file.Name()
+            files, err := os.ReadDir(dirname)
+
+            if err != nil {
+                return err
+            }
+
+            parseFolders(files, dirname, check, executable)
+
+        } else if check(file.Name()) {
+
+            filePath := path+"/"+file.Name()
+
+            err := executable(path, filePath)
+
+            if err != nil {
+                return err
+            }
+
+        }
+
+    }
+    return nil
+}
+
+func ParseFolders(check checkFunc, path string, executable fileFunc) error {
+
+	files, err := os.ReadDir(path)
+
+    if err != nil {
+        return err
+    }
+
+    return parseFolders(files, path, check, executable)
+
 }

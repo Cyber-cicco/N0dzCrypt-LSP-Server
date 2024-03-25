@@ -102,97 +102,97 @@ type JavaTest struct {
 
 
 func (f *NodzcriptFile) GetRepositoryDir() string{
-    return "./" + f.JavaBack.RootDir  + f.JavaBack.Repository
+    return f.JavaBack.RootDir  + f.JavaBack.Repository
 }
 func (f *NodzcriptFile) GetServiceDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Service
+    return f.JavaBack.RootDir + f.JavaBack.Service
 }
 func (f *NodzcriptFile) GetValidatorDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Validators
+    return f.JavaBack.RootDir + f.JavaBack.Validators
 }
 func (f *NodzcriptFile) GetJavaDir() string{
-    return "./" + f.JavaBack.RootDir 
+    return f.JavaBack.RootDir 
 }
 func (f *NodzcriptFile) GetPageBackDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir
+    return f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir
 }
 func (f *NodzcriptFile) GetIrrigatorDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir + f.JavaBack.PagesDir.Irrigator
+    return f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir + f.JavaBack.PagesDir.Irrigator
 }
 func (f *NodzcriptFile) GetJsonMapperDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Mapper
+    return f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Mapper
 }
 func (f *NodzcriptFile) GetJsonDtoDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Dto
+    return f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Dto
 }
 func (f *NodzcriptFile) GetJsonDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Json.RootDir
+    return f.JavaBack.RootDir + f.JavaBack.Json.RootDir
 }
 func (f *NodzcriptFile) GetEntityDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Entities.RootDir
+    return f.JavaBack.RootDir + f.JavaBack.Entities.RootDir
 }
 func (f *NodzcriptFile) GetEntityEnumDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Entities.RootDir + f.JavaBack.Entities.Enum
+    return f.JavaBack.RootDir + f.JavaBack.Entities.RootDir + f.JavaBack.Entities.Enum
 }
 func (f *NodzcriptFile) GetSecurityDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Security.RootDir
+    return f.JavaBack.RootDir + f.JavaBack.Security.RootDir
 }
 func (f *NodzcriptFile) GetSecurityConfigDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Config
+    return f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Config
 }
 func (f *NodzcriptFile) GetSecurityServiceDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Service
+    return f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Service
 }
 func (f *NodzcriptFile) GetUtilsDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Utils.RootDir
+    return f.JavaBack.RootDir + f.JavaBack.Utils.RootDir
 }
 func (f *NodzcriptFile) GetHXDir() string{
-    return "./" + f.JavaBack.RootDir + f.JavaBack.Utils.RootDir + f.JavaBack.Utils.HX
+    return f.JavaBack.RootDir + f.JavaBack.Utils.RootDir + f.JavaBack.Utils.HX
 }
 func (f *NodzcriptFile) GetResourcesDir() string{
-    return "./" + f.Resources.RootDir 
+    return f.Resources.RootDir 
 }
 func (f *NodzcriptFile) GetTemplateSVGDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.SVG
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.SVG
 }
 func (f *NodzcriptFile) GetTemplateStyleDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.StyleTemplates
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.StyleTemplates
 }
 func (f *NodzcriptFile) GetTemplateDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir
+    return f.Resources.RootDir + f.Resources.Templates.RootDir
 }
 func (f *NodzcriptFile) GetTemplateComponentsDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.Components
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.Components
 }
 func (f *NodzcriptFile) GetTemplateLayoutsDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.Layouts
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.Layouts
 }
 func (f *NodzcriptFile) GetTemplateJSDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.JS
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.JS
 }
 func (f *NodzcriptFile) GetPageFrontDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.PagesFront
+    return f.Resources.RootDir + f.Resources.Templates.RootDir + f.Resources.Templates.PagesFront
 }
 func (f *NodzcriptFile) GetTestDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir
+    return f.Resources.RootDir + f.Resources.Static.RootDir
 }
 func (f *NodzcriptFile) GetTestRessourcesDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir + f.JavaTest.TestMain + f.JavaTest.TestRessources
+    return f.Resources.RootDir + f.Resources.Static.RootDir + f.JavaTest.TestMain + f.JavaTest.TestRessources
 }
 func (f *NodzcriptFile) GetTestMainDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir + f.JavaTest.TestMain
+    return f.Resources.RootDir + f.Resources.Static.RootDir + f.JavaTest.TestMain
 }
 func (f *NodzcriptFile) GetStaticStyleDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.Style
+    return f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.Style
 }
 func (f *NodzcriptFile) GetStaticImgDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.Img
+    return f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.Img
 }
 func (f *NodzcriptFile) GetStaticJsDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.JS
+    return f.Resources.RootDir + f.Resources.Static.RootDir + f.Resources.Static.JS
 }
 func (f *NodzcriptFile) GetStaticDir() string{
-    return "./" + f.Resources.RootDir + f.Resources.Static.RootDir
+    return f.Resources.RootDir + f.Resources.Static.RootDir
 }
 
 //Gets the name of the fragment based on it's absoulte URL

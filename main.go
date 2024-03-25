@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
 
@@ -25,7 +24,7 @@ func main() {
         msg := scanner.Bytes()
         method, content, err := rpc.DecodeMessage(msg)
         if err != nil {
-            fmt.Printf("Error encountered : %s", err)
+            logger.Printf("Error encountered : %s", err)
             continue
         }
         HandleMessage(logger, method, content)

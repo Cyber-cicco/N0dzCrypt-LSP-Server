@@ -1,5 +1,6 @@
 package lsp
 
+
 const (
     NO_SYNC = iota
     FULL_SYNC

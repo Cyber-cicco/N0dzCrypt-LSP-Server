@@ -59,7 +59,7 @@ type THDocument struct {
     //Can be null if it is not an HTML file.
     //Javascript and CSS file won't use the LSP, but
     //can still be represented as fragments.
-    Content *sitter.Node
+    Content *sitter.Tree
 
     //Map from node to any additional context object.
     AdditionalContext map[*sitter.Node]*JavaObject
@@ -83,7 +83,7 @@ type FragmentRoute struct {
 type JavaDocument struct {
 
     //Content of the java File as an AST
-    Content sitter.Node
+    Content *sitter.Tree
 
     //Checksum to see if the file changed since last time accessing it.
     //Is useful if you edit your files with another editor which is not using
@@ -117,6 +117,8 @@ type Method struct {
 //Should only be called from the New() method
 func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
 
+    n.Nodes = make(map[string]*THDocument) 
+    n.JavaNodes = make(map[string]*JavaDocument) 
     nodzFile, path, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
     n.RootURL = path + "/"
     n.Structure = nodzFile
@@ -125,23 +127,22 @@ func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
         return err
     }
 
-    node, err := sitter.ParseCtx(context.Background(), text, thLang)
     thDoc := THDocument{}
-    thDoc.initialize(n, uri, node)
+    thDoc.initialize(n, uri, text)
 
-    n.Nodes = make(map[string]*THDocument) 
-    n.JavaNodes = make(map[string]*JavaDocument) 
     n.Nodes[uri.AbsolutePath()] = &thDoc
 
     return nil
 }
 
-func (t *THDocument) initialize(graph *NodzGraph, uri lsp.DocumentUri, rootNode *sitter.Node) {
+func (t *THDocument) initialize(graph *NodzGraph, uri lsp.DocumentUri, text []byte) {
 
     t.URI = uri
     var err error
 
-    t.ContextProvider, err = graph.initContextProviders(t) 
+    t.ContextProvider, err = graph.initJavaNodes(t) 
+    _, err = thParser.ParseCtx(context.Background(), nil, text)
+    _ = THDocument{}
 
     if err != nil {
 
@@ -157,6 +158,7 @@ func NewGraph(uri lsp.DocumentUri, text []byte) (NodzGraph, error) {
     return nodzGraph, err
 }
 
+//Gets the URL reference of a template in the backend
 func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
 
     path := strings.TrimPrefix(uri.AbsolutePath(), n.RootURL)
@@ -169,24 +171,56 @@ func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
     return paths
 }
 
-//Finds the route that correponds to the document URI and appends them in the context graph and document
+//When opening a file, first checks the Routes file to find a Route corresponding to the template
+//URL. 
+//Then maps every java file in the page directory to it's URI and 
+//checksums it's content to find wether it was changed or not. 
+//If the entry of this file already existed in the context and has not been changed,
+// doesn't do anything. Else, creates / updates the content of the java Document
+//If the route is referenced in this document or any dependency of this document in the same
+//page directory, this document is also appended to the THDocument ContextProvider array
 //Mutates n and t
-func (n *NodzGraph) initContextProviders(t *THDocument) ([]*JavaDocument, error) {
+func (n *NodzGraph) initJavaNodes(t *THDocument) ([]*JavaDocument, error) {
+
+    routePath := n.RootURL + n.Structure.GetPageBackDir() + "Routes.java"
+    _, err := ExtractRouteNameFromFile(n, n.GetRouteReferences(t.URI), routePath)  //extractedRoutes
 
     routeReferences := []*JavaDocument{}
     pathOfPages :=  n.RootURL + n.Structure.GetPageBackDir()
 
-    err := data.ParseFolders(".java", pathOfPages, func(path, filepath string) error {
+    err = data.ParseFolders(func(path string) bool{
+        return strings.HasSuffix(path, ".java")
+    },
+    pathOfPages,
+    func(path, filepath string) error {
 
-        check, err := javaDocExistsAndUpToDate(n, filepath)
+        content, exists, upToDate, err := javaDocExistsAndUpToDate(n, filepath)
+
         if  err != nil {
             return err
         }
-        if !check {
+
+        if !exists {
+
+            node, err := ParseJava(nil, content)
+            
+            if err != nil {
+                return err
+            }
+
+            n.JavaNodes[filepath] = &JavaDocument{
+            	Content:    node,
+            	ShaSum:     sha1.Sum(content),
+            	OpenBuffer: false,
+            }
 
         }
-        return nil
 
+        if exists && !upToDate {
+
+        }
+
+        return nil
     })
 
     if err != nil {
@@ -196,6 +230,25 @@ func (n *NodzGraph) initContextProviders(t *THDocument) ([]*JavaDocument, error)
     return routeReferences, nil
 }
 
+//Adds a java document to the nodes of the graph.
+//Mutates n
+func (n *NodzGraph) addJavaDocToNodes(oldTree *sitter.Tree, path string, content []byte) error {
+
+        node, err := ParseJava(oldTree, content)
+        
+        if err != nil {
+            return err
+        }
+
+        n.JavaNodes[path] = &JavaDocument{
+            Content:    node,
+            ShaSum:     sha1.Sum(content),
+            OpenBuffer: false,
+        }
+
+        return nil
+}
+
 //TODO : remplacer par une recherche des propriétés dans application.properties ou application.yml
 func GetDefaultSuffix() string {
 
@@ -203,25 +256,31 @@ func GetDefaultSuffix() string {
 }
 
 //Check if the JavaDocument is already in the context or not, and check wether it has been changed 
-func javaDocExistsAndUpToDate(n *NodzGraph, filepath string) (bool, error) {
+//If the file is opened in a vim buffer, it is assumed to be up to date, since it is updated every
+//time a change is made.
+func javaDocExistsAndUpToDate(n *NodzGraph, filepath string) ([]byte, bool, bool, error) {
 
-    if n.JavaNodes[filepath] == nil {
-        return false, nil
-    }
-
-    if n.JavaNodes[filepath].OpenBuffer {
-        return true, nil
+    if n.JavaNodes[filepath] != nil && n.JavaNodes[filepath].OpenBuffer {
+        return nil, true, true, nil
     }
 
     content, err := os.ReadFile(filepath)
 
     if err != nil {
-        return true, err
+        return nil, false, false, err
+    }
+
+    if n.JavaNodes[filepath] == nil {
+        return content, false, false, nil
+    }
+
+    if err != nil {
+        return nil, false, false, err
     }
 
     sum := sha1.Sum(content)
 
-    return sum == n.JavaNodes[filepath].ShaSum, err 
+    return content, true, sum == n.JavaNodes[filepath].ShaSum, err 
 
 }
 
