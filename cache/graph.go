@@ -4,7 +4,8 @@ import (
 	"context"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
-	"github.com/Cyber-cicco/nodzcript-lsp/logging"
+	"github.com/Cyber-cicco/nodzcript-lsp/config"
+	"github.com/Cyber-cicco/nodzcript-lsp/data"
 	"github.com/Cyber-cicco/nodzcript-lsp/lsp"
 )
 
@@ -22,7 +23,7 @@ const (
 //A Graph represents a nodzcript project.
 //URIs are mapped to document nodes.
 type NodzGraph struct {
-    Structure NodzcriptFile 
+    Structure *config.NodzcriptFile 
     Nodes map[lsp.DocumentUri]THDocument
 }
 
@@ -98,14 +99,21 @@ type Method struct {
 //Creates a new Graph from a Document URI
 //Should only be called from the New() method
 func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
-    node, err := sitter.ParseCtx(context.Background(), text, thLang)
+
+    nodzFile, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
+    n.Structure = nodzFile
+
     if err != nil {
         return err
     }
-    logging.Logger().Println(node)
+
+    node, err := sitter.ParseCtx(context.Background(), text, thLang)
     thDoc := THDocument{}
     thDoc.initialize(uri, node)
+
+    n.Nodes = make(map[lsp.DocumentUri]THDocument) 
     n.Nodes[uri] = thDoc
+
     return nil
 }
 
@@ -113,7 +121,7 @@ func (t *THDocument) initialize(uri lsp.DocumentUri, rootNode *sitter.Node) {
 }
 
 //Initalizes a new graph
-func New(uri lsp.DocumentUri, text []byte) (NodzGraph, error) {
+func NewGraph(uri lsp.DocumentUri, text []byte) (NodzGraph, error) {
     nodzGraph := NodzGraph{}
     err := nodzGraph.initialize(uri, text)
     return nodzGraph, err

@@ -6,7 +6,6 @@ const (
     INCR_SYNC
 )
 
-type DocumentUri string
 
 type ClientCapabilities struct {
 

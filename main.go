@@ -13,6 +13,8 @@ import (
 	"github.com/Cyber-cicco/nodzcript-lsp/rpc"
 )
 
+var writer = os.Stdout
+
 func main() {
     logger := logging.Logger()
     logger.Println("LSP server started")
@@ -48,7 +50,6 @@ func HandleMessage(logger *log.Logger, method string, content []byte) {
             logger.Printf("Error parsing encoding the response : %s", err)
             break
         }
-        writer := os.Stdout
         writer.Write([]byte(reply))
         logger.Println("Sent the reply")
 
@@ -60,6 +61,6 @@ func HandleMessage(logger *log.Logger, method string, content []byte) {
         logger.Printf("Text document URI : %s. Text document content : %s",
             request.Params.TextDocument.URI,
             request.Params.TextDocument.Text)
-        cache.New(request.Params.TextDocument.URI, []byte(request.Params.TextDocument.Text))
+        graph, err := cache.NewGraph(request.Params.TextDocument.URI, []byte(request.Params.TextDocument.Text))
     }
 }

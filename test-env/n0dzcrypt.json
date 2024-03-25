@@ -1,0 +1,78 @@
+{
+  "java-back": {
+    "root": "src/main/java/fr/edpurolo/freelearning/",
+    "basepackage": "fr.edpurolo.freelearning",
+    "page": {
+      "root": "page/",
+      "controller": "",
+      "irrigator": "irrigator/"
+    },
+    "service": "service/",
+    "security": {
+      "root": "security/",
+      "service": "service/",
+      "config": "config/"
+    },
+    "repository": "repository/",
+    "util": {
+      "root": "util/",
+      "hx": "hx/"
+    },
+    "entities": {
+      "root": "entity/",
+      "enum": "enums/"
+    },
+    "validators": "validator/",
+    "json": {
+      "root": "json/",
+      "dto": "dto/",
+      "mapper": "mapper/"
+    }
+  },
+  "resources": {
+    "root": "src/main/resources/",
+    "templates": {
+      "root": "templates/",
+      "pages": "page/",
+      "components": "component/",
+      "layouts": "layout/",
+      "svg": "svg/",
+      "javascript": "script/",
+      "styletemplates": "style/"
+    },
+    "static": {
+      "root": "static/",
+      "style": "style/",
+      "jsstatic": "script/",
+      "img": "img/"
+    }
+  },
+  "java-test": {
+    "root": "src/test/java/",
+    "resources": "",
+    "base-dir": ""
+  },
+  "page-domains": null,
+  "routes": [
+    {
+      "name": "ADR_BASE_LAYOUT",
+      "route": "layout/base"
+    },
+    {
+      "name": "ADR_HOME",
+      "route": "page/home/home"
+    },
+    {
+      "name": "ADR_ABOUT",
+      "route": "page/about/about"
+    },
+    {
+      "name": "ADR_LOGIN",
+      "route": "page/login/login"
+    },
+    {
+      "name": "ADR_FORM_ERROR",
+      "route": "components/form-error"
+    }
+  ]
+}
