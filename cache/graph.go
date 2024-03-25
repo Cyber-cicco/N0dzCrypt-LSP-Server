@@ -2,6 +2,7 @@ package cache
 
 import (
 	"context"
+	"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 	"github.com/Cyber-cicco/nodzcript-lsp/config"
@@ -23,6 +24,7 @@ const (
 //A Graph represents a nodzcript project.
 //URIs are mapped to document nodes.
 type NodzGraph struct {
+    RootURL string
     Structure *config.NodzcriptFile 
     Nodes map[lsp.DocumentUri]THDocument
 }
@@ -74,7 +76,8 @@ type FragmentRoute struct {
 
 //The tree-sitter representation of the AST of a java file
 type JavaDocument struct {
-    sitter.Node
+    Content sitter.Node
+    shaSum string
 }
 
 //Minimal representation of a java object
@@ -100,7 +103,8 @@ type Method struct {
 //Should only be called from the New() method
 func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
 
-    nodzFile, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
+    nodzFile, path, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
+    n.RootURL = path
     n.Structure = nodzFile
 
     if err != nil {
@@ -109,7 +113,7 @@ func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
 
     node, err := sitter.ParseCtx(context.Background(), text, thLang)
     thDoc := THDocument{}
-    thDoc.initialize(uri, node)
+    thDoc.initialize(n, uri, node)
 
     n.Nodes = make(map[lsp.DocumentUri]THDocument) 
     n.Nodes[uri] = thDoc
@@ -117,12 +121,29 @@ func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
     return nil
 }
 
-func (t *THDocument) initialize(uri lsp.DocumentUri, rootNode *sitter.Node) {
+func (t *THDocument) initialize(grap *NodzGraph, uri lsp.DocumentUri, rootNode *sitter.Node) {
+    t.URI = uri
 }
+
 
 //Initalizes a new graph
 func NewGraph(uri lsp.DocumentUri, text []byte) (NodzGraph, error) {
     nodzGraph := NodzGraph{}
     err := nodzGraph.initialize(uri, text)
     return nodzGraph, err
+}
+
+func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
+    path := strings.TrimPrefix(uri.AbsolutePath(), n.RootURL + "/")
+    paths := []string{ path }
+
+    if strings.HasSuffix(path, GetDefaultSuffix()) {
+        paths = append(paths, strings.TrimSuffix(path, GetDefaultSuffix()))
+    }
+    return paths
+}
+
+//TODO : remplacer par une recherche des propriétés dans application.properties ou application.yml
+func GetDefaultSuffix() string {
+    return ".html"
 }

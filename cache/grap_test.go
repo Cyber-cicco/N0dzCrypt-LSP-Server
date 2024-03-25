@@ -38,13 +38,42 @@ func TestInitialization(t *testing.T) {
 <div id="test"></div>
     `
     graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
+
     graph2, err := NewGraph(lsp.DocumentUri(uri2), []byte(textDoc2))
+
     if err == nil {
         t.Fatal("Got no error while it was supposed to fail")
     }
+    
     fmt.Printf("graph1: %v\n", graph1)
     fmt.Printf("graph2: %v\n", graph2)
+}
+
+func TestGetRouteReferences(t *testing.T) {
+    uri1 := "file:///home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
+    textDoc1 := ` 
+<div class="bonjour">bonjour</div>
+<div id="test"></div>
+    `
+    graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    expectedRoute1 := "src/main/resources/templates/page/home/home.html" 
+    expectedRoute2 := "src/main/resources/templates/page/home/home" 
+
+    route := graph1.GetRouteReferences(lsp.DocumentUri(uri1))
+
+    if route[0] != expectedRoute1 {
+        t.Fatalf("Expected %s, got %s", expectedRoute1, route[0])
+    }
+    if route[1] != expectedRoute2 {
+        t.Fatalf("Expected %s, got %s", expectedRoute2, route[1])
+    }
 }
