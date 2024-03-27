@@ -64,12 +64,30 @@ func (e *SExpression) Alternation() *SExpression {
     return e
 }
 
-func (e *SExpression) For(condition func() bool, operation func (e *SExpression) *SExpression, termination func()) *SExpression {
+func (e *SExpression) For(condition func() bool, operation func (e *SExpression), termination func()) *SExpression {
     for condition() {
-
+        operation(e)
+        termination()
     }
     return e
 }
+
+func (e *SExpression) IfElse(condition bool, operation func(e *SExpression), alternative func(e *SExpression)) * SExpression {
+    if condition {
+        operation(e)
+    } else {
+        alternative(e)
+    }
+    return e
+}
+func (e *SExpression) If(condition bool, operation func(e *SExpression)) * SExpression {
+    if condition {
+        operation(e)
+    }
+    return e
+}
+
+
 
 func (s *SExpression) Not() *SExpression {
 
