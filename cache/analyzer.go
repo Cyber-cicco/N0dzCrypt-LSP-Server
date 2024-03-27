@@ -16,6 +16,7 @@ var thParser *sitter.Parser
 var javaParser *sitter.Parser
 
 func init() {
+
     javaLang = java.GetLanguage()
     javaParser = sitter.NewParser()
     javaParser.SetLanguage(javaLang)
@@ -25,6 +26,7 @@ func init() {
 }
 
 func ParseJava(oldContent *sitter.Tree, newContent []byte) (*sitter.Tree, error) {
+
     return javaParser.ParseCtx(context.Background(), oldContent, newContent)
 }
 

@@ -1,50 +1,5 @@
-[nodzcript lsp]2024/03/25 21:08:04 main.go:18: LSP server started
-[nodzcript lsp]2024/03/25 21:08:04 main.go:35: Received message with method : initialize
-[nodzcript lsp]2024/03/25 21:08:04 main.go:44: Connected to : Neovim, 0.10.0-dev
-[nodzcript lsp]2024/03/25 21:08:04 main.go:53: Sent the reply
-[nodzcript lsp]2024/03/25 21:08:04 main.go:35: Received message with method : initialized
-[nodzcript lsp]2024/03/25 22:36:46 main.go:34: Received message with method : textDocument/didOpen
-[nodzcript lsp]2024/03/25 22:36:46 main.go:59: Text document URI : file:///home/hijokaidan/PC/digi-learning/src/main/resources/templates/pages/cours/visionneuse/fragments/cours.sommaire.html. Text document content : <!--/*@thymesVar id="cours" type="fr.diginamic.digilearning.entities.Cours"*/-->
-<!--/*@thymesVar id="idSModule" type="java.lang.Integer"*/-->
-<!--/*@thymesVar id="idModuleOrigine" type="java.lang.Integer"*/-->
-<section id="chapitre-cours" class="flex flex-col gap-10 bg-grey overflow-hidden shadow-dark h-full w-full p-5 shadow-md rounded-md"
->
-    <h1 class="text-primary font-poppins text-5xl text-center" th:text="${cours.getTitre()}"></h1>
-    <div class="flex flex-col gap-10 items-center">
-        <article class="p-2 text-lg bg-lightAccent w-full" th:text="${cours.getDescription()}"></article>
-        <h2 class="text-primary font-poppins text-3xl text-center">Sommaire : </h2>
-        <th:block th:if="${superUser}">
-            <div class="" th:each="c, iterStat : ${cours.getAllChapitres()}">
-                <div
-                    class="text-primary text-lg underline hover:cursor-pointer"
-                    th:text="${c.getLibelle()}"
-                    th:hx-get="'/cours/admin/visionner/api?ordre=' + ${c.getOrdre()} + '&cours=' + ${cours.getId()}"
-                    th:hx-push-url="'/cours/admin/visionner?ordre=' + ${c.getOrdre()} + '&cours=' + ${cours.getId()}"
-                    hx-target="#insert"
-                ></div>
-            </div>
-        </th:block>
-        <th:block th:unless="${superUser}">
-            <div class="" th:each="c, iterStat : ${cours.getChapitres()}">
-                <div
-                        class="text-primary text-lg underline hover:cursor-pointer"
-                        th:text="${c.getLibelle()}"
-                        th:hx-get="'/cours/chapitre/api?id='
-                                + ${c.getOrdre()}
-                                + '&cours=' + ${cours.getId()}
-                                + '&smodule=' + ${idSModule}
-                                + '&module=' + ${idModuleOrigine}"
-                        th:hx-push-url="'/cours/chapitre?id='
-                                + ${c.getOrdre()}
-                                + '&cours=' + ${cours.getId()}
-                                + '&smodule=' + ${idSModule}
-                                + '&module=' + ${idModuleOrigine}"
-                        hx-target="#chapitre-cours"
-                        hx-swap="outerHTML"
-                        hx-select="#chapitre-cours"
-                ></div>
-            </div>
-        </th:block>
-    </div>
-</section>
-[nodzcript lsp]2024/03/25 22:36:54 main.go:34: Received message with method : textDocument/didClose
+[nodzcript lsp]2024/03/27 01:06:09 main.go:18: LSP server started
+[nodzcript lsp]2024/03/27 01:06:09 main.go:35: Received message with method : initialize
+[nodzcript lsp]2024/03/27 01:06:09 main.go:44: Connected to : Neovim, 0.10.0-dev
+[nodzcript lsp]2024/03/27 01:06:09 main.go:53: Sent the reply
+[nodzcript lsp]2024/03/27 01:06:10 main.go:35: Received message with method : initialized
