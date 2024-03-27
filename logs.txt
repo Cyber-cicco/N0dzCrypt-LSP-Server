@@ -1,5 +1,6 @@
-[nodzcript lsp]2024/03/27 01:06:09 main.go:18: LSP server started
-[nodzcript lsp]2024/03/27 01:06:09 main.go:35: Received message with method : initialize
-[nodzcript lsp]2024/03/27 01:06:09 main.go:44: Connected to : Neovim, 0.10.0-dev
-[nodzcript lsp]2024/03/27 01:06:09 main.go:53: Sent the reply
-[nodzcript lsp]2024/03/27 01:06:10 main.go:35: Received message with method : initialized
+[nodzcript lsp]2024/03/27 11:37:04 main.go:18: LSP server started
+[nodzcript lsp]2024/03/27 11:37:04 main.go:35: Received message with method : initialize
+[nodzcript lsp]2024/03/27 11:37:04 main.go:44: Connected to : Neovim, 0.10.0-dev
+[nodzcript lsp]2024/03/27 11:37:04 main.go:53: Sent the reply
+[nodzcript lsp]2024/03/27 11:37:04 main.go:35: Received message with method : initialized
+[nodzcript lsp]2024/03/27 11:39:12 main.go:35: Received message with method : shutdown
