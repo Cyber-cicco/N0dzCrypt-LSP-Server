@@ -3,11 +3,11 @@ package cache
 import (
 	"context"
 	"errors"
-	"fmt"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 	"github.com/Cyber-cicco/go-tree-sitter/java"
 	"github.com/Cyber-cicco/go-tree-sitter/thymeleaf"
+	"github.com/Cyber-cicco/tree-sitter-query-builder/querier"
 )
 
 var thLang *sitter.Language
@@ -56,31 +56,28 @@ func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routeP
     return "", nil
 }
 
-func queryRouteFromTree(routeReferences []string, tree *sitter.Tree, content []byte) (string, error) {
+//Get in the route folder, and give back the name of the route variable corresponding to the name of the route.
+func queryRouteFromTree(routeReferences []string, tree *sitter.Tree, content []byte) (string, bool, error) {
 
-    q, err := sitter.NewQuery([]byte(Q_JAVA_STRING), javaLang)
+    qb := querier.NewPQ(Q_JAVA_STRING)
+    var varName string
 
-    if err != nil {
-        return "", err
-    }
+    for _, routeReference := range routeReferences {
+        qb.AddValue("page", routeReference)
+        q, err := qb.GetQuery()
 
-    qc := sitter.NewQueryCursor()
-    qc.Exec(q, tree.RootNode())
-
-    for {
-
-        m, ok := qc.NextMatch()
-
-        if !ok {
-            break
+        if err != nil {
+            return "", false, err
         }
 
-        m = qc.FilterPredicates(m, content)
+        q.Tree = tree
+        q.Lang = javaLang
+        q.Content = content
 
-        for _, c := range m.Captures {
-            fmt.Println(c.Node.Content(content))
-        }
+        q.ExecuteQuery(func(c *sitter.QueryCapture){
+            varName = c.Node.Parent().Parent().ChildByFieldName("name").Content(content)
+        })
     }
 
-    return "", nil
+    return varName, varName != "", nil
 }

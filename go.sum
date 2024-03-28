@@ -1,7 +1,9 @@
 github.com/Cyber-cicco/go-tree-sitter v0.1.0 h1:nasw21zz/stVUgiq7Yo+2t0/OoTNQ1HDsivbjnycMCs=
 github.com/Cyber-cicco/go-tree-sitter v0.1.0/go.mod h1:6YQzB7JUfy3ObvBBDCpT8s3qgTSZ3QFt+M/w6/jWPQY=
-github.com/Cyber-cicco/tree-sitter-query-builder v0.0.0-20240327105605-2fb244da1167 h1:Orn2E9bwv2DKXrdaPc3nTalfL0NzZJ06YZHSqpTYbT4=
-github.com/Cyber-cicco/tree-sitter-query-builder v0.0.0-20240327105605-2fb244da1167/go.mod h1:+M7hxMfxJQ7Wvi2H8V/0nWsDh9QwWk7u/GTa01PJYn8=
+github.com/Cyber-cicco/tree-sitter-query-builder v0.2.0 h1:vHFkhoGLoSbq1l84kwMrP+4bpVdbgISakxfb0MU34Ec=
+github.com/Cyber-cicco/tree-sitter-query-builder v0.2.0/go.mod h1:f0SSFQ9Rc+bQFplkODTpJTvvBFlMwLU1S9A40qtBHQU=
+github.com/Cyber-cicco/tree-sitter-query-builder v1.0.0 h1:4RMe5I5p8Y614bRO+nGvpJZAYjQRuwFr0QFbM5N26iA=
+github.com/Cyber-cicco/tree-sitter-query-builder v1.0.0/go.mod h1:qFGwjDJF6KpBTljgODzRhU+38jvSi5C9V8d8n6tpmP0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

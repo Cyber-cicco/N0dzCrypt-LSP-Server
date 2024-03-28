@@ -8,8 +8,8 @@ import (
 )
 
 func TestInitialization(t *testing.T) {
-    uri1 := "file:///home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
-    uri2 := "file:///home/hijokaidan/PC/nodzcript-lsp/test.html"
+    uri1 := "file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
+    uri2 := "file:///home/hijokaidan/PC/golang/nodzcript-lsp/test.html"
     textDoc1 := `
 <section class="flex flex-col h-full w-full items-center justify-center bg-gradient-to-r from-blue-950 to-gray-900">
     <img th:insert="/svg/n0dzCrypt :: svg('270', '270')">
@@ -54,7 +54,7 @@ func TestInitialization(t *testing.T) {
 }
 
 func TestGetRouteReferences(t *testing.T) {
-    uri1 := "file:///home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
+    uri1 := "file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
     textDoc1 := ` 
 <div class="bonjour">bonjour</div>
 <div id="test"></div>
@@ -80,12 +80,12 @@ func TestGetRouteReferences(t *testing.T) {
 
 func TestJavaDocExistsAndUpToDate(t *testing.T) {
 
-    uri1 := "file:///home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
+    uri1 := "file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
     textDoc1 := ` 
 <div class="bonjour">bonjour</div>
 <div id="test"></div>
     `
-    javaFileURI :=  "/home/hijokaidan/PC/nodzcript-lsp/test-env/src/main/java/fr/edpurolo/freelearning/page/AboutController.java"
+    javaFileURI :=  "/home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/java/fr/edpurolo/freelearning/page/AboutController.java"
 
     graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
 
