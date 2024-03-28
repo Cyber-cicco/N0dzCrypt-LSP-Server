@@ -3,6 +3,8 @@ package cache
 import (
 	"context"
 	"testing"
+
+	"github.com/Cyber-cicco/nodzcript-lsp/config"
 )
 
 func TestQueryRouteFromTree(t *testing.T) {
@@ -24,26 +26,29 @@ public class Routes {
     public static final String ADR_FORM_ERROR = "components/form-error";
 }
 `)
-    expected := "ADR_LOGIN"
     tree, err := javaParser.ParseCtx(context.Background(), nil, content)
 
     if err != nil {
         t.Fatalf("Expected no error, got %s", err)
     }
 
-    routeReferences1 := []string{"page/about/login", "page/about/login.html"}
-
-    varName, ok, err := queryRouteFromTree(routeReferences1, tree, content)
-
-    if err != nil {
-        t.Fatalf("Expected no error, got %s", err)
+    nodzGraph := NodzGraph{
+    	RootURL:   "jesapelroot/",
+    	Structure: &config.NodzcriptFile{
+    		Resources:           config.Resources{
+    			RootDir:   "resources/",
+    			Templates: config.FrontTemplates{
+    				RootDir:        "templates/",
+    			},
+    			Static:    config.Static{},
+    		},
+    	},
     }
 
-    if !ok {
-        t.Fatalf("Found no match while there was supposed to be one")
-    }
+    varName, err := queryRoutesFromTree(&nodzGraph, tree, content)
+    adrHome := varName["ADR_HOME"]
 
-    if varName != expected {
-        t.Fatalf("Expected %s, got %s", expected, varName)
+    if adrHome != "jesapelroot/resources/templates/page/home/home" {
+        t.Fatalf("Expected jesapelroot/resources/templates/page/home/home got %s", adrHome)
     }
 }

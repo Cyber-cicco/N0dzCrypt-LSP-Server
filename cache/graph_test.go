@@ -1,7 +1,6 @@
 package cache
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/Cyber-cicco/nodzcript-lsp/lsp"
@@ -37,20 +36,18 @@ func TestInitialization(t *testing.T) {
 <div class="bonjour">bonjour</div>
 <div id="test"></div>
     `
-    graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+    _, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    graph2, err := NewGraph(lsp.DocumentUri(uri2), []byte(textDoc2))
+    _, err = NewGraph(lsp.DocumentUri(uri2), []byte(textDoc2))
 
     if err == nil {
         t.Fatal("Got no error while it was supposed to fail")
     }
     
-    fmt.Printf("graph1: %v\n", graph1)
-    fmt.Printf("graph2: %v\n", graph2)
 }
 
 func TestGetRouteReferences(t *testing.T) {
@@ -78,6 +75,7 @@ func TestGetRouteReferences(t *testing.T) {
     }
 }
 
+//TODO : change this test to a mock, the method it is testing is used as an internal of NewGraph()
 func TestJavaDocExistsAndUpToDate(t *testing.T) {
 
     uri1 := "file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home.html"
@@ -88,10 +86,6 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     javaFileURI :=  "/home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/java/fr/edpurolo/freelearning/page/AboutController.java"
 
     graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
-
-    if err != nil {
-        t.Fatalf("Got an error while it was supposed to be working : %s", err)
-    }
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)

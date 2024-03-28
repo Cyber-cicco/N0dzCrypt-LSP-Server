@@ -6,6 +6,5 @@ const Q_JAVA_STRING = `(
         name: (identifier)
         value: (string_literal
             (string_fragment) @fragment)))
-(#eq? @fragment "~page")
 )`
 

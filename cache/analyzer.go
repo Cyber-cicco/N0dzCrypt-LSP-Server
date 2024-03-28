@@ -32,13 +32,13 @@ func ParseJava(oldContent *sitter.Tree, newContent []byte) (*sitter.Tree, error)
 
 //Goes and check the route java file if it can find path and get back the variable name holding the path.
 //Mutates graph
-func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routePath string) (string, error) {
+func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routePath string) (map[VarName]URL, error) {
 
     var tree *sitter.Tree
     content, exists, upToDate, err := javaDocExistsAndUpToDate(graph, routePath)
 
     if err != nil {
-        return "", errors.New("Routes.java was not found")
+        return nil, errors.New("Routes.java was not found")
     }
 
     if !exists {
@@ -51,33 +51,36 @@ func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routeP
 
     tree = graph.JavaNodes[routePath].Content
 
-    queryRouteFromTree(routeReferences, tree, content)
+    routeMap, err := queryRoutesFromTree(graph, tree, content)
 
-    return "", nil
+    if err != nil {
+        return nil, err
+    }
+
+    return routeMap, nil
 }
 
 //Get in the route folder, and give back the name of the route variable corresponding to the name of the route.
-func queryRouteFromTree(routeReferences []string, tree *sitter.Tree, content []byte) (string, bool, error) {
+func queryRoutesFromTree(graph *NodzGraph, tree *sitter.Tree, content []byte) (map[VarName]URL, error) {
 
-    qb := querier.NewPQ(Q_JAVA_STRING)
-    var varName string
+    routes := make(map[VarName]URL)
 
-    for _, routeReference := range routeReferences {
-        qb.AddValue("page", routeReference)
-        q, err := qb.GetQuery()
-
-        if err != nil {
-            return "", false, err
-        }
-
-        q.Tree = tree
-        q.Lang = javaLang
-        q.Content = content
-
-        q.ExecuteQuery(func(c *sitter.QueryCapture){
-            varName = c.Node.Parent().Parent().ChildByFieldName("name").Content(content)
-        })
+    q := querier.Query{
+    	Query:   []byte(Q_JAVA_STRING),
+    	Content: content,
+    	Lang:    javaLang,
+    	Tree:    tree,
     }
 
-    return varName, varName != "", nil
+    err := q.ExecuteQuery(func(c *sitter.QueryCapture){
+        varName := VarName(c.Node.Parent().Parent().ChildByFieldName("name").Content(content))
+        url := URL(graph.RootURL + graph.Structure.GetTemplateDir() + c.Node.Content(content))
+        routes[varName] = url
+    })
+
+    if err != nil {
+        return nil, err
+    }
+
+    return routes, nil
 }

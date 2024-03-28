@@ -32,7 +32,12 @@ type NodzGraph struct {
     Structure *config.NodzcriptFile 
     Nodes map[string]*THDocument
     JavaNodes map[string]*JavaDocument
+    Routes map[VarName]URL
 }
+
+type URL string 
+
+type VarName string
 
 //A Thymeleaf document is a mutable representation of a project file
 //It contains it's updated AST, the context objects for the whole document,
@@ -92,6 +97,15 @@ type JavaDocument struct {
 
     //Checks wether or not there is an open java buffer attached to the LSP.
     OpenBuffer bool
+
+    //Maps the URL of the fragment pages to a list of pointer to methods belonging to this 
+    //JavaDocument
+    URLToMethods map[string][]*IrrigatorMethod
+}
+
+type IrrigatorMethod struct {
+
+    //
 }
 
 //Minimal representation of a java object
@@ -183,45 +197,45 @@ func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
 func (n *NodzGraph) initJavaNodes(t *THDocument) ([]*JavaDocument, error) {
 
     routePath := n.RootURL + n.Structure.GetPageBackDir() + "Routes.java"
-    _, err := ExtractRouteNameFromFile(n, n.GetRouteReferences(t.URI), routePath)  //extractedRoutes
+    routeMap, err := ExtractRouteNameFromFile(n, n.GetRouteReferences(t.URI), routePath)  //extractedRoutes
 
     routeReferences := []*JavaDocument{}
     pathOfPages :=  n.RootURL + n.Structure.GetPageBackDir()
 
     err = data.ParseFolders(func(path string) bool{
         return strings.HasSuffix(path, ".java")
-    },
-    pathOfPages,
-    func(path, filepath string) error {
+        },
+        pathOfPages,
+        func(path, filepath string) error {
 
-        content, exists, upToDate, err := javaDocExistsAndUpToDate(n, filepath)
+            content, exists, upToDate, err := javaDocExistsAndUpToDate(n, filepath)
 
-        if  err != nil {
-            return err
-        }
-
-        if !exists {
-
-            node, err := ParseJava(nil, content)
-            
-            if err != nil {
+            if  err != nil {
                 return err
             }
 
-            n.JavaNodes[filepath] = &JavaDocument{
-            	Content:    node,
-            	ShaSum:     sha1.Sum(content),
-            	OpenBuffer: false,
+            if !exists {
+
+                node, err := ParseJava(nil, content)
+                
+                if err != nil {
+                    return err
+                }
+
+                n.JavaNodes[filepath] = &JavaDocument{
+                    Content:    node,
+                    ShaSum:     sha1.Sum(content),
+                    OpenBuffer: false,
+                    IrrigatedTemplates 
+                }
+
             }
 
-        }
+            if exists && !upToDate {
+            }
 
-        if exists && !upToDate {
-
-        }
-
-        return nil
-    })
+            return nil
+        })
 
     if err != nil {
         return nil, err
