@@ -60,6 +60,6 @@ func HandleMessage(logger *log.Logger, method string, content []byte) {
         logger.Printf("Text document URI : %s. Text document content : %s",
             request.Params.TextDocument.URI,
             request.Params.TextDocument.Text)
-        graph, err := cache.NewGraph(request.Params.TextDocument.URI, []byte(request.Params.TextDocument.Text))
+        graph, err := cache.NewSession(request.Params.TextDocument.URI, []byte(request.Params.TextDocument.Text))
     }
 }

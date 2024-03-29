@@ -32,26 +32,26 @@ func ParseJava(oldContent *sitter.Tree, newContent []byte) (*sitter.Tree, error)
 
 //Goes and check the route java file if it can find path and get back the variable name holding the path.
 //Mutates graph
-func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routePath string) (map[VarName]URL, error) {
+func ExtractRoutes(session *Session, routeReferences []string, routePath string) (map[string]string, error) {
 
     var tree *sitter.Tree
-    content, exists, upToDate, err := javaDocExistsAndUpToDate(graph, routePath)
+    content, exists, upToDate, err := javaDocExistsAndUpToDate(session, routePath)
 
     if err != nil {
         return nil, errors.New("Routes.java was not found")
     }
 
     if !exists {
-        graph.addJavaDocToNodes(nil, routePath, content)
+        session.addJavaDocToNodes(nil, routePath, content)
     }
 
     if exists && !upToDate {
-        graph.addJavaDocToNodes(graph.JavaNodes[routePath].Content, routePath, content)
+        session.addJavaDocToNodes(session.JavaNodes[routePath].Content, routePath, content)
     }
 
-    tree = graph.JavaNodes[routePath].Content
+    tree = session.JavaNodes[routePath].Content
 
-    routeMap, err := queryRoutesFromTree(graph, tree, content)
+    routeMap, err := queryRoutesFromTree(session, tree, content)
 
     if err != nil {
         return nil, err
@@ -61,9 +61,9 @@ func ExtractRouteNameFromFile(graph *NodzGraph, routeReferences []string, routeP
 }
 
 //Get in the route folder, and give back the name of the route variable corresponding to the name of the route.
-func queryRoutesFromTree(graph *NodzGraph, tree *sitter.Tree, content []byte) (map[VarName]URL, error) {
+func queryRoutesFromTree(graph *Session, tree *sitter.Tree, content []byte) (map[string]string, error) {
 
-    routes := make(map[VarName]URL)
+    routes := make(map[string]string)
 
     q := querier.Query{
     	Query:   []byte(Q_JAVA_STRING),
@@ -73,8 +73,8 @@ func queryRoutesFromTree(graph *NodzGraph, tree *sitter.Tree, content []byte) (m
     }
 
     err := q.ExecuteQuery(func(c *sitter.QueryCapture){
-        varName := VarName(c.Node.Parent().Parent().ChildByFieldName("name").Content(content))
-        url := URL(graph.RootURL + graph.Structure.GetTemplateDir() + c.Node.Content(content))
+        varName := c.Node.Parent().Parent().ChildByFieldName("name").Content(content)
+        url := graph.RootURL + graph.NodzConf.GetTemplateDir() + c.Node.Content(content)
         routes[varName] = url
     })
 

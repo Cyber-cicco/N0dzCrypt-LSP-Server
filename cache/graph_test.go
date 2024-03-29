@@ -3,6 +3,7 @@ package cache
 import (
 	"testing"
 
+	"github.com/Cyber-cicco/nodzcript-lsp/data"
 	"github.com/Cyber-cicco/nodzcript-lsp/lsp"
 )
 
@@ -36,13 +37,13 @@ func TestInitialization(t *testing.T) {
 <div class="bonjour">bonjour</div>
 <div id="test"></div>
     `
-    _, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+    _, err := NewSession(lsp.DocumentUri(uri1), []byte(textDoc1))
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    _, err = NewGraph(lsp.DocumentUri(uri2), []byte(textDoc2))
+    _, err = NewSession(lsp.DocumentUri(uri2), []byte(textDoc2))
 
     if err == nil {
         t.Fatal("Got no error while it was supposed to fail")
@@ -56,7 +57,7 @@ func TestGetRouteReferences(t *testing.T) {
 <div class="bonjour">bonjour</div>
 <div id="test"></div>
     `
-    graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+    session1, err := NewSession(lsp.DocumentUri(uri1), []byte(textDoc1))
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
@@ -65,7 +66,7 @@ func TestGetRouteReferences(t *testing.T) {
     expectedRoute1 := "src/main/resources/templates/page/home/home.html" 
     expectedRoute2 := "src/main/resources/templates/page/home/home" 
 
-    route := graph1.GetRouteReferences(lsp.DocumentUri(uri1))
+    route := GetRouteReferences(lsp.DocumentUri(uri1), session1.RootURL)
 
     if route[0] != expectedRoute1 {
         t.Fatalf("Expected %s, got %s", expectedRoute1, route[0])
@@ -85,13 +86,13 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     `
     javaFileURI :=  "/home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/java/fr/edpurolo/freelearning/page/AboutController.java"
 
-    graph1, err := NewGraph(lsp.DocumentUri(uri1), []byte(textDoc1))
+    session1, err := NewSession(lsp.DocumentUri(uri1), []byte(textDoc1))
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
     }
 
-    _, exists, upToDate, err := javaDocExistsAndUpToDate(&graph1, javaFileURI)
+    _, exists, upToDate, err := javaDocExistsAndUpToDate(session1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
@@ -103,11 +104,11 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     }
 
     sum := [20]byte{169, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
-    graph1.JavaNodes[javaFileURI] = &JavaDocument{
+    session1.JavaNodes[javaFileURI] = &JavaDocument{
         ShaSum: sum,
     }
 
-    _, exists, upToDate, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+    _, exists, upToDate, err = javaDocExistsAndUpToDate(session1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
@@ -118,11 +119,11 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     }
 
     sum = [20]byte{168, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
-    graph1.JavaNodes[javaFileURI] = &JavaDocument{
+    session1.JavaNodes[javaFileURI] = &JavaDocument{
         ShaSum: sum,
     }
 
-    _, exists, upToDate, err = javaDocExistsAndUpToDate(&graph1, javaFileURI)
+    _, exists, upToDate, err = javaDocExistsAndUpToDate(session1, javaFileURI)
 
     if err != nil {
         t.Fatalf("Got an error while it was supposed to be working : %s", err)
@@ -130,6 +131,37 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
 
     if !exists || upToDate {
         t.Fatalf("Check shouldn't be true")
+    }
+
+}
+
+func TestExtractRoutes(t *testing.T) {
+
+    var uri lsp.DocumentUri = lsp.DocumentUri("file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/")
+
+    javaMap := make(map[string]*JavaDocument)
+    routeMap := make(map[string]string)
+    nodzFile, path, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
+
+    if err != nil {
+        t.Fatalf("Got an error while it was supposed to be working : %s", err)
+    }
+
+    session := &Session{
+    	RootURL:      path,
+    	NodzConf:     nodzFile,
+    	Nodes:        map[string]*THDocument{},
+    	JavaNodes:    javaMap,
+    	Routes:       routeMap,
+    	FragmentURLs: []string{},
+    }
+
+    routesPath := path + nodzFile.GetPageBackDir() + "Routes.java"
+    routeMap, err = ExtractRoutes(session, GetRouteReferences(uri, path), routesPath)  //extractedRoutes
+    expected := "/home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home" 
+
+    if routeMap["ADR_HOME"] != expected {
+        t.Fatalf("Expected %s, got %s", expected, routeMap["ADR_HOME"])
     }
 
 }

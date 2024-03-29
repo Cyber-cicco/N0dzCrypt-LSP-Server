@@ -1,10 +1,8 @@
 package cache
 
 import (
-	"context"
 	"crypto/sha1"
 	"os"
-	"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 	"github.com/Cyber-cicco/nodzcript-lsp/config"
@@ -23,21 +21,44 @@ const (
     TH_STYLE
 )
 
-//A Graph represents a nodzcript project.
-//URIs are mapped to document nodes.
-type NodzGraph struct {
+//# A Session represents an initialized nodzcript project.
+//
+//It contains every necessary piece of information to provide autocompletion, diagnostics
+//and code suggestions in a certain project.
+type Session struct {
 
-    //URL of the project root Directory. Ends with a slash
+    //URL of the project root Directory, aka the one in which there is a nodzcript config file.
+    //Ends with a slash
+    //
+    //The root URL servers as both the path from which you can get files
+    //of the project using the nodzcript configuration file, but also
+    //as the identifier of it. Every file opened under the same nodzcript
+    //config file will share the same session
     RootURL string
-    Structure *config.NodzcriptFile 
+
+    //Representation of the config file. Contains info on routes
+    //to find certain types of file in the project.
+    NodzConf *config.NodzcriptFile 
+
+    //Map of URIs of a Thymeleaf file to a Thymeleaf object containing
+    //a representation of it's content as an AST, as well as context objects,
+    //type definitions and fragment references.
+    //Only opened files and files referenced as a fragment in an opened file 
+    //are kept here.
     Nodes map[string]*THDocument
+
+    //# Map of URIs of Java files to a representation of a java files.
+    //
+    //Every java file in the "pages" package should be parsed and have an entry
+    //in this map once a thymeleaf document has been opened.
     JavaNodes map[string]*JavaDocument
-    Routes map[VarName]URL
+
+    //Contains a map of the variable name to the absolute path of file 
+    //Allows to easily get the thymeleaf documents impacted by a 
+    Routes map[string]string
+
+    FragmentURLs []string
 }
-
-type URL string 
-
-type VarName string
 
 //A Thymeleaf document is a mutable representation of a project file
 //It contains it's updated AST, the context objects for the whole document,
@@ -51,7 +72,7 @@ type THDocument struct {
     //The java class(es) responsible for irrigating the context variables.
     ContextProvider []*JavaDocument
 
-    //Java documents referencing the route of the Thymeleaf fragment.
+    //Java documents directly referencing the route of the Thymeleaf fragment.
     Controllers []*JavaDocument
 
     //The context objects provided by the java classes.
@@ -84,7 +105,8 @@ type FragmentRoute struct {
     PathVariable []JavaObject
 }
 
-//The tree-sitter representation of the AST of a java file
+//The tree-sitter representation of the AST of a java file,
+//along with infos about 
 type JavaDocument struct {
 
     //Content of the java File as an AST
@@ -105,7 +127,11 @@ type JavaDocument struct {
 
 type IrrigatorMethod struct {
 
-    //
+    //Signature of the method. Sha1 sum of the part that are not supposed to change if the signature doesn't
+    Identifier [20]byte
+
+    //Checksum to see if the method has changed since last reading it
+    //If it has, you should parse it
 }
 
 //Minimal representation of a java object
@@ -127,62 +153,36 @@ type Method struct {
     Arguments []Type
 }
 
-//Creates a new Graph from a Document URI
-//Should only be called from the New() method
-func (n *NodzGraph) initialize(uri lsp.DocumentUri, text []byte) error {
 
-    n.Nodes = make(map[string]*THDocument) 
-    n.JavaNodes = make(map[string]*JavaDocument) 
+//Initalizes a new Session
+func NewSession(uri lsp.DocumentUri, text []byte) (*Session, error) {
+
     nodzFile, path, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
-    n.RootURL = path + "/"
-    n.Structure = nodzFile
+    javaMap := make(map[string]*JavaDocument)
+    routeMap := make(map[string]string)
+
+    session := &Session{
+    	RootURL:      path,
+    	NodzConf:     nodzFile,
+    	Nodes:        map[string]*THDocument{},
+    	JavaNodes:    javaMap,
+    	Routes:       routeMap,
+    	FragmentURLs: []string{},
+    }
 
     if err != nil {
-        return err
+        return nil, err
     }
 
-    thDoc := THDocument{}
-    thDoc.initialize(n, uri, text)
-
-    n.Nodes[uri.AbsolutePath()] = &thDoc
-
-    return nil
-}
-
-func (t *THDocument) initialize(graph *NodzGraph, uri lsp.DocumentUri, text []byte) {
-
-    t.URI = uri
-    var err error
-
-    t.ContextProvider, err = graph.initJavaNodes(t) 
-    _, err = thParser.ParseCtx(context.Background(), nil, text)
-    _ = THDocument{}
+    routesPath := path + nodzFile.GetPageBackDir() + "Routes.java"
+    routeMap, err = ExtractRoutes(session, GetRouteReferences(uri, path), routesPath)  //extractedRoutes
 
     if err != nil {
-
-    }
-}
-
-
-//Initalizes a new graph
-func NewGraph(uri lsp.DocumentUri, text []byte) (NodzGraph, error) {
-
-    nodzGraph := NodzGraph{}
-    err := nodzGraph.initialize(uri, text)
-    return nodzGraph, err
-}
-
-//Gets the URL reference of a template in the backend
-func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
-
-    path := strings.TrimPrefix(uri.AbsolutePath(), n.RootURL)
-    paths := []string{ path }
-
-    if strings.HasSuffix(path, GetDefaultSuffix()) {
-        paths = append(paths, strings.TrimSuffix(path, GetDefaultSuffix()))
+        return nil, err
     }
 
-    return paths
+
+    return session, err
 }
 
 //When opening a file, first checks the Routes file to find a Route corresponding to the template
@@ -194,59 +194,13 @@ func (n *NodzGraph) GetRouteReferences(uri lsp.DocumentUri) []string {
 //If the route is referenced in this document or any dependency of this document in the same
 //page directory, this document is also appended to the THDocument ContextProvider array
 //Mutates n and t
-func (n *NodzGraph) initJavaNodes(t *THDocument) ([]*JavaDocument, error) {
-
-    routePath := n.RootURL + n.Structure.GetPageBackDir() + "Routes.java"
-    routeMap, err := ExtractRouteNameFromFile(n, n.GetRouteReferences(t.URI), routePath)  //extractedRoutes
-
-    routeReferences := []*JavaDocument{}
-    pathOfPages :=  n.RootURL + n.Structure.GetPageBackDir()
-
-    err = data.ParseFolders(func(path string) bool{
-        return strings.HasSuffix(path, ".java")
-        },
-        pathOfPages,
-        func(path, filepath string) error {
-
-            content, exists, upToDate, err := javaDocExistsAndUpToDate(n, filepath)
-
-            if  err != nil {
-                return err
-            }
-
-            if !exists {
-
-                node, err := ParseJava(nil, content)
-                
-                if err != nil {
-                    return err
-                }
-
-                n.JavaNodes[filepath] = &JavaDocument{
-                    Content:    node,
-                    ShaSum:     sha1.Sum(content),
-                    OpenBuffer: false,
-                    IrrigatedTemplates 
-                }
-
-            }
-
-            if exists && !upToDate {
-            }
-
-            return nil
-        })
-
-    if err != nil {
-        return nil, err
-    }
-
-    return routeReferences, nil
+func getJavaDocsMap(session *Session, th *THDocument) ([]*JavaDocument, error) {
+    return nil, nil
 }
 
 //Adds a java document to the nodes of the graph.
 //Mutates n
-func (n *NodzGraph) addJavaDocToNodes(oldTree *sitter.Tree, path string, content []byte) error {
+func (n *Session) addJavaDocToNodes(oldTree *sitter.Tree, path string, content []byte) error {
 
         node, err := ParseJava(oldTree, content)
         
@@ -272,7 +226,8 @@ func GetDefaultSuffix() string {
 //Check if the JavaDocument is already in the context or not, and check wether it has been changed 
 //If the file is opened in a vim buffer, it is assumed to be up to date, since it is updated every
 //time a change is made.
-func javaDocExistsAndUpToDate(n *NodzGraph, filepath string) ([]byte, bool, bool, error) {
+func javaDocExistsAndUpToDate(n *Session, filepath string) ([]byte, bool, bool, error) {
+
 
     if n.JavaNodes[filepath] != nil && n.JavaNodes[filepath].OpenBuffer {
         return nil, true, true, nil

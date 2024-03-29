@@ -13,7 +13,7 @@ type fileFunc func(fileContent, filePath string) error
 type checkFunc func(path string) bool
 
 //Get the nodzcript config file of the project if it exists in any
-//of the parent directoris of the current document
+//of the parent directories of the current document
 func GetNodzcriptFile(path string) (*config.NodzcriptFile, string, error) {
 
     path, fileName, err := GetConfigFilePath(path)
@@ -33,7 +33,7 @@ func GetNodzcriptFile(path string) (*config.NodzcriptFile, string, error) {
     }
 
     json.Unmarshal(file, &fileTree)
-    return &fileTree, path, nil
+    return &fileTree, path + "/", nil
 }
 
 func GetConfigFilePath(path string) (string, string, error) {

@@ -32,9 +32,9 @@ public class Routes {
         t.Fatalf("Expected no error, got %s", err)
     }
 
-    nodzGraph := NodzGraph{
+    nodzGraph := Session{
     	RootURL:   "jesapelroot/",
-    	Structure: &config.NodzcriptFile{
+    	NodzConf: &config.NodzcriptFile{
     		Resources:           config.Resources{
     			RootDir:   "resources/",
     			Templates: config.FrontTemplates{
