@@ -104,7 +104,7 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     }
 
     sum := [20]byte{169, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
-    session1.JavaNodes[javaFileURI] = &JavaDocument{
+    session1.JavaNodes[javaFileURI] = &JavaIrrigator{
         ShaSum: sum,
     }
 
@@ -119,7 +119,7 @@ func TestJavaDocExistsAndUpToDate(t *testing.T) {
     }
 
     sum = [20]byte{168, 164, 167, 201, 207, 213, 86, 80, 23, 58, 253, 242, 100, 12, 33, 70, 251, 134, 228, 126}
-    session1.JavaNodes[javaFileURI] = &JavaDocument{
+    session1.JavaNodes[javaFileURI] = &JavaIrrigator{
         ShaSum: sum,
     }
 
@@ -139,8 +139,6 @@ func TestExtractRoutes(t *testing.T) {
 
     var uri lsp.DocumentUri = lsp.DocumentUri("file:///home/hijokaidan/PC/golang/nodzcript-lsp/test-env/")
 
-    javaMap := make(map[string]*JavaDocument)
-    routeMap := make(map[string]string)
     nodzFile, path, err := data.GetNodzcriptFile(uri.AbsoluteDirPath())
 
     if err != nil {
@@ -151,13 +149,12 @@ func TestExtractRoutes(t *testing.T) {
     	RootURL:      path,
     	NodzConf:     nodzFile,
     	Nodes:        map[string]*THDocument{},
-    	JavaNodes:    javaMap,
-    	Routes:       routeMap,
+        JavaNodes:    make(map[string]*JavaIrrigator),
     	FragmentURLs: []string{},
     }
 
     routesPath := path + nodzFile.GetPageBackDir() + "Routes.java"
-    routeMap, err = ExtractRoutes(session, GetRouteReferences(uri, path), routesPath)  //extractedRoutes
+    routeMap, err := ExtractRoutes(session, GetRouteReferences(uri, path), routesPath)  //extractedRoutes
     expected := "/home/hijokaidan/PC/golang/nodzcript-lsp/test-env/src/main/resources/templates/page/home/home" 
 
     if routeMap["ADR_HOME"] != expected {

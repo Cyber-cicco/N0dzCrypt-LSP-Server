@@ -2,12 +2,13 @@ package cache
 
 import (
 	"context"
+	"crypto/sha1"
 	"errors"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 	"github.com/Cyber-cicco/go-tree-sitter/java"
 	"github.com/Cyber-cicco/go-tree-sitter/thymeleaf"
-	"github.com/Cyber-cicco/tree-sitter-query-builder/querier"
+	"github.com/Cyber-cicco/nodzcript-lsp/cache/querier"
 )
 
 var thLang *sitter.Language
@@ -17,70 +18,164 @@ var javaParser *sitter.Parser
 
 func init() {
 
-    javaLang = java.GetLanguage()
-    javaParser = sitter.NewParser()
-    javaParser.SetLanguage(javaLang)
-    thLang = thymeleaf.GetLanguage()
-    thParser = sitter.NewParser()
-    thParser.SetLanguage(thLang)
+	javaLang = java.GetLanguage()
+	javaParser = sitter.NewParser()
+	javaParser.SetLanguage(javaLang)
+	thLang = thymeleaf.GetLanguage()
+	thParser = sitter.NewParser()
+	thParser.SetLanguage(thLang)
 }
 
 func ParseJava(oldContent *sitter.Tree, newContent []byte) (*sitter.Tree, error) {
 
-    return javaParser.ParseCtx(context.Background(), oldContent, newContent)
+	return javaParser.ParseCtx(context.Background(), oldContent, newContent)
 }
 
-//Goes and check the route java file if it can find path and get back the variable name holding the path.
-//Mutates graph
+// Goes and check the route java file if it can find path and get back the variable name holding the path.
+// Mutates graph
 func ExtractRoutes(session *Session, routeReferences []string, routePath string) (map[string]string, error) {
 
-    var tree *sitter.Tree
-    content, exists, upToDate, err := javaDocExistsAndUpToDate(session, routePath)
+	var tree *sitter.Tree
+	content, exists, upToDate, err := javaDocExistsAndUpToDate(session, routePath)
 
-    if err != nil {
-        return nil, errors.New("Routes.java was not found")
-    }
+	if err != nil {
+		return nil, errors.New("Routes.java was not found")
+	}
 
-    if !exists {
-        session.addJavaDocToNodes(nil, routePath, content)
-    }
+	if !exists {
+		session.addJavaDocToNodes(nil, routePath, content)
+	}
 
-    if exists && !upToDate {
-        session.addJavaDocToNodes(session.JavaNodes[routePath].Content, routePath, content)
-    }
+	if exists && !upToDate {
+		session.addJavaDocToNodes(session.JavaNodes[routePath].Content, routePath, content)
+	}
 
-    tree = session.JavaNodes[routePath].Content
+	tree = session.JavaNodes[routePath].Content
 
-    routeMap, err := queryRoutesFromTree(session, tree, content)
+	routeMap, err := queryRoutesFromTree(session, tree, content)
 
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
-    return routeMap, nil
+	return routeMap, nil
 }
 
-//Get in the route folder, and give back the name of the route variable corresponding to the name of the route.
-func queryRoutesFromTree(graph *Session, tree *sitter.Tree, content []byte) (map[string]string, error) {
+// Get in the route folder, and give back the name of the route variable corresponding to the name of the route.
+func queryRoutesFromTree(session *Session, tree *sitter.Tree, content []byte) (map[string]string, error) {
 
-    routes := make(map[string]string)
+	routes := make(map[string]string)
 
-    q := querier.Query{
-    	Query:   []byte(Q_JAVA_STRING),
-    	Content: content,
-    	Lang:    javaLang,
-    	Tree:    tree,
-    }
+	q := querier.Query{
+		Query:   []byte(Q_JAVA_STRING),
+		Content: content,
+		Lang:    javaLang,
+		Tree:    tree,
+	}
 
-    err := q.ExecuteQuery(func(c *sitter.QueryCapture){
-        varName := c.Node.Parent().Parent().ChildByFieldName("name").Content(content)
-        url := graph.RootURL + graph.NodzConf.GetTemplateDir() + c.Node.Content(content)
-        routes[varName] = url
-    })
+	err := q.ExecuteQuery(func(c *sitter.QueryCapture) error {
+		varName := c.Node.Parent().Parent().ChildByFieldName("name").Content(content)
+		url := session.RootURL + session.NodzConf.GetTemplateDir() + c.Node.Content(content)
+		routes[varName] = url
+		return nil
+	})
 
-    if err != nil {
-        return nil, err
-    }
+	if err != nil {
+		return nil, err
+	}
 
-    return routes, nil
+	return routes, nil
+}
+
+// Extracts all the information of a java file that is needed in this LSP.
+func ExtractJavaDoc(session *Session, oldTree *sitter.Tree, content []byte, openedBuffer bool) (*JavaIrrigator, error) {
+	tree, err := javaParser.ParseCtx(context.Background(), oldTree, content)
+
+	javaDocument := &JavaIrrigator{
+		Content:      &sitter.Tree{},
+		ShaSum:       sha1.Sum(content),
+		OpenBuffer:   openedBuffer,
+		URLToMethods: map[string][]*IrrigatorMethod{},
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	err = irrigateJavaDoc(javaDocument, session, tree, content)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return javaDocument, nil
+}
+
+// This method does a LOT of things
+//
+// First of all, it checks for every method that take a Model interface/object as parameter
+// It then check if it corresponds to the org.springframework.ui.Model interface.
+// If it does, it checks for any use of a Routes object field access.
+// If it finds one, it puts the method object in a map that has the absolute URL of the route
+// Then, it check for any access to the Model.addAttribute method,
+// finds the first argument string, creates a context object with it,
+// and finds the type of the second argument by checking the imports of the file.
+//
+// If the second argument is an object, it finds it's reference in the method, then it's type.
+// If it's type is infered from a method, it uses the findTypeFromMethod() function to get it's type.
+// If the second argument is a method, it creates an identifier for
+// that method based on it's name and the type of it's parameters.
+func irrigateJavaDoc(javaDocument *JavaIrrigator, session *Session, tree *sitter.Tree, content []byte) error {
+
+	q := querier.Query{
+		Query:   []byte(Q_JAVA_METHOD_WITH_MODEL),
+		Content: content,
+		Lang:    javaLang,
+		Tree:    tree,
+	}
+
+	var err error
+
+	err = q.ExecuteQuery(func(c *sitter.QueryCapture) error {
+
+		if c.Node.Type() == "method_declaration" {
+
+			method := &IrrigatorMethod{
+				Objects:        []*ContextObject{},
+				ReferencedURLs: []string{},
+			}
+
+			routes := findRoutesInMethod(c, content)
+
+			for _, route := range routes {
+				routeName := route.ChildByFieldName("field").Content(content)
+				method.ReferencedURLs = append(method.ReferencedURLs, routeName)
+				javaDocument.URLToMethods[session.Routes[routeName]] = append(javaDocument.URLToMethods[routeName], method)
+			}
+
+		}
+		return nil
+	})
+
+	return err
+}
+
+func findRoutesInMethod(c *sitter.QueryCapture, content []byte) []*sitter.Node {
+
+	routesInMethod := []*sitter.Node{}
+	routesInMethod = querier.GetChildrenMatching(
+		c.Node,
+		func(n *sitter.Node) bool {
+
+			isField := n.Type() == "field_access"
+			if !isField {
+				return false
+			}
+			object := n.ChildByFieldName("object")
+
+			return object.Content(content) == "Routes" && n.ChildByFieldName("field") != nil
+		},
+		routesInMethod)
+
+	return routesInMethod
 }

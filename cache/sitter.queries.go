@@ -8,3 +8,17 @@ const Q_JAVA_STRING = `(
             (string_fragment) @fragment)))
 )`
 
+const Q_JAVA_METHOD_WITH_MODEL = `(
+(method_declaration 
+    parameters: (formal_parameters
+        (formal_parameter
+            type: (type_identifier) @type))) @test 
+(#match? @type ".*Model")
+)`
+
+const Q_JAVA_FIELD_ACESS = `(
+(field_access
+    object: (identifier) @object
+    field: (identifier) @field )  
+(#eq? @object "~object")
+)`
