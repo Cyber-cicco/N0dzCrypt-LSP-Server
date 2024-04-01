@@ -77,6 +77,10 @@
     {
       "name": "ADR_RECRUTEMENT",
       "route": "page/recrutement/recrutement"
+    },
+    {
+      "name": "ADR_TEST",
+      "route": "page/test/test"
     }
   ]
 }

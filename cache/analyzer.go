@@ -137,22 +137,10 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 		Tree:    tree,
 	}
 
-    importQB := querier.NewPQ(Q_JAVA_IMPORTS)
-    importQB.AddValue("basePackage", session.NodzConf.JavaBack.BasePackage + ".+;")
 
-	importQuery, err := importQB.GetQuery()
+    findImports(session, tree, content)
 
-    if err != nil {
-        return err
-    }
-
-    importQuery.Lang = javaLang
-    importQuery.Tree = tree
-    importQuery.Content = content
-
-    findImports(session, importQuery, content)
-
-    err = methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
+    err := methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
 
 		if c.Node.Type() == "method_declaration" {
 
@@ -177,11 +165,24 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 	return err
 }
 
-func findImports(session *Session, query *querier.Query, content []byte) ([]*JavaImport, error) {
+func findImports(session *Session, tree *sitter.Tree, content []byte) ([]*JavaImport, error) {
+
+    importQB := querier.NewPQ(Q_JAVA_IMPORTS)
+    importQB.AddValue("basePackage", session.NodzConf.JavaBack.BasePackage + ".*")
+
+	importQuery, err := importQB.GetQuery()
+
+    if err != nil {
+        return nil, err
+    }
+
+    importQuery.Lang = javaLang
+    importQuery.Tree = tree
+    importQuery.Content = content
     importNodes := []*sitter.Node{}
     imports := []*JavaImport{}
 
-    err := query.ExecuteQuery(func(c *sitter.QueryCapture) error {
+    err = importQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
         importNodes = append(importNodes, c.Node) 
         return nil
     })
@@ -191,9 +192,10 @@ func findImports(session *Session, query *querier.Query, content []byte) ([]*Jav
     }
     
     for _, impNode := range importNodes {
+        importByScope := strings.Split(impNode.Content(content), ".")
         imp := &JavaImport{
         	CorrepondingURL: findURLOfJavaFromPackage(session, impNode.Content(content)) ,
-        	ClassIdentifier: "",
+        	ClassIdentifier: importByScope[len(importByScope)-1],
         }
         imports = append(imports, imp)
     }

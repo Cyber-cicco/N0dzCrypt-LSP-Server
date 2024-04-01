@@ -14,4 +14,5 @@ public class Routes {
     public static final String ADR_LOGIN = "page/about/login";
     public static final String ADR_FORM_ERROR = "components/form-error";
     public static final String ADR_RECRUTEMENT = "page/recrutement/recrutement";
+    public static final String ADR_TEST = "page/test/test";
 }
