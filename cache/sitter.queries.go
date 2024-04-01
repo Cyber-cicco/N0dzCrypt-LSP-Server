@@ -23,7 +23,6 @@ const Q_JAVA_CLASS_NAME = `(
 const Q_JAVA_IMPORTS = `(
     (import_declaration
         (scoped_identifier) @id)
-    (#match? @id "~basePackage")
 )`
 
 

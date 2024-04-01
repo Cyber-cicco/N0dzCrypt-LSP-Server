@@ -13,6 +13,14 @@ import (
 
 type DocumentKind uint
 
+type ImportType int
+
+const (
+	IMP_OTHER = iota
+    IMP_PROJECT
+    IMP_UTIL
+    IMP_LANG
+)
 const (
 	TH_PAGE = iota
 	TH_FRAGMENT
@@ -48,11 +56,17 @@ type Session struct {
 	//are kept here.
 	Nodes map[string]*THDocument
 
-	//# Map of URIs of Java files to a representation of a java files.
+	//# Map of URIs of Java files to a representation of a java irrigator.
 	//
 	//Every java file in the "pages" package should be parsed and have an entry
 	//in this map once a thymeleaf document has been opened.
 	JavaNodes map[string]*JavaIrrigator
+
+	//# Map of URIs of Java files to a representation of a java class.
+	//
+    //Those are the java files that are not an irrigator but are imported as an
+    //irrigator and need to be parsed because they are put as a context object.
+	EntityNodes map[string]*JavaClass
 
 	//Contains a map of the variable name to the absolute path of file
 	//Allows to easily get the thymeleaf documents impacted by a
@@ -133,8 +147,9 @@ type JavaIrrigator struct {
 
 // Represents informations about an import statement in java
 type JavaImport struct {
-	CorrepondingURL string
+	CorrepondingURL *string
 	ClassIdentifier string
+    ImportType ImportType
 }
 
 // Corresponds to a java file containing a type that an object can have

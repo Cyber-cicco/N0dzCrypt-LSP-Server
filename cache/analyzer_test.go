@@ -231,9 +231,11 @@ func TestFindImports(t *testing.T) {
 		t.Fatalf("Expected no error, got %s", err)
 	}
 
-	if len(javaImports) != 3 {
-		t.Fatalf("Expected an array of length 3, got %d", len(javaImports))
+	if len(javaImports) != 6 {
+		t.Fatalf("Expected an array of length 6, got %d", len(javaImports))
 	}
+
+    expectedImportKind := IMP_PROJECT
 
 	expectedClass1 := "BaseUser"
 	expectedURL1 := "/home/hijokaidan/src/main/java/fr/eduprolo/freelearning/entity/BaseUser.java"
@@ -244,30 +246,36 @@ func TestFindImports(t *testing.T) {
 	expectedClass3 := "AuthenticationInfos"
 	expectedURL3 := "/home/hijokaidan/src/main/java/fr/eduprolo/freelearning/security/AuthenticationInfos.java"
 
-	if javaImports[0].ClassIdentifier != expectedClass1 || javaImports[0].CorrepondingURL != expectedURL1 {
-		t.Fatalf("Expected class : %s and URL %s, got %s and %s",
+	if javaImports[0].ClassIdentifier != expectedClass1 || *javaImports[0].CorrepondingURL != expectedURL1 {
+		t.Fatalf("Expected class : %s\n, URL \n%s and type \n%d\n, got %s\n, %s\n and %d\n",
             expectedClass1,
             expectedURL1,
+            expectedImportKind,
 			javaImports[0].ClassIdentifier,
-			javaImports[0].CorrepondingURL,
+			*javaImports[0].CorrepondingURL,
+			javaImports[0].ImportType,
 		)
 	}
 
-	if javaImports[1].ClassIdentifier != expectedClass2 || javaImports[1].CorrepondingURL != expectedURL2 {
-		t.Fatalf("Expected class : %s and URL %s, got %s and %s",
+	if javaImports[1].ClassIdentifier != expectedClass2 || *javaImports[1].CorrepondingURL != expectedURL2 {
+		t.Fatalf("Expected class : %s\n, URL \n%s and type \n%d\n, got %s\n, %s\n and %d\n",
             expectedClass2,
             expectedURL2,
+            expectedImportKind,
 			javaImports[1].ClassIdentifier,
-			javaImports[1].CorrepondingURL,
+			*javaImports[1].CorrepondingURL,
+			javaImports[1].ImportType,
 		)
 	}
 
-	if javaImports[2].ClassIdentifier != expectedClass3 || javaImports[2].CorrepondingURL != expectedURL3 {
-		t.Fatalf("Expected class : %s and URL %s, got %s and %s",
+	if javaImports[2].ClassIdentifier != expectedClass3 || *javaImports[2].CorrepondingURL != expectedURL3 {
+		t.Fatalf("Expected class : %s\n, URL \n%s and type \n%d\n, got %s\n, %s\n and %d\n",
             expectedClass3,
             expectedURL3,
+            expectedImportKind,
 			javaImports[2].ClassIdentifier,
-			javaImports[2].CorrepondingURL,
+			*javaImports[2].CorrepondingURL,
+			javaImports[2].ImportType,
 		)
 	}
 }

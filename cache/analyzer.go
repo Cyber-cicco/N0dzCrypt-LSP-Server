@@ -137,13 +137,11 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 		Tree:    tree,
 	}
 
+	findImports(session, tree, content)
 
-    findImports(session, tree, content)
-
-    err := methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
+	err := methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
 
 		if c.Node.Type() == "method_declaration" {
-
 
 			method := &IrrigatorMethod{
 				Objects:        []*ContextObject{},
@@ -165,50 +163,72 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 	return err
 }
 
+// Create the imports objects for a java File, wether it is an irrigator or an entity.
+//
+// It is used to get the fully qualified name of a class, it's type and the URL of the file to find it's definition
+// if it is a project file.
 func findImports(session *Session, tree *sitter.Tree, content []byte) ([]*JavaImport, error) {
 
-    importQB := querier.NewPQ(Q_JAVA_IMPORTS)
-    importQB.AddValue("basePackage", session.NodzConf.JavaBack.BasePackage + ".*")
+	importQuery := querier.Query{
+		Query:   []byte(Q_JAVA_IMPORTS),
+		Content: content,
+		Lang:    javaLang,
+		Tree:    tree,
+	}
 
-	importQuery, err := importQB.GetQuery()
+	importNodes := []*sitter.Node{}
+	imports := []*JavaImport{}
 
-    if err != nil {
-        return nil, err
-    }
+	err := importQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
+		importNodes = append(importNodes, c.Node)
+		return nil
+	})
 
-    importQuery.Lang = javaLang
-    importQuery.Tree = tree
-    importQuery.Content = content
-    importNodes := []*sitter.Node{}
-    imports := []*JavaImport{}
+	if err != nil {
+		return nil, err
+	}
 
-    err = importQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
-        importNodes = append(importNodes, c.Node) 
-        return nil
-    })
+	for _, impNode := range importNodes {
+		impContent := impNode.Content(content)
+		importByScope := strings.Split(impContent, ".")
+		imp := &JavaImport{
+			CorrepondingURL: nil,
+			ClassIdentifier: importByScope[len(importByScope)-1],
+			ImportType:      IMP_OTHER,
+		}
 
-    if err != nil {
-        return nil, err
-    }
-    
-    for _, impNode := range importNodes {
-        importByScope := strings.Split(impNode.Content(content), ".")
-        imp := &JavaImport{
-        	CorrepondingURL: findURLOfJavaFromPackage(session, impNode.Content(content)) ,
-        	ClassIdentifier: importByScope[len(importByScope)-1],
-        }
-        imports = append(imports, imp)
-    }
+		if strings.HasPrefix(impContent, "java.util") {
+			imp.ImportType = IMP_UTIL
 
-    return imports, nil
+		} else if strings.HasPrefix(impContent, "java.lang") {
+			imp.ImportType = IMP_LANG
+
+		} else if strings.HasPrefix(impContent, session.NodzConf.JavaBack.BasePackage) {
+			url := findURLOfJavaFromPackage(session, impNode.Content(content))
+			imp.ImportType = IMP_LANG
+			imp.CorrepondingURL = &url
+		}
+
+		imports = append(imports, imp)
+	}
+
+	return imports, nil
 }
 
+//Finds a URL to a file specified by a package if it is a project file.
 func findURLOfJavaFromPackage(session *Session, content string) string {
-    return session.RootURL + session.NodzConf.GetJavaDir() + strings.ReplaceAll(content, ".", "/") + ".java"
+	return session.RootURL + session.NodzConf.GetJavaDir() + strings.ReplaceAll(content, ".", "/") + ".java"
 }
 
+// Finds the type of an object by looking at the class declaration inside the current file and the imports.
+//
+// If it finds a definition in the class, it will find it's property and methods.
+// Will recursively call a function to get the type of each property until it gets to a point where
+// the type doesn't come from a project file.
+//
+// TODO : Will need to work with generics.
 func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, varName string) {
-    
+
 }
 
 func findModelVarName(c *sitter.QueryCapture) {
