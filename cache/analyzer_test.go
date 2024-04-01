@@ -2,6 +2,7 @@ package cache
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/Cyber-cicco/nodzcript-lsp/config"
@@ -93,7 +94,7 @@ public class HomeController {
 	}
 
 	session := Session{
-		RootURL: "jesapelroot/",
+		RootURL: "/home/hijokaidan/",
 		NodzConf: &config.NodzcriptFile{
 			Resources: config.Resources{
 				RootDir: "resources/",
@@ -118,14 +119,54 @@ public class HomeController {
 		URLToMethods: map[string][]*IrrigatorMethod{},
 	}
 
-	err = irrigateJavaDoc(javaDocument, &session, tree, content)
+	err = assembleJavaIrrigator(javaDocument, &session, tree, content)
 
 	if err != nil {
 		t.Fatalf("Expected no error, got %s", err)
 	}
 
+    fmt.Println(javaDocument.URLToMethods)
 	if javaDocument.URLToMethods["test"] == nil {
 		t.Fatalf("Didn't expect a nil result")
 	}
 
+}
+
+func TestFindUrlForJavaPackage(t *testing.T) {
+
+	session := Session{
+		RootURL: "/home/hijokaidan/",
+		NodzConf: &config.NodzcriptFile{
+            JavaBack : config.JavaBack {
+                RootDir : "src/main/java/",
+                PagesDir: config.PageBackDir{
+                	RootDir:    "pages/",
+                	Controller: "",
+                	Irrigator:  "",
+                },
+            },
+			Resources: config.Resources{
+				RootDir: "resources/",
+				Templates: config.FrontTemplates{
+					RootDir: "templates/",
+				},
+				Static: config.Static{}}},
+
+		Nodes:        map[string]*THDocument{},
+		JavaNodes:    map[string]*JavaIrrigator{},
+		Routes:       map[string]string{},
+		FragmentURLs: []string{},
+	}
+
+    session.Routes["ADR_HOME"] = "test"
+
+    imp := "fr.eduprolo.Testing"
+
+    url := findURLOfJavaFromPackage(&session, imp)
+
+    expected := "/home/hijokaidan/src/main/java/fr/eduprolo/Testing.java" 
+
+    if url != expected{
+        t.Fatalf("Expected %s, got %s", expected, url)
+    }
 }

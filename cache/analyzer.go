@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"errors"
+	"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 	"github.com/Cyber-cicco/go-tree-sitter/java"
@@ -39,7 +40,7 @@ func ExtractRoutes(session *Session, routeReferences []string, routePath string)
 	content, exists, upToDate, err := javaDocExistsAndUpToDate(session, routePath)
 
 	if err != nil {
-		return nil, errors.New("Routes.java was not found")
+		return nil, errors.New("Routes.java was not found, url " + routePath + " doesn't seem to exists")
 	}
 
 	if !exists {
@@ -102,7 +103,7 @@ func ExtractJavaDoc(session *Session, oldTree *sitter.Tree, content []byte, open
 		return nil, err
 	}
 
-	err = irrigateJavaDoc(javaDocument, session, tree, content)
+	err = assembleJavaIrrigator(javaDocument, session, tree, content)
 
 	if err != nil {
 		return nil, err
@@ -125,20 +126,36 @@ func ExtractJavaDoc(session *Session, oldTree *sitter.Tree, content []byte, open
 // If it's type is infered from a method, it uses the findTypeFromMethod() function to get it's type.
 // If the second argument is a method, it creates an identifier for
 // that method based on it's name and the type of it's parameters.
-func irrigateJavaDoc(javaDocument *JavaIrrigator, session *Session, tree *sitter.Tree, content []byte) error {
+//
+// TODO : handle the case where a interface named Model has been imported from another scope than the right one.
+func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *sitter.Tree, content []byte) error {
 
-	q := querier.Query{
+	methodQuery := querier.Query{
 		Query:   []byte(Q_JAVA_METHOD_WITH_MODEL),
 		Content: content,
 		Lang:    javaLang,
 		Tree:    tree,
 	}
 
-	var err error
+    importQB := querier.NewPQ(Q_JAVA_IMPORTS)
+    importQB.AddValue("basePackage", session.NodzConf.JavaBack.BasePackage + ".+;")
 
-	err = q.ExecuteQuery(func(c *sitter.QueryCapture) error {
+	importQuery, err := importQB.GetQuery()
+
+    if err != nil {
+        return err
+    }
+
+    importQuery.Lang = javaLang
+    importQuery.Tree = tree
+    importQuery.Content = content
+
+    findImports(session, importQuery, content)
+
+    err = methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
 
 		if c.Node.Type() == "method_declaration" {
+
 
 			method := &IrrigatorMethod{
 				Objects:        []*ContextObject{},
@@ -158,6 +175,42 @@ func irrigateJavaDoc(javaDocument *JavaIrrigator, session *Session, tree *sitter
 	})
 
 	return err
+}
+
+func findImports(session *Session, query *querier.Query, content []byte) ([]*JavaImport, error) {
+    importNodes := []*sitter.Node{}
+    imports := []*JavaImport{}
+
+    err := query.ExecuteQuery(func(c *sitter.QueryCapture) error {
+        importNodes = append(importNodes, c.Node) 
+        return nil
+    })
+
+    if err != nil {
+        return nil, err
+    }
+    
+    for _, impNode := range importNodes {
+        imp := &JavaImport{
+        	CorrepondingURL: findURLOfJavaFromPackage(session, impNode.Content(content)) ,
+        	ClassIdentifier: "",
+        }
+        imports = append(imports, imp)
+    }
+
+    return imports, nil
+}
+
+func findURLOfJavaFromPackage(session *Session, content string) string {
+    return session.RootURL + session.NodzConf.GetJavaDir() + strings.ReplaceAll(content, ".", "/") + ".java"
+}
+
+func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, varName string) {
+    
+}
+
+func findModelVarName(c *sitter.QueryCapture) {
+
 }
 
 func findRoutesInMethod(c *sitter.QueryCapture, content []byte) []*sitter.Node {

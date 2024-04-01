@@ -100,52 +100,57 @@ type JavaTest struct {
 }
 
 func (f *NodzcriptFile) GetRepositoryDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Repository
+	return f.GetRootOfJavaProject() + f.JavaBack.Repository
 }
 func (f *NodzcriptFile) GetServiceDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Service
+	return f.GetRootOfJavaProject() + f.JavaBack.Service
 }
 func (f *NodzcriptFile) GetValidatorDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Validators
+	return f.GetRootOfJavaProject() + f.JavaBack.Validators
 }
 func (f *NodzcriptFile) GetJavaDir() string {
 	return f.JavaBack.RootDir
 }
 func (f *NodzcriptFile) GetPageBackDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir
+	return f.GetRootOfJavaProject() + f.JavaBack.PagesDir.RootDir
 }
+
+func (f *NodzcriptFile) GetRootOfJavaProject() string {
+    return f.JavaBack.RootDir + strings.ReplaceAll(f.JavaBack.BasePackage, ".", "/") + "/" 
+}
+
 func (f *NodzcriptFile) GetIrrigatorDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.PagesDir.RootDir + f.JavaBack.PagesDir.Irrigator
+	return f.GetRootOfJavaProject() + f.JavaBack.PagesDir.RootDir + f.JavaBack.PagesDir.Irrigator
 }
 func (f *NodzcriptFile) GetJsonMapperDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Mapper
+	return f.GetRootOfJavaProject() + f.JavaBack.Json.RootDir + f.JavaBack.Json.Mapper
 }
 func (f *NodzcriptFile) GetJsonDtoDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Json.RootDir + f.JavaBack.Json.Dto
+	return f.GetRootOfJavaProject() + f.JavaBack.Json.RootDir + f.JavaBack.Json.Dto
 }
 func (f *NodzcriptFile) GetJsonDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Json.RootDir
+	return f.GetRootOfJavaProject() + f.JavaBack.Json.RootDir
 }
 func (f *NodzcriptFile) GetEntityDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Entities.RootDir
+	return f.GetRootOfJavaProject() + f.JavaBack.Entities.RootDir
 }
 func (f *NodzcriptFile) GetEntityEnumDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Entities.RootDir + f.JavaBack.Entities.Enum
+	return f.GetRootOfJavaProject() + f.JavaBack.Entities.RootDir + f.JavaBack.Entities.Enum
 }
 func (f *NodzcriptFile) GetSecurityDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Security.RootDir
+	return f.GetRootOfJavaProject() + f.JavaBack.Security.RootDir
 }
 func (f *NodzcriptFile) GetSecurityConfigDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Config
+	return f.GetRootOfJavaProject() + f.JavaBack.Security.RootDir + f.JavaBack.Security.Config
 }
 func (f *NodzcriptFile) GetSecurityServiceDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Security.RootDir + f.JavaBack.Security.Service
+	return f.GetRootOfJavaProject() + f.JavaBack.Security.RootDir + f.JavaBack.Security.Service
 }
 func (f *NodzcriptFile) GetUtilsDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Utils.RootDir
+	return f.GetRootOfJavaProject() + f.JavaBack.Utils.RootDir
 }
 func (f *NodzcriptFile) GetHXDir() string {
-	return f.JavaBack.RootDir + f.JavaBack.Utils.RootDir + f.JavaBack.Utils.HX
+	return f.GetRootOfJavaProject() + f.JavaBack.Utils.RootDir + f.JavaBack.Utils.HX
 }
 func (f *NodzcriptFile) GetResourcesDir() string {
 	return f.Resources.RootDir

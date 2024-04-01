@@ -12,9 +12,20 @@ const Q_JAVA_METHOD_WITH_MODEL = `(
 (method_declaration 
     parameters: (formal_parameters
         (formal_parameter
-            type: (type_identifier) @type))) @test 
+            type: (type_identifier) @type))) @method 
 (#match? @type ".*Model")
 )`
+
+const Q_JAVA_CLASS_NAME = `(
+    (class_declaration
+        name: (identifier))
+)`
+const Q_JAVA_IMPORTS = `(
+    (import_declaration
+        (scoped_identifier) @id)
+    (#match? @id "~basePackage")
+)`
+
 
 const Q_JAVA_FIELD_ACESS = `(
 (field_access

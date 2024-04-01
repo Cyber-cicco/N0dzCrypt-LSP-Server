@@ -26,7 +26,6 @@ func (q *Query) ExecuteQuery(captureFunc func(c *sitter.QueryCapture) error) err
 
         m, ok := qc.NextMatch()
 
-
         if !ok {
             break
         }

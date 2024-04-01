@@ -121,12 +121,20 @@ type JavaIrrigator struct {
 	//the LSP (like IntelliJ Community edition)
 	ShaSum [20]byte
 
+	Imports []*JavaImport
+
 	//Checks wether or not there is an open java buffer attached to the LSP.
 	OpenBuffer bool
 
 	//Maps the URL of the fragment pages to a list of pointer to methods belonging to this
 	//JavaDocument
 	URLToMethods map[string][]*IrrigatorMethod
+}
+
+// Represents informations about an import statement in java
+type JavaImport struct {
+	CorrepondingURL string
+	ClassIdentifier string
 }
 
 // Corresponds to a java file containing a type that an object can have

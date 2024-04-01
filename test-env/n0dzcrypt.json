@@ -1,6 +1,6 @@
 {
   "java-back": {
-    "root": "src/main/java/fr/edpurolo/freelearning/",
+    "root": "src/main/java/",
     "basepackage": "fr.edpurolo.freelearning",
     "page": {
       "root": "page/",
@@ -73,6 +73,10 @@
     {
       "name": "ADR_FORM_ERROR",
       "route": "components/form-error"
+    },
+    {
+      "name": "ADR_RECRUTEMENT",
+      "route": "page/recrutement/recrutement"
     }
   ]
 }
