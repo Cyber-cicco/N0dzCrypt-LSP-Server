@@ -154,6 +154,7 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 				routeName := route.ChildByFieldName("field").Content(content)
 				method.ReferencedURLs = append(method.ReferencedURLs, routeName)
 				javaDocument.URLToMethods[session.Routes[routeName]] = append(javaDocument.URLToMethods[routeName], method)
+                findModelVarName(c.Node)
 			}
 
 		}
@@ -205,7 +206,7 @@ func findImports(session *Session, tree *sitter.Tree, content []byte) ([]*JavaIm
 
 		} else if strings.HasPrefix(impContent, session.NodzConf.JavaBack.BasePackage) {
 			url := findURLOfJavaFromPackage(session, impNode.Content(content))
-			imp.ImportType = IMP_LANG
+			imp.ImportType = IMP_PROJECT
 			imp.CorrepondingURL = &url
 		}
 
@@ -231,7 +232,7 @@ func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, varName
 
 }
 
-func findModelVarName(c *sitter.QueryCapture) {
+func findModelVarName(c *sitter.Node) {
 
 }
 

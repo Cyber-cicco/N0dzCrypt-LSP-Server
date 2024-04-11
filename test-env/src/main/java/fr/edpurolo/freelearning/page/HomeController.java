@@ -11,6 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/home")
 public class HomeController {
 
+    public static class Test {
+        
+    }
+
     @GetMapping
     public String getHome(Model model) {
         model.addAttribute("routerOutlet", Routes.ADR_HOME);
