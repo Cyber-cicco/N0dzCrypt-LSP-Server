@@ -62,6 +62,10 @@ type Session struct {
 	//in this map once a thymeleaf document has been opened.
 	JavaNodes map[string]*JavaIrrigator
 
+	//Maps the URL of the fragment pages to a list of pointer to methods belonging to this
+	//JavaDocument
+	URLToMethods map[string][]*IrrigatorMethod
+
 	//# Map of URIs of Java files to a representation of a java class.
 	//
     //Those are the java files that are not an irrigator but are imported as an
@@ -69,7 +73,7 @@ type Session struct {
 	EntityNodes map[string]*JavaClass
 
 	//Contains a map of the variable name to the absolute path of file
-	//Allows to easily get the thymeleaf documents impacted by a
+	//Allows to easily get the thymeleaf documents from a route variable name
 	Routes map[string]string
 
 	FragmentURLs []string
@@ -140,9 +144,8 @@ type JavaIrrigator struct {
 	//Checks wether or not there is an open java buffer attached to the LSP.
 	OpenBuffer bool
 
-	//Maps the URL of the fragment pages to a list of pointer to methods belonging to this
-	//JavaDocument
-	URLToMethods map[string][]*IrrigatorMethod
+    //Slice of methods irrigating a thymeleaf template.
+    Methods []*IrrigatorMethod
 }
 
 // Represents informations about an import statement in java
@@ -212,6 +215,7 @@ func NewSession(uri lsp.DocumentUri, text []byte) (*Session, error) {
 		JavaNodes:    make(map[string]*JavaIrrigator),
 		Routes:       nil,
 		FragmentURLs: []string{},
+		URLToMethods: map[string][]*IrrigatorMethod{},
 	}
 
 	routesPath := path + nodzFile.GetPageBackDir() + "Routes.java"

@@ -4,6 +4,7 @@ import (
 	"context"
 	"crypto/sha1"
 	"errors"
+	"regexp"
 	"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
@@ -96,7 +97,6 @@ func ExtractJavaDoc(session *Session, oldTree *sitter.Tree, content []byte, open
 		Content:      &sitter.Tree{},
 		ShaSum:       sha1.Sum(content),
 		OpenBuffer:   openedBuffer,
-		URLToMethods: map[string][]*IrrigatorMethod{},
 	}
 
 	if err != nil {
@@ -143,25 +143,44 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 
 		if c.Node.Type() == "method_declaration" {
 
-			method := &IrrigatorMethod{
-				Objects:        []*ContextObject{},
-				ReferencedURLs: []string{},
-			}
+            method, err := createIrrigatorMethod(javaDocument, session, c, content)
+            javaDocument.Methods = append(javaDocument.Methods, method)
 
-			routes := findRoutesInMethod(c, content)
+            if err != nil {
+                return err
+            }
 
-			for _, route := range routes {
-				routeName := route.ChildByFieldName("field").Content(content)
-				method.ReferencedURLs = append(method.ReferencedURLs, routeName)
-				javaDocument.URLToMethods[session.Routes[routeName]] = append(javaDocument.URLToMethods[routeName], method)
-                findModelVarName(c.Node)
-			}
+            for _, referencedUrl := range method.ReferencedURLs {
+                session.URLToMethods[referencedUrl] = append(session.URLToMethods[referencedUrl], method)
+            }
 
 		}
 		return nil
 	})
 
 	return err
+}
+
+func createIrrigatorMethod(javaDocument *JavaIrrigator, session *Session, c *sitter.QueryCapture, content []byte) (*IrrigatorMethod, error) {
+
+	method := &IrrigatorMethod{
+		Objects:        []*ContextObject{},
+		ReferencedURLs: []string{},
+	}
+
+	routes := findRoutesInMethod(c, content)
+
+	for _, route := range routes {
+
+		routeName := route.ChildByFieldName("field").Content(content)
+		method.ReferencedURLs = append(method.ReferencedURLs, routeName)
+		session.URLToMethods[session.Routes[routeName]] = append(session.URLToMethods[session.Routes[routeName]], method)
+
+	}
+
+	//modelVarName := findModelVarName(c.Node, content)
+
+    return method, nil
 }
 
 // Create the imports objects for a java File, wether it is an irrigator or an entity.
@@ -216,7 +235,7 @@ func findImports(session *Session, tree *sitter.Tree, content []byte) ([]*JavaIm
 	return imports, nil
 }
 
-//Finds a URL to a file specified by a package if it is a project file.
+// Finds a URL to a file specified by a package if it is a project file.
 func findURLOfJavaFromPackage(session *Session, content string) string {
 	return session.RootURL + session.NodzConf.GetJavaDir() + strings.ReplaceAll(content, ".", "/") + ".java"
 }
@@ -232,8 +251,18 @@ func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, varName
 
 }
 
-func findModelVarName(c *sitter.Node) {
+func findModelVarName(node *sitter.Node, content []byte) string {
 
+	match := querier.GetFirstMatch(node, func(node *sitter.Node) bool {
+		isFormalParam := node.Type() == "formal_parameter"
+		if !isFormalParam {
+			return false
+		}
+		typeContent := node.ChildByFieldName("type").Content(content)
+		res, _ := regexp.MatchString(".*Model", typeContent)
+		return res
+	})
+	return match.ChildByFieldName("name").Content(content)
 }
 
 func findRoutesInMethod(c *sitter.QueryCapture, content []byte) []*sitter.Node {

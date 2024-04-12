@@ -4,6 +4,8 @@ import (
 	"context"
 	"testing"
 
+	sitter "github.com/Cyber-cicco/go-tree-sitter"
+	"github.com/Cyber-cicco/nodzcript-lsp/cache/querier"
 	"github.com/Cyber-cicco/nodzcript-lsp/config"
 )
 
@@ -50,7 +52,7 @@ public class HomeController {
     }
 
     @GetMapping("/partial")
-    public String getHomePart(Model model) {
+    public String getHomePart(Model fear) {
         return Routes.ADR_HOME;
     }
 
@@ -129,6 +131,7 @@ func TestQueryMethodsFromJavaFile(t *testing.T) {
 		JavaNodes:    map[string]*JavaIrrigator{},
 		Routes:       map[string]string{},
 		FragmentURLs: []string{},
+		URLToMethods: map[string][]*IrrigatorMethod{},
 	}
 
 	session.Routes["ADR_HOME"] = "test"
@@ -138,7 +141,6 @@ func TestQueryMethodsFromJavaFile(t *testing.T) {
 		Content:      tree,
 		ShaSum:       [20]byte{},
 		OpenBuffer:   false,
-		URLToMethods: map[string][]*IrrigatorMethod{},
 	}
 
 	err = assembleJavaIrrigator(javaDocument, &session, tree, controllerContent)
@@ -147,7 +149,7 @@ func TestQueryMethodsFromJavaFile(t *testing.T) {
 		t.Fatalf("Expected no error, got %s", err)
 	}
 
-	if javaDocument.URLToMethods["test"] == nil {
+	if session.URLToMethods["test"] == nil {
 		t.Fatalf("Didn't expect a nil result")
 	}
 
@@ -278,4 +280,59 @@ func TestFindImports(t *testing.T) {
 			javaImports[2].ImportType,
 		)
 	}
+}
+
+func TestFindModelVarName(t *testing.T) {
+	tree, err := javaParser.ParseCtx(context.Background(), nil, controllerContent)
+
+	if err != nil {
+		t.Fatalf("Expected no error, got %s", err)
+	}
+
+	methodQuery := querier.Query{
+		Query:   []byte(Q_JAVA_METHOD_WITH_MODEL),
+		Content: controllerContent,
+		Lang:    javaLang,
+		Tree:    tree,
+	}
+	err = methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
+        return nil
+    })
+}
+
+func TestFindRoutes(t *testing.T) {
+	tree, err := javaParser.ParseCtx(context.Background(), nil, controllerContent)
+
+	if err != nil {
+		t.Fatalf("Expected no error, got %s", err)
+	}
+
+	methodQuery := querier.Query{
+		Query:   []byte(Q_JAVA_METHOD_WITH_MODEL),
+		Content: controllerContent,
+		Lang:    javaLang,
+		Tree:    tree,
+	}
+    routes := []*sitter.Node{}
+
+	err = methodQuery.ExecuteQuery(func(c *sitter.QueryCapture) error {
+		if c.Node.Type() == "method_declaration" {
+            currRoutes := findRoutesInMethod(c, controllerContent)
+            for _, route := range currRoutes {
+                routes = append(routes, route)
+            }
+        }
+        return nil
+    })
+
+    if len(routes) != 3 {
+        t.Fatalf("Expected length of 3, got %d", len(routes))
+    }
+
+    expected := "Routes.ADR_BASE_LAYOUT"
+    actual := routes[1].Content(controllerContent)
+
+    if actual  != expected {
+        t.Fatalf("Expected %s, got %s", expected, actual)
+    }
 }
