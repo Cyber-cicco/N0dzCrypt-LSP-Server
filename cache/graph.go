@@ -189,14 +189,16 @@ type ContextObject struct {
 // Minimal representation of a java class
 type Type struct {
 	Identifier string
-	Methods    []Method
-	Properties []ContextObject
+	Methods    []*Method
+	Properties []*ContextObject
 }
 
 // Minimal representation of the metadata of a java method
 type Method struct {
-	ReturnType Type
-	Arguments  []Type
+    Identifier string
+	ReturnType *Type
+	Arguments  []*Type
+    Documentation string
 }
 
 // Initalizes a new Session

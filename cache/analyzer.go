@@ -94,9 +94,9 @@ func ExtractJavaDoc(session *Session, oldTree *sitter.Tree, content []byte, open
 	tree, err := javaParser.ParseCtx(context.Background(), oldTree, content)
 
 	javaDocument := &JavaIrrigator{
-		Content:      &sitter.Tree{},
-		ShaSum:       sha1.Sum(content),
-		OpenBuffer:   openedBuffer,
+		Content:    &sitter.Tree{},
+		ShaSum:     sha1.Sum(content),
+		OpenBuffer: openedBuffer,
 	}
 
 	if err != nil {
@@ -143,16 +143,16 @@ func assembleJavaIrrigator(javaDocument *JavaIrrigator, session *Session, tree *
 
 		if c.Node.Type() == "method_declaration" {
 
-            method, err := createIrrigatorMethod(javaDocument, session, c, content)
-            javaDocument.Methods = append(javaDocument.Methods, method)
+			method, err := createIrrigatorMethod(javaDocument, session, c, content)
+			javaDocument.Methods = append(javaDocument.Methods, method)
 
-            if err != nil {
-                return err
-            }
+			if err != nil {
+				return err
+			}
 
-            for _, referencedUrl := range method.ReferencedURLs {
-                session.URLToMethods[referencedUrl] = append(session.URLToMethods[referencedUrl], method)
-            }
+			for _, referencedUrl := range method.ReferencedURLs {
+				session.URLToMethods[referencedUrl] = append(session.URLToMethods[referencedUrl], method)
+			}
 
 		}
 		return nil
@@ -178,9 +178,106 @@ func createIrrigatorMethod(javaDocument *JavaIrrigator, session *Session, c *sit
 
 	}
 
-	//modelVarName := findModelVarName(c.Node, content)
+	modelVarName := findModelVarName(c.Node, content)
 
-    return method, nil
+	setAttributes := findModelSetAttributes(modelVarName, c.Node, content)
+	objectsForMethod := []*ContextObject{}
+	for _, setAttribute := range setAttributes {
+		contextObject, err := findContextObject(setAttribute, javaDocument, session, content)
+
+		if err != nil {
+			return nil, err
+		}
+
+		objectsForMethod = append(objectsForMethod, contextObject)
+	}
+
+	return method, nil
+}
+
+func findContextObject(setAttribute *sitter.Node, javaDocument *JavaIrrigator, session *Session, content []byte) (*ContextObject, error) {
+
+	arguments := setAttribute.ChildByFieldName("arguments")
+
+	if arguments == nil {
+		return nil, errors.New("nil attribute where it shouldn't have been")
+	}
+
+	argumentList := querier.GetFirstMatch(setAttribute, func(n *sitter.Node) bool {
+		return n.Type() == "argument_list"
+	})
+
+	if argumentList == nil {
+		return nil, errors.New("nil argument list in model.addAttribute(...)")
+	}
+
+	firstArg := argumentList.Child(0)
+
+	if firstArg == nil {
+		return nil, errors.New("nil first child in argument list in model.addAttribute(...)")
+	}
+
+	name := querier.GetFirstMatch(firstArg, func(n *sitter.Node) bool {
+		return n.Type() == "string_fragment"
+	})
+
+	//TODO: change this behaviour so it searches to find if it's a constant string literal
+	if name == nil {
+		return nil, errors.New("first child in argument list of model.addAttribute(...) wasn't a string literal")
+	}
+
+	secondArg := argumentList.Child(1)
+
+	if secondArg == nil {
+		return nil, errors.New("nil second child in argument list in model.addAttribute(...)")
+	}
+
+	varType := findTypeFromVariable(javaDocument, session, secondArg)
+
+	contextObject := ContextObject{
+		Identifier: name.Content(content),
+		Type:       varType,
+	}
+
+	return &contextObject, nil
+}
+
+// Find every node containing a addAttribute access to the model object.
+func findModelSetAttributes(modelVarName string, methodNode *sitter.Node, content []byte) []*sitter.Node {
+
+	var nodes = []*sitter.Node{}
+
+	querier.GetChildrenMatching(methodNode, func(node *sitter.Node) bool {
+
+		isMethodInvocation := node.Type() == "method_invocation"
+
+		if !isMethodInvocation {
+			return false
+		}
+
+		object := node.ChildByFieldName("object")
+
+		if object == nil {
+			return false
+		}
+
+		isModelVarName := object.Content(content) == modelVarName
+
+		if !isModelVarName {
+			return false
+		}
+
+		name := node.ChildByFieldName("name")
+
+		if name == nil {
+			return false
+		}
+
+		return name.Content(content) == "addAttribute"
+
+	}, nodes)
+
+	return nodes
 }
 
 // Create the imports objects for a java File, wether it is an irrigator or an entity.
@@ -240,16 +337,6 @@ func findURLOfJavaFromPackage(session *Session, content string) string {
 	return session.RootURL + session.NodzConf.GetJavaDir() + strings.ReplaceAll(content, ".", "/") + ".java"
 }
 
-// Finds the type of an object by looking at the class declaration inside the current file and the imports.
-//
-// If it finds a definition in the class, it will find it's property and methods.
-// Will recursively call a function to get the type of each property until it gets to a point where
-// the type doesn't come from a project file.
-//
-// TODO : Will need to work with generics.
-func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, varName string) {
-
-}
 
 func findModelVarName(node *sitter.Node, content []byte) string {
 
