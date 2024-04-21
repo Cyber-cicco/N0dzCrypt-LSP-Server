@@ -232,7 +232,11 @@ func findContextObject(setAttribute *sitter.Node, javaDocument *JavaIrrigator, s
 		return nil, errors.New("nil second child in argument list in model.addAttribute(...)")
 	}
 
-	varType := findTypeFromVariable(javaDocument, session, secondArg)
+	varType, err := findTypeFromVariable(javaDocument, session, secondArg)
+
+    if err != nil {
+        return nil, err
+    }
 
 	contextObject := ContextObject{
 		Identifier: name.Content(content),

@@ -3,7 +3,7 @@ package cache
 import (
 	"bufio"
 	"os"
-	"strings"
+	//"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
 )
@@ -67,15 +67,15 @@ var stringType *Type
 
 func getStringType() *Type {
 
-    if stringType != nil {
-        return stringType
-    }
+	if stringType != nil {
+		return stringType
+	}
 
-    stringType = &Type{
-    	Identifier: "String",
-    	Methods:    []*Method{},
-    	Properties: []*ContextObject{},
-    }
+	stringType = &Type{
+		Identifier: "String",
+		Methods:    []*Method{},
+		Properties: []*ContextObject{},
+	}
 
 	file, err := os.Open("./types/string-methods.txt")
 
@@ -87,18 +87,59 @@ func getStringType() *Type {
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-        text := scanner.Text()
-        seps := strings.Split(text, ";")
-        method := &Method{
-        	Identifier:    seps[0],
-        	ReturnType:    &Type{},
-        	Arguments:     []*Type{},
-        	Documentation: "",
-        }
-        stringType.Methods = append(stringType.Methods, method)
+		//text := scanner.Text()
+		//seps := strings.Split(text, ";")
+		method := &Method{
+			Identifier:    "caca",
+			ReturnType:    &Type{},
+			Arguments:     []*Type{},
+			Documentation: "",
+		}
+		stringType.Methods = append(stringType.Methods, method)
 	}
 
-    return stringType
+	return stringType
+}
+
+type secondEntry struct {
+	identifier string
+	arguments  []string
+}
+
+func parseSecondCSVEntry(entry string) secondEntry {
+	secondEntry := secondEntry{}
+	lastIndex := 0
+
+	//find identifier
+	for i := 0; i < len(entry); i++ {
+		if entry[i] == '(' {
+			secondEntry.identifier = entry[lastIndex:i]
+			lastIndex = i + 1
+			break
+		}
+	}
+
+	//find arguments
+	for i := lastIndex; i < len(entry); i++ {
+		if entry[i] == ' ' {
+			secondEntry.arguments = append(secondEntry.arguments, entry[lastIndex:i])
+			lastIndex = i
+
+			for entry[i] != ',' && entry[i] != ')' && i < len(entry) {
+				i++
+			}
+			if entry[i] == ')' {
+				break
+			}
+			i++
+            for entry[i] == ' ' {
+                i++
+            }
+			lastIndex = i
+		}
+	}
+	return secondEntry
+
 }
 
 func charType() *Type {

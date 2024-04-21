@@ -56,12 +56,3 @@ String;toString();This object (which is already a string!) is itself returned.
 String;toUpperCase();Converts all of the characters in this String to upper case using the rules of the default locale.
 String;toUpperCase(Locale locale);Converts all of the characters in this String to upper case using the rules of the given Locale.
 String;trim();Returns a string whose value is this string, with any leading and trailing whitespace removed.
-String;valueOf(boolean b);Returns the string representation of the boolean argument.
-String;valueOf(char c);Returns the string representation of the char argument.
-String;valueOf(char[] data);Returns the string representation of the char array argument.
-String;valueOf(char[] data, int offset, int count);Returns the string representation of a specific subarray of the char array argument.
-String;valueOf(double d);Returns the string representation of the double argument.
-String;valueOf(float f);Returns the string representation of the float argument.
-String;valueOf(int i);Returns the string representation of the int argument.
-String;valueOf(long l);Returns the string representation of the long argument.
-String;valueOf(Object obj);Returns the string representation of the Object argument.
