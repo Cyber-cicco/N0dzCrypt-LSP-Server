@@ -17,9 +17,9 @@ type ImportType int
 
 const (
 	IMP_OTHER = iota
-    IMP_PROJECT
-    IMP_UTIL
-    IMP_LANG
+	IMP_PROJECT
+	IMP_UTIL
+	IMP_LANG
 )
 const (
 	TH_PAGE = iota
@@ -68,8 +68,8 @@ type Session struct {
 
 	//# Map of URIs of Java files to a representation of a java class.
 	//
-    //Those are the java files that are not an irrigator but are imported as an
-    //irrigator and need to be parsed because they are put as a context object.
+	//Those are the java files that are not an irrigator but are imported as an
+	//irrigator and need to be parsed because they are put as a context object.
 	EntityNodes map[string]*JavaClass
 
 	//Contains a map of the variable name to the absolute path of file
@@ -144,15 +144,15 @@ type JavaIrrigator struct {
 	//Checks wether or not there is an open java buffer attached to the LSP.
 	OpenBuffer bool
 
-    //Slice of methods irrigating a thymeleaf template.
-    Methods []*IrrigatorMethod
+	//Slice of methods irrigating a thymeleaf template.
+	Methods []*IrrigatorMethod
 }
 
 // Represents informations about an import statement in java
 type JavaImport struct {
 	CorrepondingURL *string
 	ClassIdentifier string
-    ImportType ImportType
+	ImportType      ImportType
 }
 
 // Corresponds to a java file containing a type that an object can have
@@ -188,17 +188,28 @@ type ContextObject struct {
 
 // Minimal representation of a java class
 type Type struct {
-	Identifier string
-	Methods    []*Method
-	Properties []*ContextObject
+	Identifier    string
+	Methods       []*Method
+	Properties    []*ContextObject
+	Documentation string
+	ExtendFrom    *Type
+	SubTypes      []*Type
 }
 
 // Minimal representation of the metadata of a java method
 type Method struct {
-    Identifier string
+	Identifier string
 	ReturnType *Type
-	Arguments  []*Type
-    Documentation string
+	Arguments []MethodType
+	Documentation string
+
+	//type arguments for generic methods
+	TypeArguments []*Type
+}
+
+type MethodType struct {
+	Arg    *Type
+	Spread bool
 }
 
 // Initalizes a new Session

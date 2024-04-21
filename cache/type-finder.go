@@ -3,9 +3,10 @@ package cache
 import (
 	"bufio"
 	"os"
-	//"strings"
+	"strings"
 
 	sitter "github.com/Cyber-cicco/go-tree-sitter"
+	"github.com/Cyber-cicco/nodzcript-lsp/config"
 )
 
 // Finds the type of an object by looking at the class declaration inside the current file and the imports.
@@ -58,47 +59,66 @@ func findTypeFromVariable(javaDocument *JavaIrrigator, session *Session, node *s
 		Identifier: "",
 		Methods:    []*Method{},
 		Properties: []*ContextObject{},
+		ExtendFrom: nil,
 	}
 
 	return varType, nil
 }
 
-var stringType *Type
+var idToType = make(map[string]*Type)
 
-func getStringType() *Type {
+// This method allows to populate a Type object by searching into
+// csv files documenting the methods and properties of a java object
+func getType(typeId string) (*Type, error) {
 
-	if stringType != nil {
-		return stringType
+	if idToType[typeId] != nil {
+		return idToType[typeId], nil
 	}
 
-	stringType = &Type{
-		Identifier: "String",
+	idToType[typeId] = &Type{
+		Identifier: typeId,
 		Methods:    []*Method{},
 		Properties: []*ContextObject{},
 	}
 
-	file, err := os.Open("./types/string-methods.txt")
+	csvPath := config.CSV_DIR + typeId + ".methods.csv"
 
-	if err != nil {
-		panic("should always be able to read file")
-	}
+	if _, err := os.Stat(csvPath); err == nil {
 
-	defer file.Close()
+		file, err := os.Open(csvPath)
 
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		//text := scanner.Text()
-		//seps := strings.Split(text, ";")
-		method := &Method{
-			Identifier:    "caca",
-			ReturnType:    &Type{},
-			Arguments:     []*Type{},
-			Documentation: "",
+		if err != nil {
+			return nil, err
 		}
-		stringType.Methods = append(stringType.Methods, method)
+
+		defer file.Close()
+		scanner := bufio.NewScanner(file)
+
+		for scanner.Scan() {
+			text := scanner.Text()
+			seps := strings.Split(text, ";")
+			secondEntry := parseSecondCSVEntry(seps[1])
+			returnType, err := getType(seps[0])
+
+			if err != nil {
+				return nil, err
+			}
+
+            methodTypes := []MethodType{}
+
+			method := &Method{
+				Identifier:    secondEntry.identifier,
+				ReturnType:    returnType,
+				Arguments:     methodTypes,
+				Documentation: seps[2],
+			}
+
+			idToType[typeId].Methods = append(idToType[typeId].Methods, method)
+		}
+
 	}
 
-	return stringType
+	return idToType[typeId], nil
 }
 
 type secondEntry struct {
@@ -106,6 +126,8 @@ type secondEntry struct {
 	arguments  []string
 }
 
+//Breaks down the csv entry containing the method signature into 
+//parts that can be put in the Method Struct
 func parseSecondCSVEntry(entry string) secondEntry {
 	secondEntry := secondEntry{}
 	lastIndex := 0
@@ -132,28 +154,12 @@ func parseSecondCSVEntry(entry string) secondEntry {
 				break
 			}
 			i++
-            for entry[i] == ' ' {
-                i++
-            }
+			for entry[i] == ' ' {
+				i++
+			}
 			lastIndex = i
 		}
 	}
 	return secondEntry
 
-}
-
-func charType() *Type {
-	return &Type{
-		Identifier: "char",
-		Methods:    []*Method{},
-		Properties: []*ContextObject{},
-	}
-}
-
-func intType() *Type {
-	return &Type{
-		Identifier: "int",
-		Methods:    []*Method{},
-		Properties: []*ContextObject{},
-	}
 }
